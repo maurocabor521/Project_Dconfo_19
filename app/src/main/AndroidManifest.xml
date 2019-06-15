@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity"></activity>
+        <activity android:name=".presentation.view.activity.docente.grupos.GrupoDocenteActivity"></activity>
+        <activity android:name=".presentation.view.activity.docente.actividades.ActividadDocenteActivity" />
+        <activity android:name=".presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity" />
         <activity android:name=".presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity" />
         <activity android:name=".presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity" />
         <activity android:name=".presentation.view.activity.docente.fonico.BankImagesActivity" />
