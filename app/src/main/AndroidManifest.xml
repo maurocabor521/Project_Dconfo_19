@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.view.activity.docente.grupos.GrupoDocActivity"></activity>
+        <activity android:name=".presentation.view.activity.docente.grupos.GrupoNuevoActivity"></activity>
         <activity android:name=".presentation.view.activity.docente.grupos.GrupoDocenteActivity" />
         <activity android:name=".presentation.view.activity.docente.actividades.ActividadDocenteActivity" />
         <activity android:name=".presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity" />

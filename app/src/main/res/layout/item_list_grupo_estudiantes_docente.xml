@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/idGrupo"
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight="1.5"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/txtIDgrupo_LCD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/idGrupo"
+                android:text=""
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight=".8"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NombreGrupo"
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight="1.5"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/txtNombreGrupo_LCD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/NombreGrupo"
+                android:text=""
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight=".8"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/idGrupoCurso"
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight="1.5"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/txtID_Curso_LCD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/idGrupoCurso"
+                android:text=""
+                android:textSize="@dimen/tsize_documento"
+                android:textStyle="bold"
+                android:layout_weight=".8"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

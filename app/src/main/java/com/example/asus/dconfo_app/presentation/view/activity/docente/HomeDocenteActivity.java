@@ -17,9 +17,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.actividades.ActividadDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.grupos.GrupoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity;
 
@@ -30,6 +32,8 @@ public class HomeDocenteActivity extends AppCompatActivity
     Intent intentCreateEjercicioFonico;
     Intent intentAsignarDeber;
     Intent intentAsignarDeberFonico;
+    Intent intentActividades;
+    Intent intentGrupos;
     String namegrupo;
     String namedocente;
     int iddocente;
@@ -119,9 +123,22 @@ public class HomeDocenteActivity extends AppCompatActivity
         Menu m = nv.getMenu();
 
         if (id == R.id.nav_misgrupos) {
-            Intent intent = new Intent(HomeDocenteActivity.this, ManageCursosDocenteActivity.class);
-            startActivity(intent);
+          /*  Intent intent = new Intent(HomeDocenteActivity.this, ManageCursosDocenteActivity.class);
+            startActivity(intent);*/
+            Bundle args = new Bundle();
+            args.putInt("iddocente", iddocente);
+            args.putInt("idgrupo", idgrupo);
+            intentGrupos = new Intent(HomeDocenteActivity.this, GrupoDocenteActivity.class);
+            intentGrupos.putExtras(args);
+            startActivity(intentGrupos);
+
         } else if (id == R.id.nav_actividades) {
+            Bundle args = new Bundle();
+            args.putInt("iddocente", iddocente);
+            args.putInt("idgrupo", idgrupo);
+            intentActividades = new Intent(HomeDocenteActivity.this, ActividadDocenteActivity.class);
+            intentActividades.putExtras(args);
+            startActivity(intentActividades);
 
         } else if (id == R.id.nav_misejercicios) {
 
@@ -191,7 +208,7 @@ public class HomeDocenteActivity extends AppCompatActivity
             Log.i(TAG, "iddocente: " + iddocente);
             Log.i(TAG, "namedocente: " + namedocente);
 
-        }else if (id == R.id.nav_con_silabica) {
+        } else if (id == R.id.nav_con_silabica) {
             // Handle the camera action
             boolean b = !m.findItem(R.id.nav_con_silabica_actividades).isVisible();
             //setting submenus visible state
@@ -200,8 +217,7 @@ public class HomeDocenteActivity extends AppCompatActivity
             m.findItem(R.id.nav_con_silabica_asignar).setVisible(b);
             m.findItem(R.id.nav_con_silabica_estudiantes).setVisible(b);
             return true;
-        }
-        else if (id == R.id.nav_con_silabica_ejercicios) {
+        } else if (id == R.id.nav_con_silabica_ejercicios) {
             Bundle parametros1 = new Bundle();
             parametros1.putInt("iddocente", iddocente);
             parametros1.putString("namedocente", namedocente);
