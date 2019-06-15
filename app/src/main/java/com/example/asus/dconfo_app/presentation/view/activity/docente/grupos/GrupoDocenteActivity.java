@@ -2,8 +2,10 @@ package com.example.asus.dconfo_app.presentation.view.activity.docente.grupos;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.HomeDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.ManageCursosDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.adapter.GruposDocenteAdapter;
+import com.example.asus.dconfo_app.presentation.view.adapter.Grupos_Estudiante_DocenteAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +40,7 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
     int idgrupo;
     int iddocente;
     ProgressDialog progreso;
+    FloatingActionButton fb_nuevo_GrupoEstudiantes;
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
@@ -49,6 +53,27 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
         Bundle datos = this.getIntent().getExtras();
         idgrupo = datos.getInt("idgrupo");
         iddocente = datos.getInt("iddocente");
+
+        rv_GrupoDocente_Grupos = (RecyclerView) findViewById(R.id.rv_docente_Grupo_misGruposEst);
+        rv_GrupoDocente_Grupos.setLayoutManager(new LinearLayoutManager(this));
+        rv_GrupoDocente_Grupos.setHasFixedSize(true);
+
+        fb_nuevo_GrupoEstudiantes = (FloatingActionButton) findViewById(R.id.fb_Grupo_newGrupo);
+        fb_nuevo_GrupoEstudiantes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("idgrupo", idgrupo);
+                bundle.putInt("iddocente", iddocente);
+                Intent intent = new Intent(GrupoDocenteActivity.this, GrupoNuevoActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        progreso = new ProgressDialog(this);
+
+        cargarWebService();
 
         // Toast.makeText(getApplicationContext(), "idgrupo: " + idgrupo, Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), "iddocente: " + iddocente, Toast.LENGTH_LONG).show();
@@ -103,6 +128,7 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
         //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
         Grupo_Estudiantes grupo_estudiantes = null;
         JSONArray json = response.optJSONArray("grupo_estudiante");
+        listaGrupoEstudiantes = new ArrayList<>();
 
         try {
             for (int i = 0; i < json.length(); i++) {
@@ -110,7 +136,7 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
                 JSONObject jsonObject = null;
                 jsonObject = json.getJSONObject(i);
                 // jsonObject = new JSONObject(response);
-                grupo_estudiantes.setIdGrupo(jsonObject.optInt("idgrupo_estudiante"));
+                grupo_estudiantes.setIdGrupoEstudiantes(jsonObject.optInt("idgrupo_estudiante"));
                 grupo_estudiantes.setNameGrupoEstudiantes(jsonObject.optString("name_grupo_estudiante"));
                 grupo_estudiantes.setIdDocente(jsonObject.optInt("docente_iddocente"));
                 grupo_estudiantes.setIdGrupo(jsonObject.optInt("grupo_idgrupo"));
@@ -120,9 +146,9 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
             }
             //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
             // Log.i("size", "lista: " + listaGrupos.size());
-        /*   GruposDocenteAdapter gruposDocenteAdapter = new GruposDocenteAdapter(listaGrupos);
+            Grupos_Estudiante_DocenteAdapter grupos_estudiante_docenteAdapter = new Grupos_Estudiante_DocenteAdapter(listaGrupoEstudiantes);
 
-            gruposDocenteAdapter.setOnClickListener(new View.OnClickListener() {
+            grupos_estudiante_docenteAdapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                    /*Toast.makeText(getApplicationContext(), "Seleccion: " +
@@ -164,9 +190,9 @@ public class GrupoDocenteActivity extends AppCompatActivity implements Response.
                                     (listaEjercicios.get(recyclerView.getChildAdapterPosition(view)));//video p2 detalle envia el objeto completo
                                     */
 
-               // }
-          //  });
-          //  rv_GrupoDocente_Grupos.setAdapter(gruposDocenteAdapter);
+                }
+            });
+            rv_GrupoDocente_Grupos.setAdapter(grupos_estudiante_docenteAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d("error", response.toString());

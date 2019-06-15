@@ -31,7 +31,7 @@ public class Grupos_Estudiante_DocenteAdapter extends RecyclerView.Adapter<Grupo
     @NonNull
     @Override
     public GruposHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_cursos_docente, parent, false);
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_grupo_estudiantes_docente, parent, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         vista.setLayoutParams(layoutParams);
@@ -42,7 +42,7 @@ public class Grupos_Estudiante_DocenteAdapter extends RecyclerView.Adapter<Grupo
     @Override
     public void onBindViewHolder(GruposHolder holder, int position) {
         // holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
-       // Log.i("size", "lista_: " + listaGrupos.size());
+        // Log.i("size", "lista_: " + listaGrupos.size());
     /*    if (listaGrupos.size() != 0) {
             holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
             holder.txtNombreGrupo.setText(listaGrupos.get(position).getNameGrupo().toString());
@@ -52,6 +52,10 @@ public class Grupos_Estudiante_DocenteAdapter extends RecyclerView.Adapter<Grupo
         } else {
 
         }*/
+        holder.txtidGrupoEstudiantes.setText(listaGruposEstudiantes.get(position).getIdGrupoEstudiantes().toString());
+        holder.txtNombreGrupoEstudiantes.setText(listaGruposEstudiantes.get(position).getNameGrupoEstudiantes());
+       // holder.txtCantEstudiantes.setText(listaGruposEstudiantes.get(position).getIdGrupoEstudiantes().toString());
+
 
     }
 
@@ -73,15 +77,13 @@ public class Grupos_Estudiante_DocenteAdapter extends RecyclerView.Adapter<Grupo
     }
 
     public class GruposHolder extends RecyclerView.ViewHolder {
-        TextView txtidGrupo, txtidCurso, txtNombreGrupo, txtidInst;
+        TextView txtidGrupoEstudiantes, txtCantEstudiantes, txtNombreGrupoEstudiantes;
 
         public GruposHolder(View itemView) {
             super(itemView);
-            txtidGrupo = (TextView) itemView.findViewById(R.id.txtIDgrupo_LCD);
-            txtNombreGrupo = (TextView) itemView.findViewById(R.id.txtNombreGrupo_LCD);
-            txtidCurso = (TextView) itemView.findViewById(R.id.txtID_Curso_LCD);
-            txtidInst = (TextView) itemView.findViewById(R.id.txtInstituto_LCD);
-
+            txtidGrupoEstudiantes = (TextView) itemView.findViewById(R.id.txt_GrupoEst_IdGrupo);
+            txtNombreGrupoEstudiantes = (TextView) itemView.findViewById(R.id.txt_GrupoEst_NombreGrupo);
+            txtCantEstudiantes = (TextView) itemView.findViewById(R.id.txt_GrupoEst_Cant_Estu);
         }
     }
 }
