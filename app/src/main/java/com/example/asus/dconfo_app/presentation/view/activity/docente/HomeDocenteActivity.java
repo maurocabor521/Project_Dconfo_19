@@ -28,6 +28,7 @@ import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.New
 import com.example.asus.dconfo_app.presentation.view.activity.docente.grupos.GrupoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity;
+import com.example.asus.dconfo_app.presentation.view.adapter.ConcienciaTipoAdapterRecyclerView;
 
 import java.util.ArrayList;
 
@@ -98,13 +99,28 @@ public class HomeDocenteActivity extends AppCompatActivity
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_docente_conciencias.setLayoutManager(linearLayoutManager);
 
+        ConcienciaTipoAdapterRecyclerView concienciaTipoAdapterRecyclerView=new ConcienciaTipoAdapterRecyclerView(buidConcienciaTipo());
+        System.out.println("lista conciencias: "+buidConcienciaTipo().toString());
+        rv_docente_conciencias.setAdapter(concienciaTipoAdapterRecyclerView);
+
         //Toast.makeText(getApplicationContext(), "idgrupo: " + idgrupo, Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), "idcurso: " + idcurso, Toast.LENGTH_LONG).show();
     }
 
     public ArrayList<ConcienciaTipo> buidConcienciaTipo() {
         ArrayList<ConcienciaTipo> conciencia_tipo = new ArrayList<>();
-        conciencia_tipo.add(new ConcienciaTipo());
+        conciencia_tipo.add(new ConcienciaTipo("Conciencia Fónica",
+                "La conciencia Fónica se refiere a la habilidad de escuchar, " +
+                        "identificar y manipular los fonemas— el objetivo de esta actividad es" +
+                        "que el estudiante se percate de los fonemas que contiene la palabra. ", ""));
+
+        conciencia_tipo.add(new ConcienciaTipo("Conciencia Sílabica",
+                "El objetivo de estas actividades es que el estudiante marque un" +
+                        "cuadro por cada silaba que la palabra contenga ", ""));
+        conciencia_tipo.add(new ConcienciaTipo("Conciencia Léxica",
+                "conciencia léxica se define como la capacidad para percibir que una oración" +
+                        " o enunciado puede ser segmentado en palabras." +
+                        "como objetivo marcar con cuadros el número de palabras que contenga la oración. ", ""));
 
         return conciencia_tipo;
     }

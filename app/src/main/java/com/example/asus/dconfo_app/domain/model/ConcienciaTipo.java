@@ -5,6 +5,12 @@ public class ConcienciaTipo {
     private String Description;
     private String urlImage;
 
+    public ConcienciaTipo(String titleConciencia, String description, String urlImage) {
+        this.titleConciencia = titleConciencia;
+        Description = description;
+        this.urlImage = urlImage;
+    }
+
     public String getTitleConciencia() {
         return titleConciencia;
     }
