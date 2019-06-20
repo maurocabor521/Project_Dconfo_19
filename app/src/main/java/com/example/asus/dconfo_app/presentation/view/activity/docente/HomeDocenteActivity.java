@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.domain.model.ConcienciaTipo;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.actividades.ActividadDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity;
@@ -24,6 +28,8 @@ import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.New
 import com.example.asus.dconfo_app.presentation.view.activity.docente.grupos.GrupoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity;
+
+import java.util.ArrayList;
 
 public class HomeDocenteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +44,8 @@ public class HomeDocenteActivity extends AppCompatActivity
     String namedocente;
     int iddocente;
     int idgrupo;
+    Button btnInicio;
+    RecyclerView rv_docente_conciencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +85,46 @@ public class HomeDocenteActivity extends AppCompatActivity
         iddocente = datos.getInt("idDoc");
         //toolbar.setLabelFor();
         this.setTitle("Docente: " + namedocente + " - Id Curso: " + idcurso + " - " + namegrupo);
+        btnInicio = (Button) findViewById(R.id.btn_docente_content);
+        btnInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "idgrupo_btn: " + idgrupo, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        rv_docente_conciencias = (RecyclerView) findViewById(R.id.rv_docente_conciencias);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_docente_conciencias.setLayoutManager(linearLayoutManager);
 
         //Toast.makeText(getApplicationContext(), "idgrupo: " + idgrupo, Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), "idcurso: " + idcurso, Toast.LENGTH_LONG).show();
     }
+
+    public ArrayList<ConcienciaTipo> buidConcienciaTipo() {
+        ArrayList<ConcienciaTipo> conciencia_tipo = new ArrayList<>();
+        conciencia_tipo.add(new ConcienciaTipo());
+
+        return conciencia_tipo;
+    }
+
+   /* public ArrayList<Picture> buidPicture() {
+        ArrayList<Picture> pictures = new ArrayList<>();
+        pictures.add(
+                new Picture("https://www.hcn.org/issues/47.2/this-land-is-their-land/publicland11-jpg/image",
+                        "Uriel Ramirez", "4 días", "7 Me gusta")
+        );
+        pictures.add(
+                new Picture("http://hardboilednews.com/wp-content/uploads/2016/11/Crazy-Mountains2.jpeg",
+                        "Camilo Medina", "2 días", "1 Me gusta")
+        );
+        pictures.add(
+                new Picture("https://www.hcn.org/issues/47.2/this-land-is-their-land/publicland11-jpg/image",
+                        "Luisa Jimenez", "8 días", "6 Me gusta")
+        );
+        return pictures;
+    }*/
 
     @Override
     public void onBackPressed() {

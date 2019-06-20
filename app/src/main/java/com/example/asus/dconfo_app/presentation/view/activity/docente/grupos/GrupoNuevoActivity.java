@@ -141,10 +141,13 @@ public class GrupoNuevoActivity extends AppCompatActivity {
                             }
 
                             listaStringEstudiantes = new ArrayList<>();
-                            //listaStringEstudiantes.add("Seleccione Id Estudiante");
+                            listaStringEstudiantes.add("Seleccione Id Estudiante");
                             for (int i = 0; i < listaEstudiantes.size(); i++) {
                                 listaStringEstudiantes.add(listaEstudiantes.get(i).getIdestudiante().toString() + " - " + listaEstudiantes.get(i).getNameestudiante());
                             }
+
+                            listaIdEstudiantes.add(0000);
+
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, listaStringEstudiantes);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             sp_GrupoEstudiantes_nuevo.setAdapter(adapter);
@@ -154,7 +157,8 @@ public class GrupoNuevoActivity extends AppCompatActivity {
                                     if (position != 0) {
                                         //listaIdEstudiantes.add(listaEstudiantes.get(position - 1).getIdestudiante());
                                         listaIdEstudiantes.add(listaEstudiantes.get(position).getIdestudiante());
-                                        System.out.println("lista id est: " + listaIdEstudiantes.toString());
+                                        //System.out.println("lista id est: " + listaIdEstudiantes.toString());
+                                        Toast.makeText(getApplicationContext(), "id est: " + listaIdEstudiantes.get(position), Toast.LENGTH_LONG).show();
                                         showListView();
                                     } else {
 
