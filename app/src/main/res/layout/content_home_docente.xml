@@ -9,11 +9,6 @@
     tools:context=".presentation.view.activity.docente.HomeDocenteActivity"
     tools:showIn="@layout/app_bar_home_docente">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/dconfo" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +19,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/dconfo" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_docente_conciencias"
                 android:layout_width="match_parent"
@@ -31,11 +32,6 @@
 
             </android.support.v7.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/btn_docente_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Botón inicio" />
 
         </LinearLayout>
 

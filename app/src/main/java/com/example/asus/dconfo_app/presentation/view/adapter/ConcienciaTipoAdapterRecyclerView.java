@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.ConcienciaTipo;
 import com.squareup.picasso.Picasso;
@@ -49,17 +51,38 @@ public class ConcienciaTipoAdapterRecyclerView extends RecyclerView.Adapter<Conc
         ConcienciaTipo concienciaTipo = listaConcienciaTipo.get(position);
         holder.titulo.setText(concienciaTipo.getTitleConciencia());
         holder.description.setText(concienciaTipo.getDescription());
-        if (holder.titulo.equals("Conciencia Fónica")) {
-            Drawable drawable = holder.iv_conciencia.getResources().getDrawable(R.drawable.ic_conciencia_fonica);
+        if (concienciaTipo.getTitleConciencia().equals("Conciencia Fónica")) {
+            System.out.println("True Fonica");
+            Drawable drawable = holder.ll_imagen.getResources().getDrawable(R.drawable.ic_conciencia_fonica);
             holder.iv_conciencia.setBackground(drawable);
-        } else if (holder.titulo.equals("Conciencia Sílabica")) {
-            Drawable drawable = holder.iv_conciencia.getResources().getDrawable(R.drawable.ic_conciencia_silabica);
+        } else if (concienciaTipo.getTitleConciencia().equals("Conciencia Sílabica")) {
+            System.out.println("True Silabica");
+            Drawable drawable = holder.ll_imagen.getResources().getDrawable(R.drawable.ic_conciencia_silabica);
             holder.iv_conciencia.setBackground(drawable);
-        } else if (holder.titulo.equals("Conciencia Léxica")) {
-            Drawable drawable = holder.iv_conciencia.getResources().getDrawable(R.drawable.ic_conciencia_lexica);
+        } else if (concienciaTipo.getTitleConciencia().equals("Conciencia Léxica")) {
+            System.out.println("True Lexica");
+            Drawable drawable = holder.ll_imagen.getResources().getDrawable(R.drawable.ic_conciencia_lexica);
             holder.iv_conciencia.setBackground(drawable);
         }
 
+        if (esPar(position)) {
+            int c = holder.ll_contenedor.getResources().getColor(R.color.colorAccent);
+            holder.ll_contenedor.setBackgroundColor(c);
+        }else{
+            int c = holder.ll_contenedor.getResources().getColor(R.color.colorAccent);
+            holder.ll_contenedor.setBackgroundColor(c);
+        }
+
+    }
+
+    public boolean esPar(int numero) {
+        boolean variable;
+        if (numero % 2 == 0) {
+            variable = true;
+        } else {
+            variable = false;
+        }
+        return variable;
     }
 
     @Override
@@ -71,6 +94,8 @@ public class ConcienciaTipoAdapterRecyclerView extends RecyclerView.Adapter<Conc
         private ImageView iv_conciencia;
         private TextView titulo;
         private TextView description;
+        private LinearLayout ll_imagen;
+        private LinearLayout ll_contenedor;
 
 
         public ConcienciaViewHolder(View itemView) {
@@ -78,6 +103,8 @@ public class ConcienciaTipoAdapterRecyclerView extends RecyclerView.Adapter<Conc
             iv_conciencia = (ImageView) itemView.findViewById(R.id.iv_conciencia_imagen);
             titulo = (TextView) itemView.findViewById(R.id.txt_conciencia_titulo);
             description = (TextView) itemView.findViewById(R.id.txt_conciencia_description);
+            ll_imagen = (LinearLayout) itemView.findViewById(R.id.ll_conciencia_layout);
+            ll_contenedor = (LinearLayout) itemView.findViewById(R.id.ll_conciencia_contenedor);
 
         }
     }

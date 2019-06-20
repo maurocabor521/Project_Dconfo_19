@@ -86,13 +86,13 @@ public class HomeDocenteActivity extends AppCompatActivity
         iddocente = datos.getInt("idDoc");
         //toolbar.setLabelFor();
         this.setTitle("Docente: " + namedocente + " - Id Curso: " + idcurso + " - " + namegrupo);
-        btnInicio = (Button) findViewById(R.id.btn_docente_content);
+       /* btnInicio = (Button) findViewById(R.id.btn_docente_content);
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "idgrupo_btn: " + idgrupo, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         rv_docente_conciencias = (RecyclerView) findViewById(R.id.rv_docente_conciencias);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
