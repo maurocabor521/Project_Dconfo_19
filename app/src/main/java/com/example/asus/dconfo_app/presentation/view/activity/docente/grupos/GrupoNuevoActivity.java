@@ -158,7 +158,7 @@ public class GrupoNuevoActivity extends AppCompatActivity {
                                         //listaIdEstudiantes.add(listaEstudiantes.get(position - 1).getIdestudiante());
                                         listaIdEstudiantes.add(listaEstudiantes.get(position).getIdestudiante());
                                         //System.out.println("lista id est: " + listaIdEstudiantes.toString());
-                                        Toast.makeText(getApplicationContext(), "id est: " + listaIdEstudiantes.get(position), Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(getApplicationContext(), "id est: " + listaIdEstudiantes.get(position), Toast.LENGTH_LONG).show();
                                         showListView();
                                     } else {
 

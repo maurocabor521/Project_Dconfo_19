@@ -67,7 +67,7 @@ public class ImagenUrlAdapter extends RecyclerView.Adapter<ImagenUrlAdapter.Usua
 
         String url_lh= Globals.url;
 
-        String urlImagen = "http://"+url_lh+"/proyecto_dconfo/" + rutaImagen;
+        String urlImagen = "http://"+url_lh+"/proyecto_dconfo_v1/" + rutaImagen;
         urlImagen = urlImagen.replace(" ", "%20");
 
         ImageRequest imageRequest = new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
