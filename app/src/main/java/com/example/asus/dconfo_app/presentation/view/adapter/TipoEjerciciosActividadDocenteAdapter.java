@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.EjercicioG1;
+import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 
 import java.util.List;
 
@@ -19,18 +21,18 @@ import java.util.List;
 
 public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<TipoEjerciciosActividadDocenteAdapter.EjerciciosHolder> implements View.OnClickListener {
 
-    List<EjercicioG1> listaEjerciciosG1;
+    List<EjercicioG2> listaEjerciciosG2;
     private View.OnClickListener listener;
 
-    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG1> listaEjerciciosG1) {
-        this.listaEjerciciosG1 = listaEjerciciosG1;
+    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG2> listaEjerciciosG2) {
+        this.listaEjerciciosG2 = listaEjerciciosG2;
     }
 
 
     @NonNull
     @Override
     public EjerciciosHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ejercicio, parent, false);
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ejercicio_actividad, parent, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         vista.setLayoutParams(layoutParams);
@@ -41,14 +43,10 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(EjerciciosHolder holder, int position) {
         // holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
-       // Log.i("size", "lista_: " + listaGrupos.size());
-        if (listaEjerciciosG1.size() != 0) {
-            holder.txtidEjercicio.setText(listaEjerciciosG1.get(position).getIdEjercicio().toString());
-            holder.txtidDocente.setText(listaEjerciciosG1.get(position).getIdDocente().toString());
-            holder.txtnameEjercicio.setText(listaEjerciciosG1.get(position).getNameEjercicio().toString());
-            holder.txtidActividad.setText(listaEjerciciosG1.get(position).getIdActividad().toString());
-            holder.txtidTipo.setText(listaEjerciciosG1.get(position).getIdTipo().toString());
-
+        // Log.i("size", "lista_: " + listaGrupos.size());
+        if (listaEjerciciosG2.size() != 0) {
+            holder.txtidEjercicio.setText(listaEjerciciosG2.get(position).getIdEjercicioG2().toString());
+            holder.txtnameEjercicio.setText(listaEjerciciosG2.get(position).getNameEjercicioG2().toString());
         } else {
 
         }
@@ -62,7 +60,7 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return listaEjerciciosG1.size();
+        return listaEjerciciosG2.size();
     }
 
     @Override
@@ -73,15 +71,14 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
     }
 
     public class EjerciciosHolder extends RecyclerView.ViewHolder {
-        TextView txtidEjercicio,txtidDocente, txtnameEjercicio, txtidActividad, txtidTipo;
+        TextView txtidEjercicio, txtnameEjercicio;
+        CheckBox cb_elegido;
 
         public EjerciciosHolder(View itemView) {
             super(itemView);
             txtidEjercicio = (TextView) itemView.findViewById(R.id.txt_ejercicioId_home);
-            txtidDocente = (TextView) itemView.findViewById(R.id.txt_docenteId_home);
             txtnameEjercicio = (TextView) itemView.findViewById(R.id.txt_ejercicioNombre_home);
-            txtidActividad = (TextView) itemView.findViewById(R.id.txt_ejercicioActividad_home);
-            txtidTipo = (TextView) itemView.findViewById(R.id.txt_ejercicioTipo_home);
+            cb_elegido = (CheckBox) itemView.findViewById(R.id.checkBox_item_ejercicio_act);
 
         }
     }

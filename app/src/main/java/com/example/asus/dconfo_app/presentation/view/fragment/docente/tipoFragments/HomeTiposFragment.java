@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.Curso;
 import com.example.asus.dconfo_app.domain.model.EjercicioG1;
+import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 import com.example.asus.dconfo_app.domain.model.Grupo;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
@@ -62,7 +63,7 @@ public class HomeTiposFragment extends Fragment implements Response.Listener<JSO
     private TextToSpeech mTTS;
     String nameDocente="";
     int idDocente=0;
-    ArrayList<EjercicioG1> listaEjercicios;
+    ArrayList<EjercicioG2> listaEjercicios;
     ProgressDialog progreso;
     //******** CONEXIÓN CON WEBSERVICE
     //RequestQueue request;
@@ -124,7 +125,7 @@ public class HomeTiposFragment extends Fragment implements Response.Listener<JSO
         idDocente=getArguments().getInt("iddocente");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Docente Home: "+nameDocente);
 
-        cargarWebService();
+       // cargarWebService();
         return view;
     }
 
@@ -141,7 +142,7 @@ public class HomeTiposFragment extends Fragment implements Response.Listener<JSO
 
        // String url = "http://192.168.0.13/proyecto_dconfo/wsJSONConsultarListaEjerciciosDocente.php?iddocente=" + idDocente;
 
-        String url = "http://"+url_lh+"/proyecto_dconfo_v1/wsJSONConsultarListaEjerciciosDocente.php?iddocente=" + idDocente;
+        String url = "http://"+url_lh+"/proyecto_dconfo_v1/2wsJSONConsultarListaEjercicios.php?iddocente=" + idDocente;
         //String url = "http://"+url_lh+"/proyecto_dconfo/wsJSONConsultarListaCursosDocente.php?iddocente=" + idDocente;
         // http://localhost/proyecto_dconfo/
 ///wsJSONConsultarEstudiante.php?documento=" + edt_codigo.getText().toString();
@@ -174,17 +175,17 @@ public class HomeTiposFragment extends Fragment implements Response.Listener<JSO
     public void onResponse(JSONObject response) {
 //        progreso.hide();
         //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
-        EjercicioG1 ejercicioG1 = null;
-        JSONArray json = response.optJSONArray("ejerciciog1");
+        EjercicioG2 ejercicioG1 = null;
+        JSONArray json = response.optJSONArray("ejerciciog2");
 
         try {
             for (int i = 0; i < json.length(); i++) {
-                ejercicioG1 = new EjercicioG1();
+                ejercicioG1 = new EjercicioG2();
                 JSONObject jsonObject = null;
                 jsonObject = json.getJSONObject(i);
                 // jsonObject = new JSONObject(response);
-                ejercicioG1.setIdEjercicio(jsonObject.optInt("idEjercicioG1"));
-                ejercicioG1.setNameEjercicio(jsonObject.optString("nameEjercicioG1"));
+                ejercicioG1.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
+                ejercicioG1.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
                 ejercicioG1.setIdDocente(jsonObject.optInt("docente_iddocente"));
                 ejercicioG1.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
                 ejercicioG1.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
@@ -195,9 +196,9 @@ public class HomeTiposFragment extends Fragment implements Response.Listener<JSO
             }
             //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
              Log.i("size", "lista: " + listaEjercicios.toString());
-            TipoEjerciciosDocenteAdapter tipoEjerciciosDocenteAdapter = new TipoEjerciciosDocenteAdapter(listaEjercicios);
+            //TipoEjerciciosDocenteAdapter tipoEjerciciosDocenteAdapter = new TipoEjerciciosDocenteAdapter(listaEjercicios);
 
-            rv_tipos.setAdapter(tipoEjerciciosDocenteAdapter);
+            //rv_tipos.setAdapter(tipoEjerciciosDocenteAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d("error", response.toString());

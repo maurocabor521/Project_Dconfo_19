@@ -35,40 +35,6 @@
                 android:layout_marginBottom="5dp"
                 android:background="?android:attr/listDivider" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Fónicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark"
-                    android:id="@+id/btn_docentente_act_fon"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Léxicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark"
-                    android:id="@+id/btn_docentente_act_lex"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Silábicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark"
-                    android:id="@+id/btn_docentente_act_sil"/>
-
-            </LinearLayout>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,6 +42,41 @@
                 android:text="Seleccione el tipo de ejercicio"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_docentente_act_fon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fónicos"
+                    android:textStyle="bold"
+                    android:theme="@style/RaisedButtonDark" />
+
+                <Button
+                    android:id="@+id/btn_docentente_act_lex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Léxicos"
+                    android:textStyle="bold"
+                    android:theme="@style/RaisedButtonDark" />
+
+                <Button
+                    android:id="@+id/btn_docentente_act_sil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Silábicos"
+                    android:textStyle="bold"
+                    android:theme="@style/RaisedButtonDark" />
+
+            </LinearLayout>
+
 
             <View
                 android:id="@+id/divider1"
@@ -91,14 +92,6 @@
                 android:orientation="vertical"
                 android:visibility="invisible">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_docente_actividad_ejercicios"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </android.support.v7.widget.RecyclerView>
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,6 +99,14 @@
                     android:text="Seleccione el o los ejercicios"
                     android:textSize="20dp"
                     android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_docente_actividad_ejercicios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
 
             </LinearLayout>
 
