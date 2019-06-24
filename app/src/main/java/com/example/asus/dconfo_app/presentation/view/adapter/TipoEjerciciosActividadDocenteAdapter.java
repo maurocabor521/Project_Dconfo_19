@@ -26,11 +26,11 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
     List<EjercicioG2> listaEjerciciosG2;
     private View.OnClickListener listener;
     //private ActividadDocenteActivity actividadDocenteActivity;
-    View view;
 
-    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG2> listaEjerciciosG2,View view) {
+
+    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG2> listaEjerciciosG2) {
         this.listaEjerciciosG2 = listaEjerciciosG2;
-        this.view = view;
+
     }
 
 
@@ -59,7 +59,7 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
                     System.out.println("ischecked - adapter : "+listaEjerciciosG2.get(position).getIdEjercicioG2());
                 }
             });
-            holder.ll_item_ejercicio.setOnClickListener(new View.OnClickListener() {
+          /*  holder.ll_item_ejercicio.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int c = cb_local.getResources().getColor(R.color.colorPrimary);
@@ -67,7 +67,7 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
                     //cb_local.isChecked()
                     //document.getElementById(previousHighlightedCheckbox).checked = false;
                 }
-            });
+            });*/
 
         } else {
 
