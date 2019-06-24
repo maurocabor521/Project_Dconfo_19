@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.EjercicioG1;
 import com.example.asus.dconfo_app.domain.model.EjercicioG2;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.actividades.ActividadDocenteActivity;
 
 import java.util.List;
 
@@ -23,9 +25,12 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
 
     List<EjercicioG2> listaEjerciciosG2;
     private View.OnClickListener listener;
+    //private ActividadDocenteActivity actividadDocenteActivity;
+    View view;
 
-    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG2> listaEjerciciosG2) {
+    public TipoEjerciciosActividadDocenteAdapter(List<EjercicioG2> listaEjerciciosG2,View view) {
         this.listaEjerciciosG2 = listaEjerciciosG2;
+        this.view = view;
     }
 
 
@@ -41,12 +46,29 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
     }
 
     @Override
-    public void onBindViewHolder(EjerciciosHolder holder, int position) {
+    public void onBindViewHolder(final EjerciciosHolder holder, final int position) {
         // holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
         // Log.i("size", "lista_: " + listaGrupos.size());
         if (listaEjerciciosG2.size() != 0) {
             holder.txtidEjercicio.setText(listaEjerciciosG2.get(position).getIdEjercicioG2().toString());
             holder.txtnameEjercicio.setText(listaEjerciciosG2.get(position).getNameEjercicioG2().toString());
+            final CheckBox cb_local=holder.cb_elegido;
+            holder.cb_elegido.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("ischecked - adapter : "+listaEjerciciosG2.get(position).getIdEjercicioG2());
+                }
+            });
+            holder.ll_item_ejercicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int c = cb_local.getResources().getColor(R.color.colorPrimary);
+                    holder.ll_item_ejercicio.setBackgroundColor(c);
+                    //cb_local.isChecked()
+                    //document.getElementById(previousHighlightedCheckbox).checked = false;
+                }
+            });
+
         } else {
 
         }
@@ -73,12 +95,14 @@ public class TipoEjerciciosActividadDocenteAdapter extends RecyclerView.Adapter<
     public class EjerciciosHolder extends RecyclerView.ViewHolder {
         TextView txtidEjercicio, txtnameEjercicio;
         CheckBox cb_elegido;
+        LinearLayout ll_item_ejercicio;
 
         public EjerciciosHolder(View itemView) {
             super(itemView);
             txtidEjercicio = (TextView) itemView.findViewById(R.id.txt_ejercicioId_home);
             txtnameEjercicio = (TextView) itemView.findViewById(R.id.txt_ejercicioNombre_home);
             cb_elegido = (CheckBox) itemView.findViewById(R.id.checkBox_item_ejercicio_act);
+            ll_item_ejercicio = (LinearLayout) itemView.findViewById(R.id.ll_item_ejercicio);
 
         }
     }
