@@ -20,7 +20,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/actividades/ActividadDocenteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/actividades/ActividadDocenteActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/TipoEjerciciosActividadDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/TipoEjerciciosActividadDocenteAdapter.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +51,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="4" />
-          <entry key="java" value="97" />
+          <entry key="java" value="99" />
           <entry key="png" value="1" />
           <entry key="xml" value="49" />
         </counts>
@@ -61,14 +60,14 @@
         <counts>
           <entry key="Groovy" value="4" />
           <entry key="Image" value="1" />
-          <entry key="JAVA" value="97" />
+          <entry key="JAVA" value="99" />
           <entry key="XML" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="1" />
-          <entry key="java" value="3795" />
+          <entry key="java" value="3978" />
           <entry key="txt" value="12" />
           <entry key="xml" value="1602" />
         </counts>
@@ -76,7 +75,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="3795" />
+          <entry key="JAVA" value="3978" />
           <entry key="PLAIN_TEXT" value="12" />
           <entry key="XML" value="1602" />
         </counts>
@@ -88,16 +87,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/actividades/ActividadDocenteActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-397">
-              <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+            <state relative-caret-position="72">
+              <caret line="195" column="46" selection-start-line="195" selection-start-column="46" selection-end-line="195" selection-end-column="46" />
               <folding>
-                <element signature="e#4422#4558#0" expanded="true" />
-                <element signature="e#4557#4558#0" expanded="true" />
-                <element signature="e#11421#12502#0" expanded="true" />
-                <element signature="e#12501#12502#0" expanded="true" />
-                <element signature="e#14473#15601#0" expanded="true" />
-                <element signature="e#15600#15601#0" expanded="true" />
+                <element signature="e#4793#4991#0" expanded="true" />
+                <element signature="e#4990#4991#0" expanded="true" />
+                <element signature="e#19408#20544#0" expanded="true" />
+                <element signature="e#20543#20544#0" expanded="true" />
+                <element signature="e#22515#23643#0" expanded="true" />
+                <element signature="e#23642#23643#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarDeberDocenteActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarEstudianteDeberActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="332" selection-start-line="332" selection-end-line="348" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -107,15 +124,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="213">
               <caret line="62" selection-start-line="62" selection-end-line="66" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/ManageCursosDocenteActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2125">
-              <caret line="153" selection-start-line="153" selection-end-line="154" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -131,16 +139,6 @@
                 <element signature="e#3246#3247#0" expanded="true" />
                 <element signature="e#3293#3294#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_actividad_docente.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2023">
-              <caret line="119" selection-start-line="119" selection-end-line="119" />
             </state>
           </provider>
         </entry>
@@ -584,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1561400274874</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="nuevo commit">
+      <created>1561407978019</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1561407978019</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -848,24 +853,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarDeberDocenteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/GrupoDocenteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarEstudianteDeberActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="142" selection-start-line="142" selection-end-line="143" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -1003,17 +994,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarDeberDocenteActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/AsignarEstudianteDeberActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="332" selection-start-line="332" selection-end-line="348" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/actividades/ActividadDocenteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-397">
-          <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+        <state relative-caret-position="72">
+          <caret line="195" column="46" selection-start-line="195" selection-start-column="46" selection-end-line="195" selection-end-column="46" />
           <folding>
-            <element signature="e#4422#4558#0" expanded="true" />
-            <element signature="e#4557#4558#0" expanded="true" />
-            <element signature="e#11421#12502#0" expanded="true" />
-            <element signature="e#12501#12502#0" expanded="true" />
-            <element signature="e#14473#15601#0" expanded="true" />
-            <element signature="e#15600#15601#0" expanded="true" />
+            <element signature="e#4793#4991#0" expanded="true" />
+            <element signature="e#4990#4991#0" expanded="true" />
+            <element signature="e#19408#20544#0" expanded="true" />
+            <element signature="e#20543#20544#0" expanded="true" />
+            <element signature="e#22515#23643#0" expanded="true" />
+            <element signature="e#23642#23643#0" expanded="true" />
           </folding>
         </state>
       </provider>

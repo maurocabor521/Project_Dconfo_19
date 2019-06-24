@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,11 +20,14 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.domain.model.Asignacion;
 import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
@@ -34,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ActividadDocenteActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
@@ -53,6 +59,9 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
     private int idgrupo;
     private int idactividad;
     private int flag;
+    private int flag_1=0;
+    private int asignacion_idGrupoAsignacion;
+    private int ejercicioG2_idEjercicioG2;
 
     View view;
 
@@ -60,6 +69,7 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
 
     ArrayList<EjercicioG2> listaEjercicios;
     ArrayList<Integer> listaIdEjercicios;
+    ArrayList<Asignacion> listaAsignaciones;
 
     ProgressDialog progreso;
     //******** CONEXIÓN CON WEBSERVICE
@@ -127,7 +137,9 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
         btn_crear_actividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarWebService();
+                crearAsignacion();
+
+                //listar_Actividades_Docente();
             }
         });
 
@@ -145,6 +157,19 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
 
     }
 
+    private void asignacionHasEjercicios() {
+
+        if (flag_1 < listaIdEjercicios.size()) {
+            System.out.println("flag met: " + flag_1);
+            ejercicioG2_idEjercicioG2 = listaIdEjercicios.get(flag_1);
+            System.out.println("IdEjercicioG2: " + ejercicioG2_idEjercicioG2);
+            crearAsignacionHasEjercicio();
+        } else if (flag_1 == listaIdEjercicios.size()) {
+            listaIdEjercicios.clear();
+        }
+
+    }
+
     private void buttonActive() {
         if (listaIdEjercicios.size() != 0 && !(edt_name_actividad.getText().equals(""))) {
             btn_crear_actividad.setEnabled(true);
@@ -152,7 +177,60 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
         }
     }
 
-    private void cargarWebService() {
+    private void crearAsignacionHasEjercicio() {
+        flag_1++;
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        String url_lh = Globals.url;
+        String url =
+                //"http://192.168.0.13/proyecto_dconfo/wsJSONCrearCurso.php?";
+                "http://" + url_lh + "/proyecto_dconfo_v1/22wsJSONCrearAsignacion_has_ejercicioG2.php";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    edt_name_actividad.setText("");
+                    //listar_Actividades_Docente();
+                    asignacionHasEjercicios();
+
+                    Toast.makeText(getApplicationContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    // Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    Log.i("ERROR", "RESPONSE" + response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String asignacion_id_GrupoAsignacion = String.valueOf(asignacion_idGrupoAsignacion);
+                String ejercicioG2_id_EjercicioG2 = String.valueOf(ejercicioG2_idEjercicioG2);
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("asignacion_idGrupoAsignacion", asignacion_id_GrupoAsignacion);
+                parametros.put("ejercicioG2_idEjercicioG2", ejercicioG2_id_EjercicioG2);
+
+
+                return parametros;
+            }
+        };
+        //request.add(stringRequest);
+        //p25 duplicar tiempo x defecto
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);//p21
+
+    }
+
+    //***********************************
+
+    private void crearAsignacion() {
 
         progreso.setMessage("Cargando...");
         progreso.show();
@@ -165,7 +243,9 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
             public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
                 progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
+
                     edt_name_actividad.setText("");
+                    listar_Actividades_Docente();
 
                     Toast.makeText(getApplicationContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
@@ -202,6 +282,87 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
         VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);//p21
 
     }
+
+    //***********************************
+    public void listar_Actividades_Docente() {
+
+
+        String url_lh = Globals.url;
+
+
+        String url = "http://" + url_lh +
+                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="
+                + idgrupo + "& iddocente=" + iddocente + "& idactividad=" + idactividad;
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Asignacion asignacion = null;
+                        listaAsignaciones = new ArrayList<>();
+
+                        // Process the JSON
+                        try {
+
+                            JSONArray array = response.optJSONArray("asignacion");
+
+                            // Loop through the array elements
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject student = array.getJSONObject(i);
+                                asignacion = new Asignacion();
+                                JSONObject jsonObject = null;
+                                jsonObject = array.getJSONObject(i);
+                                asignacion.setIdGrupoAsignacion(jsonObject.optInt("idGrupoAsignacion"));
+                                asignacion.setNameGrupoAsignacion(jsonObject.optString("nameGrupoAsignacion"));
+                                asignacion.setDocente_iddocente(jsonObject.optInt("docente_iddocente"));
+                                asignacion.setGrupo_idgrupo(jsonObject.optInt("grupo_idgrupo"));
+                                asignacion.setActividad_idActividad(jsonObject.optInt("Actividad_idActividad"));
+
+                                listaAsignaciones.add(asignacion);
+                            }
+
+                            final List<String> listaStringAsignacion = new ArrayList<>();
+                            listaStringAsignacion.add("Seleccione Id Actividad");
+                            for (int i = 0; i < listaAsignaciones.size(); i++) {
+                                listaStringAsignacion.add(listaAsignaciones.get(i).getIdGrupoAsignacion().toString() + " - " + listaAsignaciones.get(i).getNameGrupoAsignacion());
+                            }
+
+
+                        /*    Toast.makeText(getApplicationContext(), "lista Grupo estudiantes" + listaStringGrupo_Estudiantes, Toast.LENGTH_LONG).show();
+                            System.out.println("listaGrupoEstudiantes size: " + listaGrupoEstudiantes.size());
+                            System.out.println("listaGrupoEstudiantes: " + listaGrupoEstudiantes.get(0).getIdGrupoEstudiantes());*/
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        asignacion_idGrupoAsignacion = listaAsignaciones.get(listaAsignaciones.size() - 1).getIdGrupoAsignacion();
+                        System.out.println("Asignacion_idGrupoAsignacion: " + asignacion_idGrupoAsignacion + " id actividad: " + idactividad);
+                        asignacionHasEjercicios();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        System.out.println();
+                        Log.d("ERROR ACTIVIDADES: ", error.toString());
+                    }
+                }
+        );
+
+        requestQueue.add(jsonObjectRequest);
+        //stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);//p21
+    }
+    //***********************************
 
 
     private void cargarEjerciciosPorActividad() {
