@@ -2,6 +2,7 @@ package com.example.asus.dconfo_app.presentation.view.activity.docente.ejercicio
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.Find1EjercicioFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.TipoLexicoFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,11 +38,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MisEjerciciosActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
-        Response.ErrorListener {
+        Response.ErrorListener,
+        TipoLexicoFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
     private int idactividad;
+    private int idtipo;
+    private int idejercicio;
 
     private LinearLayout ll_rv_ejercicios;
     private Button btn_fon;
@@ -185,11 +190,32 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                 @Override
                 public void onClick(View v) {
 
+                    idejercicio = listaEjercicios.get(rv_ejercicios_act.
+                            getChildAdapterPosition(v)).getIdEjercicioG2();
+
+                    idactividad = listaEjercicios.get(rv_ejercicios_act.
+                            getChildAdapterPosition(v)).getIdActividad();
+
+                    idtipo = listaEjercicios.get(rv_ejercicios_act.
+                            getChildAdapterPosition(v)).getIdTipo();
+
+
                     ll_rv_ejercicios.setVisibility(View.GONE);
                     fl_mod_ejercicios.setVisibility(View.VISIBLE);
-                   /* getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, find1EjercicioFragment)
+
+                    Bundle parametros_1 = new Bundle();
+
+                    parametros_1.putInt("iddocente", iddocente);
+                    parametros_1.putInt("idgrupo", idgrupo);
+                    parametros_1.putInt("idejercicio", idejercicio);
+                    parametros_1.putInt("idactividad", idactividad);
+                    parametros_1.putInt("idtipo", idtipo);
+
+                    TipoLexicoFragment tipoLexicoFragment = new TipoLexicoFragment();
+                    tipoLexicoFragment.setArguments(parametros_1);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipoLexicoFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null).commit();*/
+                            .addToBackStack(null).commit();
 
                 }
             });
@@ -225,4 +251,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

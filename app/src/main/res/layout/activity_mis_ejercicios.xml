@@ -124,8 +124,8 @@
             <FrameLayout
                 android:id="@+id/container_docente_edit_ejer"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
                 android:visibility="gone">
 
             </FrameLayout>
