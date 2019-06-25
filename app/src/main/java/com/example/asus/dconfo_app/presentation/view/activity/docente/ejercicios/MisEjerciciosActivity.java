@@ -168,7 +168,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
 //idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
             }
-            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios);
+            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios,2);
             tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

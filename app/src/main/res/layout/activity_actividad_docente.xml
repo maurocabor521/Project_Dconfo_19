@@ -141,7 +141,7 @@
                 android:padding="20dp"
                 android:text="Crear Actividad"
                 android:textStyle="bold"
-                android:theme="@style/RaisedButtonOrange" />
+                android:theme="@style/RaisedButtonDark" />
 
         </LinearLayout>
 

@@ -66,10 +66,10 @@ public class ConcienciaTipoAdapterRecyclerView extends RecyclerView.Adapter<Conc
         }
 
         if (esPar(position)) {
-            int c = holder.ll_contenedor.getResources().getColor(R.color.colorAccent);
+            int c = holder.ll_contenedor.getResources().getColor(R.color.colorPrimaryDark);
             holder.ll_contenedor.setBackgroundColor(c);
         }else{
-            int c = holder.ll_contenedor.getResources().getColor(R.color.colorAccent);
+            int c = holder.ll_contenedor.getResources().getColor(R.color.colorPrimaryDark);
             holder.ll_contenedor.setBackgroundColor(c);
         }
 

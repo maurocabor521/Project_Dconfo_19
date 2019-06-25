@@ -40,6 +40,12 @@
         <item name="colorControlHighlight">#f12711</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="RaisedButtonGray" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorButtonNormal">#2c3e50</item>
+        <item name="colorControlHighlight">#bdc3c7</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
     <!-- Base application theme. -->
  <!--   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
         <!-- Customize your theme here. -->

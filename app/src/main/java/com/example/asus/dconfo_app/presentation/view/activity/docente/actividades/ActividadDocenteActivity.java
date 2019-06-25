@@ -59,7 +59,7 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
     private int idgrupo;
     private int idactividad;
     private int flag;
-    private int flag_1=0;
+    private int flag_1 = 0;
     private int asignacion_idGrupoAsignacion;
     private int ejercicioG2_idEjercicioG2;
 
@@ -372,32 +372,19 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
 
         String iddoc = "20181";
         String url_lh = Globals.url;
-        if (flag == 1) {
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
-            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-            final int MY_DEFAULT_TIMEOUT = 15000;
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    MY_DEFAULT_TIMEOUT,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-            // request.add(jsonObjectRequest);
-            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-        } else if (flag == 2) {
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/21wsJSONCrearAsignacion.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
-            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+        final int MY_DEFAULT_TIMEOUT = 15000;
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_DEFAULT_TIMEOUT,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-            final int MY_DEFAULT_TIMEOUT = 15000;
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    MY_DEFAULT_TIMEOUT,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // request.add(jsonObjectRequest);
+        VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
-            // request.add(jsonObjectRequest);
-            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-        }
-        // Toast.makeText(getContext(), "LISTA EJERCICIOS DOC.", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -412,112 +399,59 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
     // si esta bien el llamado a la url entonces entra a este metodo
     @Override
     public void onResponse(JSONObject response) {
-        if (flag == 1) {
-            progreso.hide();
-            //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
 
-            JSONArray json = response.optJSONArray("ejerciciog2");
+        progreso.hide();
+        //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
 
-            try {
-                for (int i = 0; i < json.length(); i++) {
-                    ejercicioG2 = new EjercicioG2();
-                    JSONObject jsonObject = null;
-                    jsonObject = json.getJSONObject(i);
-                    // jsonObject = new JSONObject(response);
-                    ejercicioG2.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
-                    ejercicioG2.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
-                    ejercicioG2.setIdDocente(jsonObject.optInt("docente_iddocente"));
-                    ejercicioG2.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
-                    ejercicioG2.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
+        JSONArray json = response.optJSONArray("ejerciciog2");
 
-                    listaEjercicios.add(ejercicioG2);
+        try {
+            for (int i = 0; i < json.length(); i++) {
+                ejercicioG2 = new EjercicioG2();
+                JSONObject jsonObject = null;
+                jsonObject = json.getJSONObject(i);
+                // jsonObject = new JSONObject(response);
+                ejercicioG2.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
+                ejercicioG2.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
+                ejercicioG2.setIdDocente(jsonObject.optInt("docente_iddocente"));
+                ejercicioG2.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
+                ejercicioG2.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
+
+                listaEjercicios.add(ejercicioG2);
 
 //idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
-                }
-                TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios);
-                tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    /*if (cb_agregar_ejercicio.isChecked()==true) {
-                        listaIdEjercicios.add(ejercicioG2.getIdEjercicioG2());
-                        System.out.println("lista id ejercicio: "+listaIdEjercicios);
-                        //System.out.println("CB: "+cb_agregar_ejercicio.isChecked());
-                    }*/
-                        int idejercicio = listaEjercicios.get(rv_ejercicios_act.
-                                getChildAdapterPosition(v)).getIdEjercicioG2();
-                        listaIdEjercicios.add(idejercicio);
-                        int c = getResources().getColor(R.color.green);
-                        // cv_item_ejecicio.setCardBackgroundColor(c);
-                        System.out.println("lista id ejercicio: " + listaIdEjercicios);
-                        // buttonActive();
-                        Toast.makeText(getApplicationContext(), "lista id ejercicios: " + listaIdEjercicios.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
-                rv_ejercicios_act.setAdapter(tipoEjerciciosActividadDocenteAdapter);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.d("error", response.toString());
-
-                //Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
-
-                progreso.hide();
             }
-        } else //flag=1
-            if (flag == 2) {
-                progreso.hide();
-                //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
-
-                JSONArray json = response.optJSONArray("ejerciciog2");
-
-                try {
-                    for (int i = 0; i < json.length(); i++) {
-                        ejercicioG2 = new EjercicioG2();
-                        JSONObject jsonObject = null;
-                        jsonObject = json.getJSONObject(i);
-                        // jsonObject = new JSONObject(response);
-                        ejercicioG2.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
-                        ejercicioG2.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
-                        ejercicioG2.setIdDocente(jsonObject.optInt("docente_iddocente"));
-                        ejercicioG2.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
-                        ejercicioG2.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
-
-                        listaEjercicios.add(ejercicioG2);
-
-//idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
-                    }
-                    TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios);
-                    tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios, 1);
+            tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     /*if (cb_agregar_ejercicio.isChecked()==true) {
                         listaIdEjercicios.add(ejercicioG2.getIdEjercicioG2());
                         System.out.println("lista id ejercicio: "+listaIdEjercicios);
                         //System.out.println("CB: "+cb_agregar_ejercicio.isChecked());
                     }*/
-                            int idejercicio = listaEjercicios.get(rv_ejercicios_act.
-                                    getChildAdapterPosition(v)).getIdEjercicioG2();
-                            listaIdEjercicios.add(idejercicio);
-                            //  int c = getResources().getColor(R.color.green);
-                            // cv_item_ejecicio.setCardBackgroundColor(c);
-                            System.out.println("lista id ejercicio: " + listaIdEjercicios);
-                            Toast.makeText(getApplicationContext(), "Mensaje: " + listaIdEjercicios.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
-                    rv_ejercicios_act.setAdapter(tipoEjerciciosActividadDocenteAdapter);
+                    int idejercicio = listaEjercicios.get(rv_ejercicios_act.
+                            getChildAdapterPosition(v)).getIdEjercicioG2();
+                    listaIdEjercicios.add(idejercicio);
+                    int c = getResources().getColor(R.color.green);
+                    // cv_item_ejecicio.setCardBackgroundColor(c);
+                    System.out.println("lista id ejercicio: " + listaIdEjercicios);
+                    // buttonActive();
+                    Toast.makeText(getApplicationContext(), "lista id ejercicios: " + listaIdEjercicios.toString(), Toast.LENGTH_SHORT).show();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.d("error", response.toString());
-
-                    //Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
-
-                    progreso.hide();
                 }
-            }//flag=1
+            });
+            System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
+            rv_ejercicios_act.setAdapter(tipoEjerciciosActividadDocenteAdapter);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.d("error", response.toString());
+
+            //Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+            progreso.hide();
+        }
 
     }
 

@@ -54,7 +54,7 @@
                     android:layout_weight="1"
                     android:text="Fónicos"
                     android:textStyle="bold"
-                    android:theme="@style/RaisedButtonOrange" />
+                    android:theme="@style/RaisedButtonDark" />
 
                 <Button
                     android:id="@+id/btn_docentente_ejer_lex"
@@ -63,7 +63,7 @@
                     android:layout_weight="1"
                     android:text="Léxicos"
                     android:textStyle="bold"
-                    android:theme="@style/RaisedButtonOrange" />
+                    android:theme="@style/RaisedButtonDark" />
 
                 <Button
                     android:id="@+id/btn_docentente_ejer_sil"
@@ -72,7 +72,7 @@
                     android:layout_weight="1"
                     android:text="Silábicos"
                     android:textStyle="bold"
-                    android:theme="@style/RaisedButtonOrange" />
+                    android:theme="@style/RaisedButtonDark" />
 
             </LinearLayout>
 
