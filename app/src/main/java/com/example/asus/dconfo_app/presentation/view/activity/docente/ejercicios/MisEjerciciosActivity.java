@@ -28,6 +28,7 @@ import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1EstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.Find1EjercicioFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.TipoLexicoFragment;
 
@@ -39,7 +40,8 @@ import java.util.ArrayList;
 
 public class MisEjerciciosActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener,
-        TipoLexicoFragment.OnFragmentInteractionListener {
+        TipoLexicoFragment.OnFragmentInteractionListener,
+        Tipo1EstudianteFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -211,9 +213,15 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                     parametros_1.putInt("idactividad", idactividad);
                     parametros_1.putInt("idtipo", idtipo);
 
-                    TipoLexicoFragment tipoLexicoFragment = new TipoLexicoFragment();
-                    tipoLexicoFragment.setArguments(parametros_1);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipoLexicoFragment)
+                    // TipoLexicoFragment tipoLexicoFragment = new TipoLexicoFragment();
+                    Tipo1EstudianteFragment tipo1EstudianteFragment = new Tipo1EstudianteFragment();
+
+                    // tipoLexicoFragment.setArguments(parametros_1);
+                    tipo1EstudianteFragment.setArguments(parametros_1);
+
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipoLexicoFragment)
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .addToBackStack(null).commit();
 
