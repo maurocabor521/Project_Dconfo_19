@@ -3,6 +3,7 @@ package com.example.asus.dconfo_app.presentation.view.activity.docente.ejercicio
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.Find1EjercicioFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +50,10 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     private EditText edt_name_actividad;
     private RecyclerView rv_ejercicios_act;
 
+    private LinearLayout ll_ejercicios;
+
+    private FrameLayout fl_mod_ejercicios;
+
     private EjercicioG2 ejercicioG2 = null;
 
     private ArrayList<EjercicioG2> listaEjercicios;
@@ -64,6 +71,10 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         progreso = new ProgressDialog(this);
 
         ll_rv_ejercicios = (LinearLayout) findViewById(R.id.ll_docente_ejer_rv);
+        ll_ejercicios = (LinearLayout) findViewById(R.id.ll_docente_edit_ejer);
+
+        fl_mod_ejercicios = (FrameLayout) findViewById(R.id.container_docente_edit_ejer);
+
 
         Intent intent = this.getIntent();
         Bundle datos = intent.getExtras();
@@ -76,6 +87,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         rv_ejercicios_act.setHasFixedSize(true);
 
         listaEjercicios = new ArrayList<>();
+
 
         btn_fon = (Button) findViewById(R.id.btn_docentente_ejer_fon);
         btn_fon.setOnClickListener(new View.OnClickListener() {
@@ -168,11 +180,16 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
 //idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
             }
-            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios,2);
+            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios, 2);
             tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    ll_rv_ejercicios.setVisibility(View.GONE);
+                    fl_mod_ejercicios.setVisibility(View.VISIBLE);
+                   /* getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, find1EjercicioFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null).commit();*/
 
                 }
             });

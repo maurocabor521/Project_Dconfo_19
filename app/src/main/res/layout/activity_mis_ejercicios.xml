@@ -34,46 +34,53 @@
                 android:layout_marginBottom="5dp"
                 android:background="?android:attr/listDivider" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Seleccione por tipo de ejercicio"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
             <LinearLayout
+                android:id="@+id/ll_docente_edit_ejer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_docentente_ejer_fon"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Fónicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark" />
+                    android:gravity="center"
+                    android:text="Seleccione por tipo de ejercicio"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btn_docentente_ejer_lex"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Léxicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark" />
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_docentente_ejer_sil"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Silábicos"
-                    android:textStyle="bold"
-                    android:theme="@style/RaisedButtonDark" />
+                    <Button
+                        android:id="@+id/btn_docentente_ejer_fon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Fónicos"
+                        android:textStyle="bold"
+                        android:theme="@style/RaisedButtonDark" />
 
+                    <Button
+                        android:id="@+id/btn_docentente_ejer_lex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Léxicos"
+                        android:textStyle="bold"
+                        android:theme="@style/RaisedButtonDark" />
+
+                    <Button
+                        android:id="@+id/btn_docentente_ejer_sil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Silábicos"
+                        android:textStyle="bold"
+                        android:theme="@style/RaisedButtonDark" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -113,6 +120,15 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="5dp"
                 android:background="?android:attr/listDivider" />
+
+            <FrameLayout
+                android:id="@+id/container_docente_edit_ejer"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimary"
+                android:visibility="gone">
+
+            </FrameLayout>
 
         </LinearLayout>
 
