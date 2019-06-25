@@ -17,6 +17,7 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -81,6 +82,7 @@
                         android:theme="@style/RaisedButtonDark" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -105,12 +107,12 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_docente_mis_ejercicios"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
 
@@ -128,9 +130,18 @@
                 android:background="@color/orange"
                 android:visibility="gone">
 
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabtn_docente_modificar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_horizontal|end"
+                    android:src="@drawable/icons8_editar_archivo_64" />
             </FrameLayout>
+
 
         </LinearLayout>
 
+
     </ScrollView>
+
 </LinearLayout>

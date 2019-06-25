@@ -29,6 +29,7 @@ import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1EstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo2EstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.Find1EjercicioFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.TipoLexicoFragment;
 
@@ -41,7 +42,8 @@ import java.util.ArrayList;
 public class MisEjerciciosActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener,
         TipoLexicoFragment.OnFragmentInteractionListener,
-        Tipo1EstudianteFragment.OnFragmentInteractionListener {
+        Tipo1EstudianteFragment.OnFragmentInteractionListener,
+        Tipo2EstudianteFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -53,6 +55,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     private Button btn_fon;
     private Button btn_lex;
     private Button btn_sil;
+    private FloatingActionButton fa_btn_btn_modificar;
     private Button btn_crear_actividad;
     private EditText edt_name_actividad;
     private RecyclerView rv_ejercicios_act;
@@ -69,6 +72,10 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     private FloatingActionButton fb_nuevo_GrupoEstudiantes;
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
+    //**********************************************************************************************
+    Tipo1EstudianteFragment tipo1EstudianteFragment;
+    TipoLexicoFragment tipoLexicoFragment;
+    //**********************************************************************************************
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +102,13 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
         listaEjercicios = new ArrayList<>();
 
+        fa_btn_btn_modificar = (FloatingActionButton) findViewById(R.id.fabtn_docente_modificar);
+        fa_btn_btn_modificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"flating action button",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btn_fon = (Button) findViewById(R.id.btn_docentente_ejer_fon);
         btn_fon.setOnClickListener(new View.OnClickListener() {
@@ -213,18 +227,19 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                     parametros_1.putInt("idactividad", idactividad);
                     parametros_1.putInt("idtipo", idtipo);
 
-                    // TipoLexicoFragment tipoLexicoFragment = new TipoLexicoFragment();
-                    Tipo1EstudianteFragment tipo1EstudianteFragment = new Tipo1EstudianteFragment();
-
-                    // tipoLexicoFragment.setArguments(parametros_1);
+                    //tipoLexicoFragment = new TipoLexicoFragment();
+                    //tipoLexicoFragment.setArguments(parametros_1);
+                    tipo1EstudianteFragment = new Tipo1EstudianteFragment();
                     tipo1EstudianteFragment.setArguments(parametros_1);
+                    Toast.makeText(getApplicationContext(), "idtipo: " + idtipo, Toast.LENGTH_LONG).show();
+
+                    if (idtipo==3){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                    }
 
                     //getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipoLexicoFragment)
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null).commit();
-
                 }
             });
             System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
