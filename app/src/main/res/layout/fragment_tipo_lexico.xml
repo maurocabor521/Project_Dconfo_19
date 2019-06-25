@@ -15,6 +15,21 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:id="@+id/ll_docente_mod_lex_t1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_docente_mod_lex_t1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,6 +50,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_docente_mod_body_lext1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">

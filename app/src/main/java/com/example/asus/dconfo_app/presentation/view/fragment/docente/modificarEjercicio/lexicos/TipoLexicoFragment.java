@@ -16,6 +16,8 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,12 +39,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.domain.model.Imagen;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
+import com.example.asus.dconfo_app.presentation.view.adapter.ImagenUrlAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -55,7 +64,8 @@ import java.util.Map;
  * Use the {@link TipoLexicoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TipoLexicoFragment extends Fragment {
+public class TipoLexicoFragment extends Fragment implements Response.Listener<JSONObject>,
+        Response.ErrorListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,13 +99,21 @@ public class TipoLexicoFragment extends Fragment {
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;//ruta carpeta de directorios
     private String path;//almacena la ruta de la imagen
 
-    String nameDocente="";
-    int idDocente=0;
+    String nameDocente = "";
+    int idDocente = 0;
+    int idgrupo = 0;
+    int idejercicio = 0;
 
     private TextToSpeech mTTS;
     private Button mButtonSpeak;
     private SeekBar mSeekBarPitch;
     private SeekBar mSeekBarSpeed;
+
+    private LinearLayout ll_rv_ejercicios;
+    private LinearLayout ll_body;
+    private RecyclerView rv_tipo1Lexico;
+
+    ArrayList<Imagen> listaImagenes;
 
 
     //******** CONEXIÓN CON WEBSERVICE
@@ -150,20 +168,31 @@ public class TipoLexicoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tipo_lexico, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.home_tipo1);
 
-        nameDocente=getArguments().getString("namedocente");
-        idDocente=getArguments().getInt("iddocente");
+        listaImagenes = new ArrayList<>();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Docente Tipo 1: "+nameDocente);
+        ll_rv_ejercicios = (LinearLayout) view.findViewById(R.id.ll_docente_mod_lex_t1);
+        ll_body = (LinearLayout) view.findViewById(R.id.ll_docente_mod_body_lext1);
 
-        ll_tipo_ejercicio=(LinearLayout)view.findViewById(R.id.ll_tipo_muestra_ejercicio);
-        ll_tipo_ejercicio_form=(LinearLayout)view.findViewById(R.id.ll_docente_lex_t1);
+        rv_tipo1Lexico = (RecyclerView) view.findViewById(R.id.rv_docente_mod_lex_t1);
+        rv_tipo1Lexico.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv_tipo1Lexico.setHasFixedSize(true);
 
-        imageView_muestra=(ImageView)view.findViewById(R.id.iv_imagen_muestra);
+        nameDocente = getArguments().getString("namedocente");
+        idDocente = getArguments().getInt("iddocente");
+        idgrupo = getArguments().getInt("idgrupo");
+        idejercicio = getArguments().getInt("idejercicio");
 
-        mSeekBarPitch = (SeekBar)view.findViewById(R.id.seek_bar_pitch);
-        mSeekBarSpeed = (SeekBar)view.findViewById(R.id.seek_bar_speed);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("id ejercicio: " + idejercicio);
 
-        mButtonSpeak=(Button)view.findViewById(R.id.btn_tipo1_textToS);
+        ll_tipo_ejercicio = (LinearLayout) view.findViewById(R.id.ll_tipo_muestra_ejercicio);
+        ll_tipo_ejercicio_form = (LinearLayout) view.findViewById(R.id.ll_docente_lex_t1);
+
+        imageView_muestra = (ImageView) view.findViewById(R.id.iv_imagen_muestra);
+
+        mSeekBarPitch = (SeekBar) view.findViewById(R.id.seek_bar_pitch);
+        mSeekBarSpeed = (SeekBar) view.findViewById(R.id.seek_bar_speed);
+
+        mButtonSpeak = (Button) view.findViewById(R.id.btn_tipo1_textToS);
         mButtonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,13 +205,13 @@ public class TipoLexicoFragment extends Fragment {
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     //int result = mTTS.setLanguage(Locale.getDefault());
-                    int result = mTTS.setLanguage(new Locale("spa","ESP"));
+                    int result = mTTS.setLanguage(new Locale("spa", "ESP"));
 
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supported");
                     } else {
-                       // mButtonSpeak.setEnabled(true);
+                        // mButtonSpeak.setEnabled(true);
                     }
                 } else {
                     Log.e("TTS", "Initialization failed");
@@ -211,6 +240,8 @@ public class TipoLexicoFragment extends Fragment {
 
             }
         });
+
+        consultarListaImagenes();
         return view;
 
     }
@@ -229,14 +260,16 @@ public class TipoLexicoFragment extends Fragment {
     }
 
     private void mostrarDialogOpciones() {//part 9
-        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {"Elegir de Banco de Datos", "Elegir de Galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (opciones[i].equals("Elegir de Banco de Datos")) {
                     //abriCamara();//part 10 tomar foto
+                    ll_rv_ejercicios.setVisibility(View.VISIBLE);
+                    ll_body.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
@@ -290,13 +323,11 @@ public class TipoLexicoFragment extends Fragment {
     }
 
 
-
     private void cargarImagen() {
         Drawable drawable = imgFoto.getDrawable();
         btn_Tipo1_pic_Ejercicio.setBackground(drawable);
         imageView_muestra.setBackground(drawable);
     }
-
 
 
     private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {//part 14
@@ -336,7 +367,7 @@ public class TipoLexicoFragment extends Fragment {
                     edt_CantLexCorEjercicio.setText("");
                     edt_CodigoEjercicio.setText("");
                     edt_nameEjercicio.setText("");
-                   // edt_OrtacionEjercicio.setText("");
+                    // edt_OrtacionEjercicio.setText("");
                     ll_tipo_ejercicio.setVisibility(View.VISIBLE);
                     ll_tipo_ejercicio_form.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
@@ -372,7 +403,7 @@ public class TipoLexicoFragment extends Fragment {
                 String letraFinal = "";
 
                 Map<String, String> parametros = new HashMap<>();
-               // parametros.put("idEjercicio", idejercicio);
+                // parametros.put("idEjercicio", idejercicio);
                 parametros.put("nameEjercicioG2", nameejercicio);
                 parametros.put("docente_iddocente", iddocente);
                 parametros.put("Tipo_Actividad_idActividad", idactividad);
@@ -434,6 +465,112 @@ public class TipoLexicoFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    private void consultarListaImagenes() {
+
+       /* progreso.setMessage("Cargando...");
+        progreso.show();*/
+        // String ip = getString(R.string.ip);
+        //int iddoc=20181;
+        String iddoc = "20181";
+        String url_lh = Globals.url;
+
+        //String url = "http://192.168.0.13/proyecto_dconfo/wsJSONConsultarListaCursosDocente.php?iddocente=" + txtiddoc.getText().toString();
+
+        // String url = "http://"+url_lh+"/proyecto_dconfo/wsJSONConsultarListaCursosDocente.php?iddocente=" + txtiddoc.getText().toString();
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSON1ConsultarListaImagenes.php";
+        // http://localhost/proyecto_dconfo/
+///wsJSONConsultarEstudiante.php?documento=" + edt_codigo.getText().toString();
+        url = url.replace(" ", "%20");
+        //hace el llamado a la url
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+
+        final int MY_DEFAULT_TIMEOUT = 15000;
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_DEFAULT_TIMEOUT,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // request.add(jsonObjectRequest);
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
+        //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        //progreso.hide();
+        Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
+        System.out.println();
+        Log.d("ERROR", error.toString());
+        //progreso.hide();
+    }
+
+    // si esta bien el llamado a la url entonces entra a este metodo
+    @Override
+    public void onResponse(final JSONObject response) {
+        //progreso.hide();
+        //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
+        Imagen imagen = null;
+        JSONArray json = response.optJSONArray("imagen");
+
+        try {
+            for (int i = 0; i < json.length(); i++) {
+                imagen = new Imagen();
+                JSONObject jsonObject = null;
+                jsonObject = json.getJSONObject(i);
+                // jsonObject = new JSONObject(response);
+                imagen.setIdImagen(jsonObject.optInt("idImagen_Ejercicio"));
+                imagen.setNameImagen(jsonObject.optString("name_Imagen_Ejercicio"));
+                imagen.setRutaImagen(jsonObject.optString("ruta_Imagen_Ejercicio"));
+                imagen.setLetraInicialImagen(jsonObject.optString("letra_inicial_Imagen"));
+                imagen.setLetraFinalImagen(jsonObject.optString("letra_final_Imagen"));
+                imagen.setCantSilabasImagen(jsonObject.optInt("cant_silabas_Imagen"));
+
+                listaImagenes.add(imagen);
+
+//idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
+            }
+
+            ImagenUrlAdapter imagenUrlAdapter = new ImagenUrlAdapter(listaImagenes, getContext());
+            imagenUrlAdapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String rutaImagen = listaImagenes.get(rv_tipo1Lexico.
+                            getChildAdapterPosition(v)).getRutaImagen();
+
+                    String nameImagen = listaImagenes.get(rv_tipo1Lexico.
+                            getChildAdapterPosition(v)).getNameImagen();
+
+                    int idImagen = listaImagenes.get(rv_tipo1Lexico.
+                            getChildAdapterPosition(v)).getIdImagen();
+
+                    //cargarImagenWebService(rutaImagen, nameImagen, idImagen);
+
+                    //Toast.makeText(getApplicationContext(), "on click: " + rutaImagen, Toast.LENGTH_LONG).show();
+                    System.out.println("on click: " + rutaImagen);
+                    //Toast.makeText(getApplicationContext(), "on click: " , Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+            rv_tipo1Lexico.setAdapter(imagenUrlAdapter);
+
+            //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
+            //Log.i("size", "lista Imágenes: " + listaImagenes.get(0).getNameImagen());
+
+            //rv_bankimages.setAdapter(gruposDocenteAdapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.d("error", response.toString());
+
+            Toast.makeText(getContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+            //progreso.hide();
+        }
+    }
+
+    //**********************************************************************************************
 
     /**
      * This interface must be implemented by activities that contain this

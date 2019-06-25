@@ -106,7 +106,18 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         fa_btn_btn_modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"flating action button",Toast.LENGTH_SHORT).show();
+
+                tipoLexicoFragment = new TipoLexicoFragment();
+                Bundle parametros_1 = new Bundle();
+                parametros_1.putInt("iddocente", iddocente);
+                parametros_1.putInt("idgrupo", idgrupo);
+                parametros_1.putInt("idejercicio", idejercicio);
+                tipoLexicoFragment.setArguments(parametros_1);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipoLexicoFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null).commit();
+                Toast.makeText(getApplicationContext(),"floating action button",Toast.LENGTH_SHORT).show();
             }
         });
 
