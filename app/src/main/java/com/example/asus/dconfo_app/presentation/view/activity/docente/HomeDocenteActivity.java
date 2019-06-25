@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.ConcienciaTipo;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.actividades.ActividadDocenteActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.ejercicios.MisEjerciciosActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity;
@@ -41,6 +42,7 @@ public class HomeDocenteActivity extends AppCompatActivity
     Intent intentAsignarDeberFonico;
     Intent intentActividades;
     Intent intentGrupos;
+    Intent intentEjercicios;
     String namegrupo;
     String namedocente;
     int iddocente;
@@ -99,8 +101,8 @@ public class HomeDocenteActivity extends AppCompatActivity
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_docente_conciencias.setLayoutManager(linearLayoutManager);
 
-        ConcienciaTipoAdapterRecyclerView concienciaTipoAdapterRecyclerView=new ConcienciaTipoAdapterRecyclerView(buidConcienciaTipo());
-        System.out.println("lista conciencias: "+buidConcienciaTipo().toString());
+        ConcienciaTipoAdapterRecyclerView concienciaTipoAdapterRecyclerView = new ConcienciaTipoAdapterRecyclerView(buidConcienciaTipo());
+        System.out.println("lista conciencias: " + buidConcienciaTipo().toString());
         rv_docente_conciencias.setAdapter(concienciaTipoAdapterRecyclerView);
 
         //Toast.makeText(getApplicationContext(), "idgrupo: " + idgrupo, Toast.LENGTH_LONG).show();
@@ -201,6 +203,12 @@ public class HomeDocenteActivity extends AppCompatActivity
             startActivity(intentActividades);
 
         } else if (id == R.id.nav_misejercicios) {
+            Bundle args = new Bundle();
+            args.putInt("iddocente", iddocente);
+            args.putInt("idgrupo", idgrupo);
+            intentEjercicios = new Intent(HomeDocenteActivity.this, MisEjerciciosActivity.class);
+            intentEjercicios.putExtras(args);
+            startActivity(intentEjercicios);
 
         } else if (id == R.id.nav_asignardeber) {
             //intentAsignarDeber = new Intent(HomeDocenteActivity.this, AsignarDeberDocenteActivity.class);
