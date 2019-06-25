@@ -1,5 +1,6 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +67,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
     private EjercicioG2HasImagen ejercicioG2HasImagen;
     private EjercicioG2HasLetrag2 ejercicioG2HasLetrag2;
-    private   EjercicioG2 ejercicioG2;
+    private EjercicioG2 ejercicioG2;
 
     String nameestudiante = "";
     int idestudiante = 0;
@@ -100,6 +101,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     boolean puedeg2 = false;
 
     JSONArray jsonArray1;
+
+    private ProgressDialog progreso;
 
     private OnFragmentInteractionListener mListener;
 
@@ -139,6 +142,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_casa_home_estudiante, container, false);
+
+        progreso = new ProgressDialog(getActivity());
+
         listaDeberes = new ArrayList<>();
         listaIdActividadEjercicios = new ArrayList<>();
         listaEjerciciosG1 = new ArrayList<>();
@@ -160,10 +166,13 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         cargarWebService();
         // cargarWebService1();
 
+
         return view;
     }
 
     private void cargarWebService() {
+        progreso.setMessage("Cargando...");
+        progreso.show();
 
         if (buscar.equals("deber")) {
             String url_lh = Globals.url;
@@ -188,7 +197,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
             VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
         } else if (buscar.equals("eje3")) {//**************AGREGADO
             String url_lh = Globals.url;
-           // String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjerG2_DET.php?idejercicioG2=" + idEjercicio;
+            // String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjerG2_DET.php?idejercicioG2=" + idEjercicio;
             String url = "http://" + url_lh + "/proyecto_dconfo_v1/10wsJSONConsultarListaEjerG2_H_Img.php?idejercicioG2=" + ejerpos2;
             url = url.replace(" ", "%20");
             //Toast.makeText(getContext(), "consultar lista det imagenes: ", Toast.LENGTH_LONG).show();
@@ -208,7 +217,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        // progreso.hide();
+        progreso.hide();
         // Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
         System.out.println();
         Log.d("-ERROR-CASAHOME: ", error.toString());
@@ -219,7 +228,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     public void onResponse(JSONObject response) {
 
         //Toast.makeText(getContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
-
+        progreso.hide();
         if (buscar.equals("deber")) {//deber
 
             DeberEstudiante deberEstudiante = null;
@@ -402,7 +411,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 Tipo1FonicoFragment tipo1FonicoFragment = new Tipo1FonicoFragment();
                 Tipo2FonicoFragment tipo2FonicoFragment = new Tipo2FonicoFragment();
 
-                Tipo2silabicoEstudianteFragment tipo2silabicoEstudianteFragment=new Tipo2silabicoEstudianteFragment();
+                Tipo2silabicoEstudianteFragment tipo2silabicoEstudianteFragment = new Tipo2silabicoEstudianteFragment();
 
                 // ArrayList<Integer> listaIDimagenes = new ArrayList<>();
                 //Bundle bundle = new Bundle();
@@ -598,8 +607,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                             //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, inicioEjercicioFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .addToBackStack(null).commit();*/
-                   buscar="eje3";
-                   cargarWebService();
+                    buscar = "eje3";
+                    cargarWebService();
                 } else if (tipo == 2) {
                    /* tipo2FonicoFragment.setArguments(bundle);
                     // inicioEjercicioFragment.setArguments(bundle);
@@ -607,7 +616,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                             //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, inicioEjercicioFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .addToBackStack(null).commit();*/
-                    buscar="eje3";
+                    buscar = "eje3";
                     cargarWebService();
                 } else if (tipo == 3) {//************listo
                     tipo1EstudianteFragment.setArguments(bundle);
@@ -630,8 +639,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1silabicoEstudianteFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .addToBackStack(null).commit();
-                }else if (tipo == 6) {//************listo
-                    buscar="eje3";
+                } else if (tipo == 6) {//************listo
+                    buscar = "eje3";
                     cargarWebService();
                  /*   //tipo1EstudianteFragment.setArguments(bundle);
                     tipo2silabicoEstudianteFragment.setArguments(bundle);

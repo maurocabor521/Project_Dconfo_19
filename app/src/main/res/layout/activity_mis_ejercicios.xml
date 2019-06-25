@@ -84,7 +84,7 @@
                 android:background="?android:attr/listDivider" />
 
             <LinearLayout
-                android:id="@+id/ll_docente_act_rv"
+                android:id="@+id/ll_docente_ejer_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
