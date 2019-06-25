@@ -55,6 +55,8 @@ public class Tipo2FonicoFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
+    private String usuario;
+
     private CircleImageView cv_est_ft2_c1f1;
     private CircleImageView cv_est_ft2_c1f2;
     private CircleImageView cv_est_ft2_c1f3;
@@ -271,6 +273,8 @@ public class Tipo2FonicoFragment extends Fragment
         pareja_4 = new ArrayList<>();
 
         listaIdImagenes = new ArrayList<>();
+
+        usuario = getArguments().getString("usuario");
 
         idImagen1 = getArguments().getInt("idejercicio1");
         listaIdImagenes.add(idImagen1);

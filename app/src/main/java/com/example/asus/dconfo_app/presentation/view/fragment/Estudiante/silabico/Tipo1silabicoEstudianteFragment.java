@@ -76,6 +76,7 @@ public class Tipo1silabicoEstudianteFragment extends Fragment  implements Respon
     private SeekBar mSeekBarSpeed;
 
     private String textOracion;
+    private String usuario;
 
     String urlImagen;
 
@@ -134,6 +135,7 @@ public class Tipo1silabicoEstudianteFragment extends Fragment  implements Respon
         View view=inflater.inflate(R.layout.fragment_tipo1silabico_estudiante, container, false);
 
         idEjercicio = getArguments().getInt("idejercicio");
+        usuario = getArguments().getString("usuario");
         System.out.println("SIL TIPO1 idEjercicio  :" + idEjercicio);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("id Ejercicio: " + idEjercicio);
 

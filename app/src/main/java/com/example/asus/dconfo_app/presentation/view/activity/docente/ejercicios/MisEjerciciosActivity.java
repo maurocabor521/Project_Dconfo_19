@@ -221,11 +221,14 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
                     Bundle parametros_1 = new Bundle();
 
+                    String usuario="docente";
+
                     parametros_1.putInt("iddocente", iddocente);
                     parametros_1.putInt("idgrupo", idgrupo);
                     parametros_1.putInt("idejercicio", idejercicio);
                     parametros_1.putInt("idactividad", idactividad);
                     parametros_1.putInt("idtipo", idtipo);
+                    parametros_1.putString("usuario", usuario);
 
                     //tipoLexicoFragment = new TipoLexicoFragment();
                     //tipoLexicoFragment.setArguments(parametros_1);

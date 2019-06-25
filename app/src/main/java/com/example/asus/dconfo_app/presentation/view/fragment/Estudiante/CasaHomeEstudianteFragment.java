@@ -433,9 +433,12 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 System.out.println("bundle3: " + bundle.get("idejercicio3"));
                 System.out.println("bundle4: " + bundle.get("idejercicio4"));*/
 
+                String usuario="estudiante";
 
                 bundle_t2.putInt("idejercicio", idEjercicio);
                 bundle_t2.putString("letrainicial", letraInicial);
+
+                bundle_t2.putString("usuario", usuario);//**************Nuevo 250619///////////////////////
                 //bundle.putIntArray("cadenaidimagenes", listaidImagenes);
 
                 if (tipo == 1) {
@@ -595,10 +598,15 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 Bundle bundle3 = new Bundle();
                 Bundle bundle4 = new Bundle();
 
+                String usuario="estudiante";
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("idejercicio", ejerpos2);
                 bundle.putString("cantLexemas", cantLex);
                 bundle.putString("oracion", oracion);
+
+                bundle.putString("usuario", usuario);//**************Nuevo 250619///////////////////////
+
 
                 if (tipo == 1) {
                    /* tipo1FonicoFragment.setArguments(bundle);

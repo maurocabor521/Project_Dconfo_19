@@ -58,6 +58,8 @@ public class Tipo2EstudianteFragment extends Fragment {
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
 
+    String usuario;//250619
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo2EstudianteFragment() {
@@ -99,6 +101,7 @@ public class Tipo2EstudianteFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_tipo2_estudiante, container, false);
 
         idEjercicio = getArguments().getInt("idejercicio");
+        usuario = getArguments().getString("usuario");
         cantLexemas_bundle = getArguments().getString("cantLexemas");
         System.out.println("cantLexemas_bundle: " + cantLexemas_bundle);
         oracion = getArguments().getString("oracion");

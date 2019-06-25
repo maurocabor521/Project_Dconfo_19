@@ -102,6 +102,8 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
     private String letrac1f3;
     private String letrac1f4;
 
+    private String usuario;
+
     private boolean cv_c1f1_isactived = false;
     private boolean cv_c1f2_isactived = false;
     private boolean cv_c1f3_isactived = false;
@@ -276,6 +278,8 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
         pareja_4 = new ArrayList<>();
 
         listaIdImagenes = new ArrayList<>();
+
+        usuario = getArguments().getString("usuario");
 
         idImagen1 = getArguments().getInt("idejercicio1");
         listaIdImagenes.add(idImagen1);

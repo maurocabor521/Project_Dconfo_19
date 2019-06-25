@@ -81,6 +81,8 @@ public class Tipo1EstudianteFragment extends Fragment
 
     String urlImagen;
 
+    String usuario;//250619
+
     ArrayList<EjercicioG1> listaEjerciciosg1;
     ArrayList<EjercicioG2> listaEjerciciosg2;
     Context context;
@@ -138,7 +140,11 @@ public class Tipo1EstudianteFragment extends Fragment
 
 
         idEjercicio = getArguments().getInt("idejercicio");
+
+        usuario = getArguments().getString("usuario");
+
         System.out.println("************************idEjercicio: " + idEjercicio);
+        System.out.println("************************usuario: " + usuario);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("id Ejercicio: " + idEjercicio);
 

@@ -51,6 +51,7 @@ public class Tipo1FonicoFragment extends Fragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String usuario;
     private TextView txt_letra;
 
     private String letra;
@@ -160,6 +161,7 @@ public class Tipo1FonicoFragment extends Fragment
         txt_resultado = view.findViewById(R.id.txt_fonico_resultado_t1);
 
         letra = getArguments().getString("letrainicial");
+        usuario = getArguments().getString("usuario");
 
         btn_verificar_tipo1 = (Button) view.findViewById(R.id.btn_estudiante_fonico_enviar_tipo1);
         btn_verificar_tipo1.setOnClickListener(new View.OnClickListener() {
