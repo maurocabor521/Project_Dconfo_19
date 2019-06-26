@@ -29,6 +29,8 @@ import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1EstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo2EstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo1FonicoFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo2FonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo1LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo2LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo2Fragment;
@@ -44,7 +46,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         Tipo1LexicoUpdateFragment.OnFragmentInteractionListener,
         Tipo2LexicoUpdateFragment.OnFragmentInteractionListener,
         Tipo1EstudianteFragment.OnFragmentInteractionListener,
-        Tipo2EstudianteFragment.OnFragmentInteractionListener {
+        Tipo2EstudianteFragment.OnFragmentInteractionListener,
+        Tipo1FonicoFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -53,6 +56,9 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     private int idejercicio;
     private String cantLexemas;
     private String oracion;
+    private String letrainicial;
+
+    private String buscar;
 
     private LinearLayout ll_rv_ejercicios;
     private Button btn_fon;
@@ -76,10 +82,15 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     //**********************************************************************************************
+    Tipo1FonicoFragment tipo1FonicoFragment;
+    Tipo2FonicoFragment tipo2FonicoFragment;
+
     Tipo1EstudianteFragment tipo1EstudianteFragment;
     Tipo2EstudianteFragment tipo2EstudianteFragment;
+
     Tipo1LexicoUpdateFragment tipo1LexicoUpdateFragment;
     Tipo2LexicoUpdateFragment tipo2LexicoUpdateFragment;
+
     Tipo2Fragment tipo2Fragment;
     //**********************************************************************************************
 
@@ -148,6 +159,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             public void onClick(View v) {
                 listaEjercicios = new ArrayList<>();
                 idactividad = 1;
+                buscar = "listaEje";
                 cargarEjerciciosPorActividad();
                 ll_rv_ejercicios.setVisibility(View.VISIBLE);
             }
@@ -158,6 +170,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             public void onClick(View v) {
                 listaEjercicios = new ArrayList<>();
                 idactividad = 2;
+                buscar = "listaEje";
                 cargarEjerciciosPorActividad();
                 ll_rv_ejercicios.setVisibility(View.VISIBLE);
             }
@@ -168,6 +181,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             public void onClick(View v) {
                 listaEjercicios = new ArrayList<>();
                 idactividad = 3;
+                buscar = "listaEje";
                 cargarEjerciciosPorActividad();
                 ll_rv_ejercicios.setVisibility(View.VISIBLE);
             }
@@ -181,20 +195,23 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String iddoc = "20181";
-        String url_lh = Globals.url;
+        if (buscar.equals("listaEje")) {
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            String iddoc = "20181";
+            String url_lh = Globals.url;
 
-        final int MY_DEFAULT_TIMEOUT = 15000;
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_DEFAULT_TIMEOUT,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-        // request.add(jsonObjectRequest);
-        VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+            final int MY_DEFAULT_TIMEOUT = 15000;
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_DEFAULT_TIMEOUT,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+        }
 
         // Toast.makeText(getContext(), "LISTA EJERCICIOS DOC.", Toast.LENGTH_LONG).show();
     }
@@ -215,101 +232,133 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         progreso.hide();
         //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
 
-        JSONArray json = response.optJSONArray("ejerciciog2");
+        if (buscar.equals("listaEje")) {//listaEje
 
-        try {
-            for (int i = 0; i < json.length(); i++) {
-                ejercicioG2 = new EjercicioG2();
-                JSONObject jsonObject = null;
-                jsonObject = json.getJSONObject(i);
-                // jsonObject = new JSONObject(response);
-                ejercicioG2.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
-                ejercicioG2.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
-                ejercicioG2.setIdDocente(jsonObject.optInt("docente_iddocente"));
-                ejercicioG2.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
-                ejercicioG2.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
-                ejercicioG2.setOracion(jsonObject.optString("oracionEjercicio"));
-                ejercicioG2.setCantidadLexemas(jsonObject.optString("cantidadValidadEjercicio"));
+            JSONArray json = response.optJSONArray("ejerciciog2");
 
-                listaEjercicios.add(ejercicioG2);
+            try {
+                for (int i = 0; i < json.length(); i++) {
+                    ejercicioG2 = new EjercicioG2();
+                    JSONObject jsonObject = null;
+                    jsonObject = json.getJSONObject(i);
+                    // jsonObject = new JSONObject(response);
+                    ejercicioG2.setIdEjercicioG2(jsonObject.optInt("idEjercicioG2"));
+                    ejercicioG2.setNameEjercicioG2(jsonObject.optString("nameEjercicioG2"));
+                    ejercicioG2.setIdDocente(jsonObject.optInt("docente_iddocente"));
+                    ejercicioG2.setIdTipo(jsonObject.optInt("Tipo_idTipo"));
+                    ejercicioG2.setIdActividad(jsonObject.optInt("Tipo_Actividad_idActividad"));
+                    ejercicioG2.setOracion(jsonObject.optString("oracionEjercicio"));
+                    ejercicioG2.setCantidadLexemas(jsonObject.optString("cantidadValidadEjercicio"));
+                    ejercicioG2.setLetra_inicial_EjercicioG2(jsonObject.optString("letra_inicial_EjercicioG2"));
+
+                    listaEjercicios.add(ejercicioG2);
 
 //idgrupo,namegrupo,curso_idcurso,curso_Instituto_idInstituto
-            }
-            TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios, 2);
-            tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    idejercicio = listaEjercicios.get(rv_ejercicios_act.
-                            getChildAdapterPosition(v)).getIdEjercicioG2();
-
-                    idactividad = listaEjercicios.get(rv_ejercicios_act.
-                            getChildAdapterPosition(v)).getIdActividad();
-
-                    idtipo = listaEjercicios.get(rv_ejercicios_act.
-                            getChildAdapterPosition(v)).getIdTipo();
-
-                    oracion = listaEjercicios.get(rv_ejercicios_act.
-                            getChildAdapterPosition(v)).getOracion();
-
-                    cantLexemas = listaEjercicios.get(rv_ejercicios_act.
-                            getChildAdapterPosition(v)).getCantidadLexemas();
-
-
-                    ll_rv_ejercicios.setVisibility(View.GONE);
-                    fl_mod_ejercicios.setVisibility(View.VISIBLE);
-
-                    Bundle parametros_1 = new Bundle();
-
-                    String usuario = "docente";
-
-                    parametros_1.putInt("iddocente", iddocente);
-                    parametros_1.putInt("idgrupo", idgrupo);
-                    parametros_1.putInt("idejercicio", idejercicio);
-                    parametros_1.putInt("idactividad", idactividad);
-                    parametros_1.putInt("idtipo", idtipo);
-                    parametros_1.putString("usuario", usuario);
-                    parametros_1.putString("oracion", oracion);
-                    parametros_1.putString("cantLexemas", cantLexemas);
-
-                    Toast.makeText(getApplicationContext(), "oracion: " + oracion, Toast.LENGTH_LONG).show();
-
-                    //tipo1LexicoUpdateFragment = new Tipo1LexicoUpdateFragment();
-                    //tipo1LexicoUpdateFragment.setArguments(parametros_1);
-                    tipo1EstudianteFragment = new Tipo1EstudianteFragment();
-                    tipo1EstudianteFragment.setArguments(parametros_1);
-
-                    tipo2EstudianteFragment = new Tipo2EstudianteFragment();
-                    tipo2EstudianteFragment.setArguments(parametros_1);
-
-                    Toast.makeText(getApplicationContext(), "idtipo: " + idtipo, Toast.LENGTH_LONG).show();
-
-                    if (idtipo == 3) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-                    }
-                    if (idtipo == 4) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2EstudianteFragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-                    }
-
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1LexicoUpdateFragment)
                 }
-            });
-            System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
-            rv_ejercicios_act.setAdapter(tipoEjerciciosActividadDocenteAdapter);
+                TipoEjerciciosActividadDocenteAdapter tipoEjerciciosActividadDocenteAdapter = new TipoEjerciciosActividadDocenteAdapter(listaEjercicios, 2);
+                tipoEjerciciosActividadDocenteAdapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.d("error", response.toString());
+                        idejercicio = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getIdEjercicioG2();
 
-            //Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+                        idactividad = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getIdActividad();
 
-            progreso.hide();
-        }
-    }
+                        idtipo = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getIdTipo();
+
+                        oracion = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getOracion();
+
+                        cantLexemas = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getCantidadLexemas();
+
+                        letrainicial = listaEjercicios.get(rv_ejercicios_act.
+                                getChildAdapterPosition(v)).getLetra_inicial_EjercicioG2();
+
+
+                        ll_rv_ejercicios.setVisibility(View.GONE);
+                        fl_mod_ejercicios.setVisibility(View.VISIBLE);
+
+                        Bundle parametros_1 = new Bundle();
+
+                        String usuario = "docente";
+
+                        parametros_1.putInt("iddocente", iddocente);
+                        parametros_1.putInt("idgrupo", idgrupo);
+                        parametros_1.putInt("idejercicio", idejercicio);
+                        parametros_1.putInt("idactividad", idactividad);
+                        parametros_1.putInt("idtipo", idtipo);
+                        parametros_1.putString("usuario", usuario);
+                        parametros_1.putString("oracion", oracion);
+                        parametros_1.putString("cantLexemas", cantLexemas);
+                        parametros_1.putString("letrainicial", letrainicial);
+
+                        Toast.makeText(getApplicationContext(), "oracion: " + oracion, Toast.LENGTH_LONG).show();
+
+                        //tipo1LexicoUpdateFragment = new Tipo1LexicoUpdateFragment();
+                        //tipo1LexicoUpdateFragment.setArguments(parametros_1);
+
+                        //****************************************************************fon
+                        tipo1FonicoFragment = new Tipo1FonicoFragment();
+                        tipo1FonicoFragment.setArguments(parametros_1);
+
+                        tipo2FonicoFragment = new Tipo2FonicoFragment();
+                        tipo2FonicoFragment.setArguments(parametros_1);
+                        //****************************************************************lex
+                        tipo1EstudianteFragment = new Tipo1EstudianteFragment();
+                        tipo1EstudianteFragment.setArguments(parametros_1);
+
+                        tipo2EstudianteFragment = new Tipo2EstudianteFragment();
+                        tipo2EstudianteFragment.setArguments(parametros_1);
+                        //****************************************************************sil
+                        //****************************************************************
+
+
+                        Toast.makeText(getApplicationContext(), "idtipo: " + idtipo, Toast.LENGTH_LONG).show();
+
+                        if (idtipo == 1) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1FonicoFragment)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .addToBackStack(null).commit();
+                        }
+                        if (idtipo == 2) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2EstudianteFragment)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .addToBackStack(null).commit();
+                        }
+                        if (idtipo == 3) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .addToBackStack(null).commit();
+                        }
+                        if (idtipo == 4) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2EstudianteFragment)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .addToBackStack(null).commit();
+                        }
+
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1LexicoUpdateFragment)
+                    }
+                });
+                System.out.println("lista ejercicios: " + listaEjercicios.size() + " idactividad: " + idactividad);
+                rv_ejercicios_act.setAdapter(tipoEjerciciosActividadDocenteAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.d("error", response.toString());
+
+                //Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+                progreso.hide();
+            }
+
+        }//listaEje
+
+
+    }//cargarEjerciciosPorActividad()
 
 
     //*********************************************************************************************
