@@ -37,7 +37,7 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/edt_fonico_tipo1_vocal"
+                        android:id="@+id/edt_fonico_update_tipo1_vocal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -58,7 +58,7 @@
                         android:textStyle="bold" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_tipo1Fonico"
+                        android:id="@+id/rv_tipo1Fonico_update"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone">
@@ -87,7 +87,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/btn_fonico_doc_img_1"
+                                android:id="@+id/btn_fonico_update_doc_img_1"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
@@ -110,7 +110,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/btn_fonico_doc_img_2"
+                                android:id="@+id/btn_fonico_update_doc_img_2"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
@@ -141,7 +141,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/btn_fonico_doc_img_3"
+                                android:id="@+id/btn_fonico_update_doc_img_3"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
@@ -164,7 +164,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/btn_fonico_doc_img_4"
+                                android:id="@+id/btn_fonico_update_doc_img_4"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
@@ -184,14 +184,14 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/edt_fonico_nameEjercicio"
+                        android:id="@+id/edt_fonico_update_nameEjercicio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="30dp"
                         android:hint="Ingrese Nombre Ejercicio" />
 
                     <Button
-                        android:id="@+id/btn_fonico_doc_enviar"
+                        android:id="@+id/btn_fonico_update_doc_enviar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"

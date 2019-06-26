@@ -272,6 +272,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
             public void onClick(View v) {
                 btn1Activo = true;
                 mostrarDialogOpciones();
+
             }
         });
         btn_img_1.setOnClickListener(new View.OnClickListener() {
@@ -280,6 +281,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
                 btn_1Activo = true;
                 //rv_tipo1Fonico.setVisibility(View.VISIBLE);
                 mostrarDialogOpciones();
+                Toast.makeText(getContext(), "btn_img_1", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -961,9 +963,15 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
 
     private void cargarImagen() {
         Drawable drawable = imgFoto.getDrawable();
-        if (btn1Activo) {
-            btn_img1.setBackground(drawable);
-            btn1Activo = false;
+        //Bitmap bitmap=;
+        Toast.makeText(getContext(), "cargarImagen: "+btn_1Activo, Toast.LENGTH_LONG).show();
+        if (btn_1Activo) {
+            //btn_img1.setBackground(drawable);//btn_img_1
+            btn_img_1.setBackground(null);
+            btn_img_1.setImageBitmap(bitmap);
+            System.out.println("bitmap: " + btn_img_1.toString());
+            btn_1Activo = false;
+
         } else if (btn2Activo) {
             btn_img2.setBackground(drawable);
             btn2Activo = false;
@@ -1057,11 +1065,11 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
                 System.out.println("dconfo imagen: "+imagen);
                 String cantidadValida = edt_CantLexCorEjercicio.getText().toString();
                 String oracion = edt_OrtacionEjercicio.getText().toString();*/
-                //System.out.println("cantidadvalida"+cantidadValida);
-                //System.out.println("oracion"+oracion);
+    //System.out.println("cantidadvalida"+cantidadValida);
+    //System.out.println("oracion"+oracion);
 
-            //    Map<String, String> parametros = new HashMap<>();
-                // parametros.put("idEjercicio", idejercicio);
+    //    Map<String, String> parametros = new HashMap<>();
+    // parametros.put("idEjercicio", idejercicio);
               /*  parametros.put("nameEjercicio", nameejercicio);
                 parametros.put("docente_iddocente", iddocente);
                 parametros.put("Actividad_idActividad", idactividad);
@@ -1069,7 +1077,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
                 parametros.put("imagen", imagen);
                 parametros.put("cantidadValidaEG1", cantidadValida);
                 parametros.put("oracion", oracion);*/
-                // parametros.put("imagen", imagen);
+    // parametros.put("imagen", imagen);
 
                /* return parametros;
             }
@@ -1085,7 +1093,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
         //hace el llamado a la url,no usa en p12
         /*jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         request.add(jsonObjectRequest);*/
-   // }
+    // }
 
     private String convertirImgString(Bitmap bitmap) {
         //recibe un bitmap

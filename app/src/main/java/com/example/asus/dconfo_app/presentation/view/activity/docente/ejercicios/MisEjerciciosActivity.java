@@ -24,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.EjercicioG2;
+import com.example.asus.dconfo_app.domain.model.EjercicioG2HasImagen;
+import com.example.asus.dconfo_app.domain.model.EjercicioG2HasLetrag2;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.TipoEjerciciosActividadDocenteAdapter;
@@ -31,6 +33,8 @@ import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1Es
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo2EstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo1FonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo2FonicoFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.silabico.Tipo2silabicoEstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo1FonicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo1LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo2LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo2Fragment;
@@ -47,7 +51,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         Tipo2LexicoUpdateFragment.OnFragmentInteractionListener,
         Tipo1EstudianteFragment.OnFragmentInteractionListener,
         Tipo2EstudianteFragment.OnFragmentInteractionListener,
-        Tipo1FonicoFragment.OnFragmentInteractionListener {
+        Tipo1FonicoFragment.OnFragmentInteractionListener,
+        Tipo1FonicoUpdateFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -59,6 +64,11 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     private String letrainicial;
 
     private String buscar;
+
+    Bundle parametros_1 = new Bundle();
+
+    private EjercicioG2HasImagen ejercicioG2HasImagen;
+    private EjercicioG2HasLetrag2 ejercicioG2HasLetrag2;
 
     private LinearLayout ll_rv_ejercicios;
     private Button btn_fon;
@@ -90,6 +100,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
     Tipo1LexicoUpdateFragment tipo1LexicoUpdateFragment;
     Tipo2LexicoUpdateFragment tipo2LexicoUpdateFragment;
+
+    Tipo1FonicoUpdateFragment tipo1FonicoUpdateFragment;
 
     Tipo2Fragment tipo2Fragment;
     //**********************************************************************************************
@@ -124,6 +136,32 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             @Override
             public void onClick(View v) {
 
+                if (idtipo == 1) {
+                    tipo1FonicoUpdateFragment = new Tipo1FonicoUpdateFragment();
+                    Bundle parametros_1 = new Bundle();
+                    parametros_1.putInt("iddocente", iddocente);
+                    parametros_1.putInt("idgrupo", idgrupo);
+                    parametros_1.putInt("idejercicio", idejercicio);
+                    tipo1FonicoUpdateFragment.setArguments(parametros_1);
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1FonicoUpdateFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null).commit();
+                    //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
+                }
+                if (idtipo == 2) {
+                   /* tipo1LexicoUpdateFragment = new Tipo1LexicoUpdateFragment();
+                    Bundle parametros_1 = new Bundle();
+                    parametros_1.putInt("iddocente", iddocente);
+                    parametros_1.putInt("idgrupo", idgrupo);
+                    parametros_1.putInt("idejercicio", idejercicio);
+                    tipo1LexicoUpdateFragment.setArguments(parametros_1);
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1LexicoUpdateFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null).commit();*/
+                    //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
+                }
                 if (idtipo == 3) {
                     tipo1LexicoUpdateFragment = new Tipo1LexicoUpdateFragment();
                     Bundle parametros_1 = new Bundle();
@@ -211,6 +249,14 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
             // request.add(jsonObjectRequest);
             VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+        } else if (buscar.equals("1")) {//**************AGREGADO
+            String url_lh = Globals.url;
+            // String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjerG2_DET.php?idejercicioG2=" + idEjercicio;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/10wsJSONConsultarListaEjerG2_H_Img.php?idejercicioG2=" + idejercicio;
+            url = url.replace(" ", "%20");
+            //Toast.makeText(getContext(), "consultar lista det imagenes: ", Toast.LENGTH_LONG).show();
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
         }
 
         // Toast.makeText(getContext(), "LISTA EJERCICIOS DOC.", Toast.LENGTH_LONG).show();
@@ -282,7 +328,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                         ll_rv_ejercicios.setVisibility(View.GONE);
                         fl_mod_ejercicios.setVisibility(View.VISIBLE);
 
-                        Bundle parametros_1 = new Bundle();
+                        // Bundle parametros_1 = new Bundle();
 
                         String usuario = "docente";
 
@@ -320,14 +366,12 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                         Toast.makeText(getApplicationContext(), "idtipo: " + idtipo, Toast.LENGTH_LONG).show();
 
                         if (idtipo == 1) {
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1FonicoFragment)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                    .addToBackStack(null).commit();
+                            buscar = "1";
+                            cargarEjerciciosPorActividad();
                         }
                         if (idtipo == 2) {
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2EstudianteFragment)
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                    .addToBackStack(null).commit();
+                            buscar = "1";
+                            cargarEjerciciosPorActividad();
                         }
                         if (idtipo == 3) {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1EstudianteFragment)
@@ -356,6 +400,74 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             }
 
         }//listaEje
+
+        else if (buscar.equals("1")) {//------------------------------------------------------------------------------------1
+
+            Toast.makeText(getApplicationContext(), "grupo g3 activo: ", Toast.LENGTH_LONG).show();
+
+            ejercicioG2HasImagen = null;
+            JSONArray json = response.optJSONArray("ejerg2hasimagen");
+
+            ArrayList<EjercicioG2HasImagen> listaDEjerciciosg2HI = new ArrayList<>();
+            listaDEjerciciosg2HI = new ArrayList<>();
+
+            try {
+                for (int i = 0; i < json.length(); i++) {
+                    ejercicioG2HasImagen = new EjercicioG2HasImagen();
+                    JSONObject jsonObject = null;
+                    jsonObject = json.getJSONObject(i);
+
+                    ejercicioG2HasImagen.setIdEjercicioG2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
+                    ejercicioG2HasImagen.setIdImagen(jsonObject.optInt("Imagen_idImagen_Ejercicio"));
+                    ejercicioG2HasImagen.setColumnaImagen(jsonObject.optInt("columna_E_H_I"));
+                    ejercicioG2HasImagen.setFilaImagen(jsonObject.optInt("fila_E_h_I"));
+
+                    listaDEjerciciosg2HI.add(ejercicioG2HasImagen);
+
+                }
+                int tipoEjercicioG2 = ejercicioG2.getIdTipo();
+                //Tipo1FonicoFragment tipo1FonicoFragment = new Tipo1FonicoFragment();
+                //Tipo2FonicoFragment tipo2FonicoFragment = new Tipo2FonicoFragment();
+
+                Tipo2silabicoEstudianteFragment tipo2silabicoEstudianteFragment = new Tipo2silabicoEstudianteFragment();
+
+
+                // bundle_t2 = new Bundle();
+
+                int[] listaidImagenes = new int[listaDEjerciciosg2HI.size()];
+                for (int i = 0; i < listaDEjerciciosg2HI.size(); i++) {
+                    // listaIDimagenes.add(listaDEjerciciosg2HI.get(i).getIdImagen());
+                    listaidImagenes[i] = listaDEjerciciosg2HI.get(i).getIdImagen();
+                    parametros_1.putInt("idejercicio" + (i + 1) + "", listaDEjerciciosg2HI.get(i).getIdImagen());
+                    parametros_1.putInt("colejercicio" + (i + 1) + "", listaDEjerciciosg2HI.get(i).getColumnaImagen());
+                    System.out.println("columna imagen g2: " + listaDEjerciciosg2HI.get(i).getColumnaImagen());
+                    parametros_1.putInt("filejercicio" + (i + 1) + "", listaDEjerciciosg2HI.get(i).getFilaImagen());
+                }
+
+                String usuario = "estudiante";
+
+                parametros_1.putString("usuario", usuario);//**************Nuevo 250619///////////////////////
+                //bundle.putIntArray("cadenaidimagenes", listaidImagenes);
+
+                if (idtipo == 1) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1FonicoFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null).commit();
+                }
+                if (idtipo == 2) {
+                    buscar = "2";
+                    //cargarEjerciciosPorActividad();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                //Toast.makeText(getContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+
+        }//eje3
 
 
     }//cargarEjerciciosPorActividad()

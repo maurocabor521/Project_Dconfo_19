@@ -137,6 +137,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     String nameDocente = "";
     int idDocente = 0;
     int idEjercicio2;
+    int idejercicio;
+    int idgrupo;
 
     ArrayList<Imagen> listaImagenes;
     ArrayList<EjercicioG2> listaEjerciciosG2;
@@ -202,73 +204,29 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
         nameDocente = getArguments().getString("namedocente");
 
         idDocente = getArguments().getInt("iddocente");
+        idejercicio = getArguments().getInt("idejercicio");
+        idgrupo = getArguments().getInt("idgrupo");
 
         ejercicioG2HasImagen = new EjercicioG2HasImagen();
 
-        edt_letra = (EditText) view.findViewById(R.id.edt_fonico_tipo1_vocal);
+        edt_letra = (EditText) view.findViewById(R.id.edt_fonico_update_tipo1_vocal);
         edt_letra.setFilters(new InputFilter[]
                 {new InputFilter.AllCaps(),
                         new InputFilter.LengthFilter(1)}
         );
 
-        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_fonico_nameEjercicio);
+        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_fonico_update_nameEjercicio);
 
-        edt_letraInicial_img1 = (EditText) view.findViewById(R.id.edt_fonico_inicialLetra_img1);
-        edt_letraFinal_img1 = (EditText) view.findViewById(R.id.edt_fonico_finalLetra_img1);
-        edt_cantSilaba_img1 = (EditText) view.findViewById(R.id.edt_fonico_cantSilabas_img1);
-
-        edt_letraInicial_img2 = (EditText) view.findViewById(R.id.edt_fonico_inicialLetra_img2);
-        edt_letraFinal_img2 = (EditText) view.findViewById(R.id.edt_fonico_finalLetra_img2);
-        edt_cantSilaba_img2 = (EditText) view.findViewById(R.id.edt_fonico_cantSilabas_img2);
-
-        edt_letraInicial_img3 = (EditText) view.findViewById(R.id.edt_fonico_inicialLetra_img3);
-        edt_letraFinal_img3 = (EditText) view.findViewById(R.id.edt_fonico_finalLetra_img3);
-        edt_cantSilaba_img3 = (EditText) view.findViewById(R.id.edt_fonico_cantSilabas_img3);
-
-        edt_letraInicial_img4 = (EditText) view.findViewById(R.id.edt_fonico_inicialLetra_img4);
-        edt_letraFinal_img4 = (EditText) view.findViewById(R.id.edt_fonico_finalLetra_img4);
-        edt_cantSilaba_img4 = (EditText) view.findViewById(R.id.edt_fonico_cantSilabas_img4);
 
         txt_id_img1 = (TextView) view.findViewById(R.id.txt_fonico_id_img1);
         txt_id_img2 = (TextView) view.findViewById(R.id.txt_fonico_id_img2);
         txt_id_img3 = (TextView) view.findViewById(R.id.txt_fonico_id_img3);
         txt_id_img4 = (TextView) view.findViewById(R.id.txt_fonico_id_img4);
 
-        btn_enviar = (Button) view.findViewById(R.id.btn_fonico_doc_enviar);
-        btn_img1 = (Button) view.findViewById(R.id.btn_fonico_doc_img1);
-
-        btn_img_1 = (ImageView) view.findViewById(R.id.btn_fonico_doc_img_1);
-
-        btn_img2 = (Button) view.findViewById(R.id.btn_fonico_doc_img2);
-
-        btn_img_2 = (ImageView) view.findViewById(R.id.btn_fonico_doc_img_2);
-
-        btn_img3 = (Button) view.findViewById(R.id.btn_fonico_doc_img3);
-        btn_img_3 = (ImageView) view.findViewById(R.id.btn_fonico_doc_img_3);
-
-        btn_img4 = (Button) view.findViewById(R.id.btn_fonico_doc_img4);
-        btn_img_4 = (ImageView) view.findViewById(R.id.btn_fonico_doc_img_4);
-
-        btn_crearImg1 = (Button) view.findViewById(R.id.btn_fonico_crearImg1);
-        btn_crearImg2 = (Button) view.findViewById(R.id.btn_fonico_crearImg2);
-        btn_crearImg3 = (Button) view.findViewById(R.id.btn_fonico_crearImg3);
-        btn_crearImg4 = (Button) view.findViewById(R.id.btn_fonico_crearImg4);
-
-        listaImagenes = new ArrayList<>();
-        listaEjerciciosG2 = new ArrayList<>();
-        listaEjercicios = new ArrayList<>();
-        listaidImagenes = new ArrayList<>();
-        listafilaImagen = new ArrayList<>();
-        listacolumnaImagen = new ArrayList<>();
+        btn_enviar = (Button) view.findViewById(R.id.btn_fonico_update_doc_enviar);
 
 
-        btn_img1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn1Activo = true;
-                mostrarDialogOpciones();
-            }
-        });
+        btn_img_1 = (ImageView) view.findViewById(R.id.btn_fonico_update_doc_img_1);
         btn_img_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,14 +235,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 mostrarDialogOpciones();
             }
         });
-
-        btn_img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn2Activo = true;
-                mostrarDialogOpciones();
-            }
-        });
+        btn_img_2 = (ImageView) view.findViewById(R.id.btn_fonico_update_doc_img_2);
         btn_img_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -294,14 +245,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             }
         });
 
-        btn_img3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn3Activo = true;
-                mostrarDialogOpciones();
-            }
-        });
-
+        btn_img_3 = (ImageView) view.findViewById(R.id.btn_fonico_update_doc_img_3);
         btn_img_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -310,13 +254,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 mostrarDialogOpciones();
             }
         });
-        btn_img4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn4Activo = true;
-                mostrarDialogOpciones();
-            }
-        });
+        btn_img_4 = (ImageView) view.findViewById(R.id.btn_fonico_update_doc_img_4);
         btn_img_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -325,6 +263,16 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 mostrarDialogOpciones();
             }
         });
+
+
+        listaImagenes = new ArrayList<>();
+        listaEjerciciosG2 = new ArrayList<>();
+        listaEjercicios = new ArrayList<>();
+        listaidImagenes = new ArrayList<>();
+        listafilaImagen = new ArrayList<>();
+        listacolumnaImagen = new ArrayList<>();
+
+
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -365,15 +313,11 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
         consultarListaImagenes();
 
-        rv_tipo1Fonico = (RecyclerView) view.findViewById(R.id.rv_tipo1Fonico);
+        rv_tipo1Fonico = (RecyclerView) view.findViewById(R.id.rv_tipo1Fonico_update);
         rv_tipo1Fonico.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_tipo1Fonico.setHasFixedSize(true);
         rv_tipo1Fonico.setVisibility(View.GONE);
 
-        btn_crearImg1.setOnClickListener(this);
-        btn_crearImg2.setOnClickListener(this);
-        btn_crearImg3.setOnClickListener(this);
-        btn_crearImg4.setOnClickListener(this);
 
         imgFoto = new ImageView(getContext());
         return view;
@@ -956,18 +900,29 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void cargarImagen() {
         Drawable drawable = imgFoto.getDrawable();
-        if (btn1Activo) {
-            btn_img1.setBackground(drawable);
-            btn1Activo = false;
-        } else if (btn2Activo) {
-            btn_img2.setBackground(drawable);
-            btn2Activo = false;
-        } else if (btn3Activo) {
-            btn_img3.setBackground(drawable);
-            btn3Activo = false;
-        } else if (btn4Activo) {
-            btn_img4.setBackground(drawable);
-            btn4Activo = false;
+
+       /* btn_img_4.setBackground(null);
+        btn_img_4.setImageBitmap(response);
+        btn_4Activo = false;
+        rv_tipo1Fonico.setVisibility(View.GONE);
+        txt_id_img4.setText(nameImagen);*/
+        if (btn_1Activo) {
+            btn_img_1.setBackground(null);
+            btn_img_1.setImageBitmap(bitmap);
+            btn_1Activo = false;
+
+        } else if (btn_2Activo) {
+            btn_img_2.setBackground(null);
+            btn_img_2.setImageBitmap(bitmap);
+            btn_2Activo = false;
+        } else if (btn_3Activo) {
+            btn_img_3.setBackground(null);
+            btn_img_3.setImageBitmap(bitmap);
+            btn_3Activo = false;
+        } else if (btn_4Activo) {
+            btn_img_4.setBackground(null);
+            btn_img_4.setImageBitmap(bitmap);
+            btn_4Activo = false;
         }
         // btn_Tipo1_pic_Ejercicio.setBackground(drawable);
         //imageView_muestra.setBackground(drawable);
@@ -1052,11 +1007,11 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 System.out.println("dconfo imagen: "+imagen);
                 String cantidadValida = edt_CantLexCorEjercicio.getText().toString();
                 String oracion = edt_OrtacionEjercicio.getText().toString();*/
-                //System.out.println("cantidadvalida"+cantidadValida);
-                //System.out.println("oracion"+oracion);
+    //System.out.println("cantidadvalida"+cantidadValida);
+    //System.out.println("oracion"+oracion);
 
-            //    Map<String, String> parametros = new HashMap<>();
-                // parametros.put("idEjercicio", idejercicio);
+    //    Map<String, String> parametros = new HashMap<>();
+    // parametros.put("idEjercicio", idejercicio);
               /*  parametros.put("nameEjercicio", nameejercicio);
                 parametros.put("docente_iddocente", iddocente);
                 parametros.put("Actividad_idActividad", idactividad);
@@ -1064,7 +1019,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 parametros.put("imagen", imagen);
                 parametros.put("cantidadValidaEG1", cantidadValida);
                 parametros.put("oracion", oracion);*/
-                // parametros.put("imagen", imagen);
+    // parametros.put("imagen", imagen);
 
                /* return parametros;
             }
@@ -1080,7 +1035,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
         //hace el llamado a la url,no usa en p12
         /*jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         request.add(jsonObjectRequest);*/
-   // }
+    // }
 
     private String convertirImgString(Bitmap bitmap) {
         //recibe un bitmap
