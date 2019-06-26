@@ -910,6 +910,16 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             btn_img_1.setBackground(null);
             btn_img_1.setImageBitmap(bitmap);
             btn_1Activo = false;
+            int fila = 1;
+            int columna = 1;
+
+          /*  ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);*/
 
         } else if (btn_2Activo) {
             btn_img_2.setBackground(null);
