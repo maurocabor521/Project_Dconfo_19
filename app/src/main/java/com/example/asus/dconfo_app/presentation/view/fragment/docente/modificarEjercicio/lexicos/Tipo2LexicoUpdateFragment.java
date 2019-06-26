@@ -78,6 +78,7 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
 
     private String nameDocente;
     private int idDocente;
+    private int idejercicio;
 
     private OnFragmentInteractionListener mListener;
 
@@ -120,19 +121,28 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tipo2, container, false);
+        View view = inflater.inflate(R.layout.fragment_lex_tipo2_uddate, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.home_tipo2);
 
         cantPulsada = 0;
 
         nameDocente = getArguments().getString("namedocente");
         idDocente = getArguments().getInt("iddocente");
+        idejercicio = getArguments().getInt("idejercicio");
 
-        edt_oracion = (EditText) view.findViewById(R.id.edt_docente_tipo2_oracion);
-        edt_cant_lexemas = (EditText) view.findViewById(R.id.edt_docente_tipo2_cant_lex_corr);
-        edt_name_ejer = (EditText) view.findViewById(R.id.edt_docente_tipo2_nombreE);
+        edt_oracion = (EditText) view.findViewById(R.id.edt_docente_update_lex_tipo2_oracion);
+        edt_cant_lexemas = (EditText) view.findViewById(R.id.edt_docente_update_lex_tipo2_cant_lex_corr);
+        edt_name_ejer = (EditText) view.findViewById(R.id.edt_docente_update_lex_tipo2_nombreE);
 
-        ll_muestra = (LinearLayout) view.findViewById(R.id.ll_docente_tipo2);
+        btn_crear_tipo2 = (Button) view.findViewById(R.id.btn_docente_update_lex_tipo2_send_EjerT2);
+        btn_crear_tipo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarWebService();
+            }
+        });
+
+        ll_muestra = (LinearLayout) view.findViewById(R.id.ll_docente_update_lex_tipo2);
 
         btn_C1 = (Button) view.findViewById(R.id.btn_docente_tipo2_casilla1);
         btn_C1.setOnClickListener(new View.OnClickListener() {
@@ -215,13 +225,6 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
             }
         });
 
-        btn_crear_tipo2 = (Button) view.findViewById(R.id.btn_docente_tipo2_send_EjerT2);
-        btn_crear_tipo2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cargarWebService();
-            }
-        });
 
         return view;
     }
@@ -244,7 +247,7 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
         progreso.setMessage("Cargando...");
         progreso.show();
         String ip = Globals.url;
-        String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/23wsJSON_UpdateLexcio1.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -254,11 +257,11 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
                     edt_cant_lexemas.setText("");
                     edt_name_ejer.setText("");
                     // edt_oracion.setText("");
-                    ll_muestra.setVisibility(View.VISIBLE);
+                    //ll_muestra.setVisibility(View.VISIBLE);
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), "No se ha cargado con éxito"+response.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No se ha cargado con éxito" + response.toString(), Toast.LENGTH_LONG).show();
                     System.out.println("error" + response.toString());
                 }
             }
@@ -278,31 +281,35 @@ public class Tipo2LexicoUpdateFragment extends Fragment {
                 //String idejercicio = "";
                 String nameejercicio = edt_name_ejer.getText().toString();
                 System.out.println("name ejercicio: " + nameejercicio);
-                String iddocente = String.valueOf(idDocente);
-                String idactividad = "2";
-                String idtipo = "4";
+                //String iddocente = String.valueOf(idDocente);
+                String id_ejercicio = String.valueOf(idejercicio);
+                //String idactividad = "2";
+                //String idtipo = "4";
                 String imagen = "";
                 //System.out.println("dconfo imagen: " + imagen);
                 String cantidadValida = edt_cant_lexemas.getText().toString();
                 String oracion = edt_oracion.getText().toString();
 
-                String letraInicial = "";
-                String letraFinal = "";
+                String de_galeria = "";
+                String rutaImagen = "";
 
                 Map<String, String> parametros = new HashMap<>();
                 // parametros.put("idEjercicio", idejercicio);
+                parametros.put("idejercicio", id_ejercicio);
                 parametros.put("nameEjercicioG2", nameejercicio);
-                parametros.put("docente_iddocente", iddocente);
-                parametros.put("Tipo_Actividad_idActividad", idactividad);
-                parametros.put("Tipo_idTipo", idtipo);
-
                 parametros.put("imagen", imagen);
-
                 parametros.put("cantidadValidadEjercicio", cantidadValida);
                 parametros.put("oracion", oracion);
+                parametros.put("de_galeria", de_galeria);
+                parametros.put("rutaImagen", rutaImagen);
+                // parametros.put("docente_iddocente", iddocente);
 
-                parametros.put("letra_inicial_EjercicioG2", letraInicial);
-                parametros.put("letra_final_EjercicioG2", letraFinal);
+                // parametros.put("Tipo_Actividad_idActividad", idactividad);
+                //parametros.put("Tipo_idTipo", idtipo);
+
+
+                //parametros.put("letra_inicial_EjercicioG2", letraInicial);
+                //parametros.put("letra_final_EjercicioG2", letraFinal);
 
                 return parametros;
             }

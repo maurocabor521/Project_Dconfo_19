@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.view.fragment.docente.modificarEjercicio.lexicos.TipoLexicoFragment">
+    tools:context=".presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo1LexicoUpdateFragment">
 
     <TextView
         android:layout_width="match_parent"

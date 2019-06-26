@@ -10,7 +10,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo 2" />
+        android:text="Tipo 2 Léxico"
+        android:gravity="center"/>
 
     <LinearLayout
 
