@@ -36,6 +36,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.asus.dconfo_app.R;
@@ -55,6 +56,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +83,7 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
     private EditText edt_OrtacionEjercicio;
     private EditText edt_CantLexCorEjercicio;
     private Button btn_NewTipo1_Ejercicio;
-    private Button btn_Tipo1_pic_Ejercicio;
+    private CircleImageView btn_Tipo1_pic_Ejercicio;
     private LinearLayout ll_tipo_ejercicio;
     private LinearLayout ll_tipo_ejercicio_form;
     private ImageView imageView_muestra;
@@ -114,6 +117,9 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
     private RecyclerView rv_tipo1Lexico;
 
     ArrayList<Imagen> listaImagenes;
+
+    private boolean isGalleryChoise = false;
+    private String ruta_Imagen;
 
 
     //******** CONEXIÓN CON WEBSERVICE
@@ -219,13 +225,17 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
             }
         });
 
-        edt_CantLexCorEjercicio = (EditText) view.findViewById(R.id.edt_tipo1_cant_lex_corr);
-        edt_CodigoEjercicio = (EditText) view.findViewById(R.id.edt_tipo1_codigoEjercicio);
-        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_tipo1_nameEjercicio);
-        edt_OrtacionEjercicio = (EditText) view.findViewById(R.id.edt_tipo1_oracion);
-        btn_NewTipo1_Ejercicio = (Button) view.findViewById(R.id.btn_tipo1_send_ejercicio);
-        btn_Tipo1_pic_Ejercicio = (Button) view.findViewById(R.id.btn_tipo1_pic);
         imgFoto = new ImageView(getContext());
+
+        edt_CantLexCorEjercicio = (EditText) view.findViewById(R.id.edt_update_lex1_cant_lex_corr);
+        // edt_CodigoEjercicio = (EditText) view.findViewById(R.id.edt_tipo1_codigoEjercicio);
+        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_update_lex1_nameEjercicio);
+        edt_OrtacionEjercicio = (EditText) view.findViewById(R.id.edt_update_lex1_oracion);
+
+
+        //********************************CIRCLEVIEW NO BOTÓN
+
+        btn_Tipo1_pic_Ejercicio = (CircleImageView) view.findViewById(R.id.civ_tipo1_pic);
         btn_Tipo1_pic_Ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -233,6 +243,9 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
             }
         });
 
+        //********************************
+
+        btn_NewTipo1_Ejercicio = (Button) view.findViewById(R.id.btn_update_lex1_send_ejercicio);
         btn_NewTipo1_Ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,6 +289,7 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
                         /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);*/
                         //directamente de galeria
+                        isGalleryChoise = true;
                         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         intent.setType("image/");
                         startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
@@ -357,7 +371,7 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
         progreso.show();
         String ip = Globals.url;
         //String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONRegistroTipo1.php";//p12.buena
-        String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/23wsJSON_UpdateLexcio1.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -365,7 +379,7 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
                 progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
                     edt_CantLexCorEjercicio.setText("");
-                    edt_CodigoEjercicio.setText("");
+                   // edt_CodigoEjercicio.setText("");
                     edt_nameEjercicio.setText("");
                     // edt_OrtacionEjercicio.setText("");
                     ll_tipo_ejercicio.setVisibility(View.VISIBLE);
@@ -373,6 +387,7 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("error: " + response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -388,34 +403,57 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //String idejercicio = edt_CodigoEjercicio.getText().toString();
-                //String idejercicio = "";
+
+                String id_ejercicio = String.valueOf(idejercicio);
                 String nameejercicio = edt_nameEjercicio.getText().toString();
-                String iddocente = String.valueOf(idDocente);
-                String idactividad = "2";
-                String idtipo = "3";
-                String imagen = convertirImgString(bitmap);
-                //System.out.println("dconfo imagen: "+imagen);
+                //String iddocente = String.valueOf(idDocente);
+                // String idactividad = "2";
+                // String idtipo = "3";
+                //String imagen = convertirImgString(bitmap);
+                String imagen = null;
                 String cantidadValida = edt_CantLexCorEjercicio.getText().toString();
                 String oracion = edt_OrtacionEjercicio.getText().toString();
-                //System.out.println("cantidadvalida"+cantidadValida);
-                //System.out.println("oracion"+oracion);
-                String letraInicial = "";
-                String letraFinal = "";
+                String de_galeria;
+                String rutaImagen = "";
+
+                if (isGalleryChoise == true) {
+                    de_galeria = "si";
+                    imagen = convertirImgString(bitmap);
+                    System.out.println("dconfo imagen: " + imagen);
+                } else {
+                    de_galeria = "no";
+                }
+
 
                 Map<String, String> parametros = new HashMap<>();
                 // parametros.put("idEjercicio", idejercicio);
+
+                parametros.put("idejercicio", id_ejercicio);
                 parametros.put("nameEjercicioG2", nameejercicio);
-                parametros.put("docente_iddocente", iddocente);
-                parametros.put("Tipo_Actividad_idActividad", idactividad);
-                parametros.put("Tipo_idTipo", idtipo);
-                parametros.put("imagen", imagen);
+                // parametros.put("docente_iddocente", iddocente);
+                // parametros.put("Tipo_Actividad_idActividad", idactividad);
+                //parametros.put("Tipo_idTipo", idtipo);
+                // parametros.put("imagen", imagen);
                 parametros.put("cantidadValidadEjercicio", cantidadValida);
                 parametros.put("oracion", oracion);
-                parametros.put("letra_inicial_EjercicioG2", letraInicial);
-                parametros.put("letra_final_EjercicioG2", letraFinal);
+                // parametros.put("letra_inicial_EjercicioG2", letraInicial);
+                //parametros.put("letra_final_EjercicioG2", letraFinal);
                 // parametros.put("imagen", imagen);
 
+                if (isGalleryChoise == true) {
+                    parametros.put("imagen", imagen);
+                    parametros.put("de_galeria", de_galeria);
+                    parametros.put("rutaImagen", rutaImagen);
+                    isGalleryChoise = false;
+                } else {
+                    parametros.put("imagen", "");
+                    parametros.put("de_galeria", de_galeria);
+                    parametros.put("rutaImagen", ruta_Imagen);
+                }
+
+                System.out.println("parametros: " + parametros.toString());
                 return parametros;
+
             }
         };
         //request.add(stringRequest);
@@ -545,7 +583,9 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
                     int idImagen = listaImagenes.get(rv_tipo1Lexico.
                             getChildAdapterPosition(v)).getIdImagen();
 
-                    //cargarImagenWebService(rutaImagen, nameImagen, idImagen);
+                    ruta_Imagen = rutaImagen;
+
+                    cargarImagenWebService(rutaImagen, nameImagen, idImagen);
 
                     //Toast.makeText(getApplicationContext(), "on click: " + rutaImagen, Toast.LENGTH_LONG).show();
                     System.out.println("on click: " + rutaImagen);
@@ -571,6 +611,54 @@ public class TipoLexicoFragment extends Fragment implements Response.Listener<JS
     }
 
     //**********************************************************************************************
+    private void cargarImagenWebService(String rutaImagen, final String nameImagen, final int idImagen) {
+
+        // String ip = context.getString(R.string.ip);
+
+        String url_lh = Globals.url;
+
+        String urlImagen = "http://" + url_lh + "/proyecto_dconfo_v1/" + rutaImagen;
+        urlImagen = urlImagen.replace(" ", "%20");
+
+        ImageRequest imageRequest = new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                //  if (btn_1Activo) {
+                btn_Tipo1_pic_Ejercicio.setBackground(null);
+                btn_Tipo1_pic_Ejercicio.setImageBitmap(response);
+                rv_tipo1Lexico.setVisibility(View.GONE);
+                ll_body.setVisibility(View.VISIBLE);
+                   /* btn_1Activo = false;
+                    rv_tipo1Fonico.setVisibility(View.GONE);
+                    txt_id_img1.setText(nameImagen);*/
+
+                int fila = 1;
+                int columna = 1;
+
+                   /* ejercicioG2HasImagen.setIdImagen(idImagen);
+                    ejercicioG2HasImagen.setFilaImagen(fila);
+                    ejercicioG2HasImagen.setColumnaImagen(columna);
+
+                    listaidImagenes.add(idImagen);
+                    listafilaImagen.add(fila);
+                    listacolumnaImagen.add(columna);*/
+
+                //  }
+                // iv_bank_prueba.setBackground(null);
+                // iv_bank_prueba.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Error al cargar la imagen", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //request.add(imageRequest);
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(imageRequest);
+    }
+
+
+    //----------------------------------------------------------------------------------------------
 
     /**
      * This interface must be implemented by activities that contain this

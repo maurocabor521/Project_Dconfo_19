@@ -67,12 +67,16 @@
                             android:layout_weight="1"
                             android:gravity="center">
 
-                            <Button
-                                android:id="@+id/btn_tipo1_pic"
-                                android:layout_width="96dp"
-                                android:layout_height="96dp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/ic_no_foto_80dp" />
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_tipo1_pic"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center|top"
+                                android:layout_margin="5dp"
+                                android:background="@drawable/ic_no_foto_80dp"
+                                android:elevation="@dimen/elevation_ciecleimageprofile" />
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -109,7 +113,7 @@
                             android:theme="@style/EditTextBlack">
 
                             <android.support.design.widget.TextInputEditText
-                                android:id="@+id/edt_tipo1_nameEjercicio"
+                                android:id="@+id/edt_update_lex1_nameEjercicio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Ingrese nombre Ejercicio">
@@ -124,7 +128,7 @@
                             android:theme="@style/EditTextBlack">
 
                             <android.support.design.widget.TextInputEditText
-                                android:id="@+id/edt_tipo1_oracion"
+                                android:id="@+id/edt_update_lex1_oracion"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Ingrese oración a trabajar">
@@ -139,7 +143,7 @@
                             android:theme="@style/EditTextBlack">
 
                             <android.support.design.widget.TextInputEditText
-                                android:id="@+id/edt_tipo1_cant_lex_corr"
+                                android:id="@+id/edt_update_lex1_cant_lex_corr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Ingrese Cantidad de Léxemas Correctas">
@@ -158,10 +162,10 @@
                     android:layout_marginTop="10dp">
 
                     <Button
-                        android:id="@+id/btn_tipo1_send_ejercicio"
+                        android:id="@+id/btn_update_lex1_send_ejercicio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Crear Ejercicio"
+                        android:text="Modificar Ejercicio"
                         android:textStyle="bold"
                         android:theme="@style/RaisedButtonDark" />
                 </LinearLayout>
