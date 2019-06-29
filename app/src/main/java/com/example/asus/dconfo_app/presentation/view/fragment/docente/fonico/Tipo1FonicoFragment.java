@@ -405,6 +405,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
 
                     edt_letra.setText("");
                     edt_nameEjercicio.setText("");
+                    progreso.hide();
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
@@ -436,7 +437,7 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
                 String cantidad = "";
                 String oracion = "";
 
-                System.out.println("letra inicial" + letra_inicial);
+                //System.out.println("letra inicial" + letra_inicial);
 
                 Map<String, String> parametros = new HashMap<>();
 
@@ -451,6 +452,8 @@ public class Tipo1FonicoFragment extends Fragment implements View.OnClickListene
                 parametros.put("imagen", imagen);
                 parametros.put("cantidadValidadEjercicio", cantidad);
                 parametros.put("oracion", oracion);
+
+                System.out.println(" PARAMETROS: " + parametros.toString());
 
                 return parametros;
             }

@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,39 +79,27 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     private String mParam2;
 
     private EditText edt_letra;
-
-    private EditText edt_letraInicial_img1;
-    private EditText edt_letraFinal_img1;
-    private EditText edt_cantSilaba_img1;
-
-    private EditText edt_letraInicial_img2;
-    private EditText edt_letraFinal_img2;
-    private EditText edt_cantSilaba_img2;
-
-    private EditText edt_letraInicial_img3;
-    private EditText edt_letraFinal_img3;
-    private EditText edt_cantSilaba_img3;
-
-    private EditText edt_letraInicial_img4;
-    private EditText edt_letraFinal_img4;
-    private EditText edt_cantSilaba_img4;
-
     private EditText edt_nameEjercicio;
 
-    private Button btn_img1;
+    private EditText edt_nameImagen;
+    private EditText edt_letraInicial;
+    private EditText edt_letraFinal;
+    private EditText edt_cantSilabas;
+
+    private LinearLayout ll_createImage;
+
+    private boolean cargarImagen_boolen = false;
+
     private ImageView btn_img_1;
-    private Button btn_img2;
+
     private ImageView btn_img_2;
-    private Button btn_img3;
+
     private ImageView btn_img_3;
-    private Button btn_img4;
+
     private ImageView btn_img_4;
     private Button btn_enviar;
+    private Button btn_crearImg;
 
-    private Button btn_crearImg1;
-    private Button btn_crearImg2;
-    private Button btn_crearImg3;
-    private Button btn_crearImg4;
 
     private boolean btn1Activo = false;
     private boolean btn_1Activo = false;
@@ -139,6 +128,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     int idEjercicio2;
     int idejercicio;
     int idgrupo;
+    int idImagen;
 
     ArrayList<Imagen> listaImagenes;
     ArrayList<EjercicioG2> listaEjerciciosG2;
@@ -201,6 +191,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tipo1_fonico_update, container, false);
 
+        progreso = new ProgressDialog(getActivity());
+
         nameDocente = getArguments().getString("namedocente");
 
         idDocente = getArguments().getInt("iddocente");
@@ -209,7 +201,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
         ejercicioG2HasImagen = new EjercicioG2HasImagen();
 
-        edt_letra = (EditText) view.findViewById(R.id.edt_fonico_update_tipo1_vocal);
+        edt_letra = (EditText) view.findViewById(R.id.edt_fonico_update_tipo1_vocal_update);
         edt_letra.setFilters(new InputFilter[]
                 {new InputFilter.AllCaps(),
                         new InputFilter.LengthFilter(1)}
@@ -217,13 +209,29 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
         edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_fonico_update_nameEjercicio);
 
+        edt_nameImagen = (EditText) view.findViewById(R.id.edt_fonico_update_name_image);
+        edt_letraInicial = (EditText) view.findViewById(R.id.edt_fonico_update_let_ini);
+        edt_letraFinal = (EditText) view.findViewById(R.id.edt_fonico_update_let_final);
+        edt_cantSilabas = (EditText) view.findViewById(R.id.edt_fonico_update_cant_silabas);
 
-        txt_id_img1 = (TextView) view.findViewById(R.id.txt_fonico_id_img1);
-        txt_id_img2 = (TextView) view.findViewById(R.id.txt_fonico_id_img2);
-        txt_id_img3 = (TextView) view.findViewById(R.id.txt_fonico_id_img3);
-        txt_id_img4 = (TextView) view.findViewById(R.id.txt_fonico_id_img4);
+        ll_createImage = (LinearLayout) view.findViewById(R.id.ll_fonico_update_form_create_img);
+
+
+        txt_id_img1 = (TextView) view.findViewById(R.id.txt_fonico_id_img1_update);
+        txt_id_img2 = (TextView) view.findViewById(R.id.txt_fonico_id_img2_update);
+        txt_id_img3 = (TextView) view.findViewById(R.id.txt_fonico_id_img3_update);
+        txt_id_img4 = (TextView) view.findViewById(R.id.txt_fonico_id_img4_update);
 
         btn_enviar = (Button) view.findViewById(R.id.btn_fonico_update_doc_enviar);
+
+        btn_crearImg = (Button) view.findViewById(R.id.btn_fonico_update_create_img);
+        btn_crearImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                crearImagen();
+            }
+        });
 
 
         btn_img_1 = (ImageView) view.findViewById(R.id.btn_fonico_update_doc_img_1);
@@ -324,12 +332,89 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     }
 
     //----------------------------------------------------------------------------------------------
+    private void crearImagen() {
+
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+        String ip = Globals.url;
+
+        String url = "http://" + ip + "/proyecto_dconfo_v1/24wsJSONCrearImagen.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+//                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    edt_nameImagen.setText("");
+                    edt_letraInicial.setText("");
+                    edt_letraFinal.setText("");
+                    edt_cantSilabas.setText("");
+                    progreso.hide();
+                    ll_createImage.setVisibility(View.GONE);
+
+                    cargarImagen_boolen=true;
+
+                    consultarListaImagenes();
+
+                    Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("error: " + response);
+                    progreso.hide();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                //progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                //String idEjercicio = "7";
+                String nameimagen = edt_nameImagen.getText().toString();
+                String letra_inicial = edt_letraInicial.getText().toString();
+                String letra_final = edt_letraFinal.getText().toString();
+                String cant_silabas = edt_cantSilabas.getText().toString();
+                String imagen = convertirImgString(bitmap);
+
+                System.out.println("letra inicial" + letra_inicial);
+
+                Map<String, String> parametros = new HashMap<>();
+
+                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("name_Imagen", nameimagen);
+                parametros.put("letra_inicial", letra_inicial);
+                parametros.put("letra_final", letra_final);
+                parametros.put("cant_silabas", cant_silabas);
+                parametros.put("imagen", imagen);
+
+                //System.out.println("parametros: " + parametros);
+                return parametros;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+    }
+
+    //----------------------------------------------------------------------------------------------
     //******************************WEB SERVICE
     //para iniciar el proceso de llamado al webservice
     private void cargarWebService_2() {
-       /* progreso = new ProgressDialog(getContext());
+
+        progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...");
-        progreso.show();*/
+        progreso.show();
+
         String ip = Globals.url;
         //String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONRegistroTipo1Fonico.php";//p12.buena
         String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
@@ -594,8 +679,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void consultarListaImagenes() {
 
-       /* progreso.setMessage("Cargando...");
-        progreso.show();*/
+        progreso.setMessage("Cargando...");
+        progreso.show();
         // String ip = getString(R.string.ip);
         //int iddoc=20181;
         String iddoc = "20181";
@@ -624,7 +709,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        //progreso.hide();
+        progreso.hide();
         Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
         System.out.println();
         Log.d("ERROR", error.toString());
@@ -634,10 +719,12 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     // si esta bien el llamado a la url entonces entra a este metodo
     @Override
     public void onResponse(final JSONObject response) {
-        //progreso.hide();
+        progreso.hide();
         //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
         Imagen imagen = null;
         JSONArray json = response.optJSONArray("imagen");
+
+        listaImagenes.clear();
 
         try {
             for (int i = 0; i < json.length(); i++) {
@@ -694,6 +781,12 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
             //progreso.hide();
         }
+
+        if (cargarImagen_boolen){
+
+            cargarImagen();
+        }
+
     }
 
     //**********************************************************************************************
@@ -878,7 +971,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                cargarImagen();
+              //  cargarImagen();
+                ll_createImage.setVisibility(View.VISIBLE);
                 break;
 
             case COD_FOTO://p10
@@ -900,12 +994,14 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void cargarImagen() {
         Drawable drawable = imgFoto.getDrawable();
-
+        idImagen=listaImagenes.get(listaImagenes.size()- 1).getIdImagen();
        /* btn_img_4.setBackground(null);
         btn_img_4.setImageBitmap(response);
         btn_4Activo = false;
         rv_tipo1Fonico.setVisibility(View.GONE);
         txt_id_img4.setText(nameImagen);*/
+        System.out.println("Lista imagenes size CI: "+listaImagenes.size());
+        System.out.println("Lista imagenes: "+listaImagenes.get(listaImagenes.size()- 1).getIdImagen());
         if (btn_1Activo) {
             btn_img_1.setBackground(null);
             btn_img_1.setImageBitmap(bitmap);
@@ -913,13 +1009,15 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             int fila = 1;
             int columna = 1;
 
-          /*  ejercicioG2HasImagen.setIdImagen(idImagen);
+
+          ejercicioG2HasImagen.setIdImagen(idImagen);
             ejercicioG2HasImagen.setFilaImagen(fila);
             ejercicioG2HasImagen.setColumnaImagen(columna);
-
             listaidImagenes.add(idImagen);
             listafilaImagen.add(fila);
-            listacolumnaImagen.add(columna);*/
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen=false;
 
         } else if (btn_2Activo) {
             btn_img_2.setBackground(null);
