@@ -1,14 +1,21 @@
 package com.example.asus.dconfo_app.presentation.view.activity.estudiante;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 
+import com.example.asus.dconfo_app.MainActivity;
 import com.example.asus.dconfo_app.R;
 
 
+import com.example.asus.dconfo_app.presentation.view.activity.docente.HomeDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.CasaHomeEstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.InicioEjercicioFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1EstudianteFragment;
@@ -65,6 +72,33 @@ public class HomeEstudianteActivity extends AppCompatActivity implements
         finish();
         return true;
     }*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home_estudiante, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.actionShare) {
+            finish();
+            return true;
+        } else if (id == R.id.actionSalir) {
+            finish();
+            Intent intent=new Intent(HomeEstudianteActivity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void cargarBottombar() {
 

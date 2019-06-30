@@ -10,5 +10,6 @@
         android:id="@+id/action_off"
         android:orderInCategory="100"
         android:title="Salir"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
 </menu>
