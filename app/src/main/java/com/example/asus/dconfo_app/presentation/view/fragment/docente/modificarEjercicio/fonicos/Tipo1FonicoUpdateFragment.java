@@ -10,9 +10,12 @@ import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -87,6 +90,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     private EditText edt_cantSilabas;
 
     private LinearLayout ll_createImage;
+    private LinearLayout ll_createExercice;
 
     private boolean cargarImagen_boolen = false;
 
@@ -145,6 +149,10 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     private static final String CARPETA_IMAGEN = "imagenes";//carpeta donde se guardan las fotos
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;//ruta carpeta de directorios
     private String path;//almacena la ruta de la imagen
+
+    //***********************************************************************************************
+
+    //***********************************************************************************************
 
     //******** CONEXIÓN CON WEBSERVICE
     //RequestQueue request;
@@ -215,6 +223,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
         edt_cantSilabas = (EditText) view.findViewById(R.id.edt_fonico_update_cant_silabas);
 
         ll_createImage = (LinearLayout) view.findViewById(R.id.ll_fonico_update_form_create_img);
+        ll_createExercice = (LinearLayout) view.findViewById(R.id.ll_fonico_update_exe_imgs);
 
 
         txt_id_img1 = (TextView) view.findViewById(R.id.txt_fonico_id_img1_update);
@@ -292,7 +301,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             @Override
             public void onClick(View v) {
                 cargarWebService_2();
-                try {
+             /*   try {
                     Thread.sleep(100);
                     System.out.println("Dormir... crea Ejercicio");
                 } catch (InterruptedException e) {
@@ -304,7 +313,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                     System.out.println("Dormir... Lista ejercicios");
                 } catch (InterruptedException e) {
 
-                }
+                }*/
 
                /* for (int i = 0; i < listaidImagenes.size(); i++) {
                     webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(i), listafilaImagen.get(i), listacolumnaImagen.get(i));
@@ -355,7 +364,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                     progreso.hide();
                     ll_createImage.setVisibility(View.GONE);
 
-                    cargarImagen_boolen=true;
+                    cargarImagen_boolen = true;
 
                     consultarListaImagenes();
 
@@ -412,7 +421,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     private void cargarWebService_2() {
 
         progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
+        progreso.setMessage("Cargando...WS");
         progreso.show();
 
         String ip = Globals.url;
@@ -427,6 +436,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                     edt_letra.setText("");
                     edt_nameEjercicio.setText("");
+                    progreso.hide();
+                    listarEjerciciosG2Docente();
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
@@ -440,7 +451,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
                 System.out.println("error" + error.toString());
-                //progreso.hide();
+                progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
             @Override
@@ -534,19 +545,29 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                                 listaEjerciciosG2.add(ejercicioG2);
                             }
-                            idEjercicio2 = listaEjerciciosG2.get(listaEjerciciosG2.size() - 1).getIdEjercicioG2();
+                           /* idEjercicio2 = listaEjerciciosG2.get(listaEjerciciosG2.size() - 1).getIdEjercicioG2();
                             System.out.println("Último de lista EG2: " + idEjercicio2);
 
                             if (idEjercicio2 > 0) {
 
                                 ejerciciog2HI_adjuntarImagenes();
 
-                            }
+                            }*/
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        idEjercicio2 = listaEjerciciosG2.get(listaEjerciciosG2.size() - 1).getIdEjercicioG2();
+                        System.out.println("Último de lista EG2: " + idEjercicio2);
+
+                        if (idEjercicio2 > 0) {
+
+                            ejerciciog2HI_adjuntarImagenes();
+
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -607,7 +628,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void webService_CrearEjercicioG2_Has_Imagen(final int id_Imagen, final int fila_imagen, final int columna_imagen) {
        /* progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
+        progreso.setMessage("Cargando...E_H_I");
         progreso.show();*/
         String ip = Globals.url;
         String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONCrearEjercicio2HasImagen.php";//p12.buena
@@ -620,7 +641,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
-
+                    progreso.hide();
                     Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
@@ -634,7 +655,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
                 System.out.println("error" + error.toString());
-                //progreso.hide();
+                progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
             @Override
@@ -782,7 +803,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             //progreso.hide();
         }
 
-        if (cargarImagen_boolen){
+        if (cargarImagen_boolen) {
 
             cargarImagen();
         }
@@ -919,32 +940,23 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     //**********************************************************************************************
 
     private void mostrarDialogOpciones() {//part 9
-        final CharSequence[] opciones = {"Elegir de Banco de Imágenes", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Banco de Imágenes", "Elegir de Galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 if (opciones[i].equals("Elegir de Banco de Imágenes")) {
-                /*    Intent intent = new Intent(getActivity(), BankImagesActivity.class);
 
-                    //intent.setAction(Intent.ACTION_GET_CONTENT);
-                    intent.setAction(Intent.ACTION_PICK);
-                    //intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    //intent.setType("image/*");
-
-                    startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
-                    System.out.println("info: " + intent);
-                    //abriCamara();//part 10 tomar foto
-                    //Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
-                    */
-                    //cargarWebService_1();
                     rv_tipo1Fonico.setVisibility(View.VISIBLE);
+
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
                         /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);*/
                         //directamente de galeria
+
                         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         intent.setType("image/");
                         startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
@@ -952,9 +964,56 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                         dialogInterface.dismiss();
                     }
                 }
+                if (opciones[i].equals("Tomar Foto")) {
+                    abriCamara();//part 10 tomar foto
+                    Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         builder.show();
+
+    }
+
+    private void abriCamara() {//part 10
+        Toast.makeText(getContext(), "abricamara", Toast.LENGTH_LONG).show();
+        File miFile = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
+        boolean isCreada = miFile.exists();
+
+        if (isCreada == false) {
+            isCreada = miFile.mkdirs();
+        }
+
+        if (isCreada == true) {
+            Toast.makeText(getContext(), "abricamara, istrue", Toast.LENGTH_LONG).show();
+            Long consecutivo = System.currentTimeMillis() / 1000;
+            String nombre = consecutivo.toString() + ".jpg";
+
+            path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
+                    + File.separator + nombre;//indicamos la ruta de almacenamiento
+
+            fileImagen = new File(path);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));//necesario para activar la cámara,como minimo
+
+            ////
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Toast.makeText(getContext(), "abricamara, N", Toast.LENGTH_LONG).show();
+                String authorities = getContext().getPackageName() + ".provider";
+                Uri imageUri = FileProvider.getUriForFile(getContext(), authorities, fileImagen);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            } else {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
+                Toast.makeText(getContext(), "abricamara, Not N", Toast.LENGTH_LONG).show();
+            }
+
+            startActivityForResult(intent, COD_FOTO);
+
+            ////
+
+        }
 
     }
 
@@ -971,8 +1030,9 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-              //  cargarImagen();
+                //  cargarImagen();
                 ll_createImage.setVisibility(View.VISIBLE);
+                ll_createExercice.setVisibility(View.GONE);
                 break;
 
             case COD_FOTO://p10
@@ -986,7 +1046,9 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                 bitmap = BitmapFactory.decodeFile(path);
                 imgFoto.setImageBitmap(bitmap);
-
+                ll_createImage.setVisibility(View.VISIBLE);
+                ll_createExercice.setVisibility(View.GONE);
+                cargarImagen();
                 break;
         }
         bitmap = redimensionarImagen(bitmap, 600, 800);//part 14 redimencionar imágen,guarde en carpeta y BD
@@ -994,43 +1056,80 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void cargarImagen() {
         Drawable drawable = imgFoto.getDrawable();
-        idImagen=listaImagenes.get(listaImagenes.size()- 1).getIdImagen();
+        idImagen = listaImagenes.get(listaImagenes.size() - 1).getIdImagen();
        /* btn_img_4.setBackground(null);
         btn_img_4.setImageBitmap(response);
         btn_4Activo = false;
         rv_tipo1Fonico.setVisibility(View.GONE);
         txt_id_img4.setText(nameImagen);*/
-        System.out.println("Lista imagenes size CI: "+listaImagenes.size());
-        System.out.println("Lista imagenes: "+listaImagenes.get(listaImagenes.size()- 1).getIdImagen());
+        System.out.println("Lista imagenes size CI: " + listaImagenes.size());
+        System.out.println("Lista imagenes: " + listaImagenes.get(listaImagenes.size() - 1).getIdImagen());
         if (btn_1Activo) {
             btn_img_1.setBackground(null);
             btn_img_1.setImageBitmap(bitmap);
             btn_1Activo = false;
+
             int fila = 1;
             int columna = 1;
-
-
-          ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setIdImagen(idImagen);
             ejercicioG2HasImagen.setFilaImagen(fila);
             ejercicioG2HasImagen.setColumnaImagen(columna);
             listaidImagenes.add(idImagen);
             listafilaImagen.add(fila);
             listacolumnaImagen.add(columna);
 
-            cargarImagen_boolen=false;
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
 
         } else if (btn_2Activo) {
             btn_img_2.setBackground(null);
             btn_img_2.setImageBitmap(bitmap);
             btn_2Activo = false;
+
+            int fila = 1;
+            int columna = 2;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+
         } else if (btn_3Activo) {
             btn_img_3.setBackground(null);
             btn_img_3.setImageBitmap(bitmap);
             btn_3Activo = false;
+            int fila = 1;
+            int columna = 3;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+
         } else if (btn_4Activo) {
             btn_img_4.setBackground(null);
             btn_img_4.setImageBitmap(bitmap);
             btn_4Activo = false;
+
+            int fila = 1;
+            int columna = 4;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
         }
         // btn_Tipo1_pic_Ejercicio.setBackground(drawable);
         //imageView_muestra.setBackground(drawable);
