@@ -35,6 +35,7 @@ import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo2FonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.silabico.Tipo2silabicoEstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo1FonicoUpdateFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo2FonicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo1LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo2LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo2Fragment;
@@ -52,7 +53,9 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         Tipo1EstudianteFragment.OnFragmentInteractionListener,
         Tipo2EstudianteFragment.OnFragmentInteractionListener,
         Tipo1FonicoFragment.OnFragmentInteractionListener,
-        Tipo1FonicoUpdateFragment.OnFragmentInteractionListener {
+        Tipo1FonicoUpdateFragment.OnFragmentInteractionListener,
+        Tipo2FonicoFragment.OnFragmentInteractionListener,
+        Tipo2FonicoUpdateFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -95,6 +98,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     Tipo1FonicoFragment tipo1FonicoFragment;
     Tipo2FonicoFragment tipo2FonicoFragment;
 
+    //Tipo2FonicoFragment tipo2FonicoFragment
+
     Tipo1EstudianteFragment tipo1EstudianteFragment;
     Tipo2EstudianteFragment tipo2EstudianteFragment;
 
@@ -102,6 +107,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
     Tipo2LexicoUpdateFragment tipo2LexicoUpdateFragment;
 
     Tipo1FonicoUpdateFragment tipo1FonicoUpdateFragment;
+    Tipo2FonicoUpdateFragment tipo2FonicoUpdateFragment;
 
     Tipo2Fragment tipo2Fragment;
     //**********************************************************************************************
@@ -150,16 +156,16 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 }
                 if (idtipo == 2) {
-                   /* tipo1LexicoUpdateFragment = new Tipo1LexicoUpdateFragment();
+                   tipo2FonicoUpdateFragment = new Tipo2FonicoUpdateFragment();
                     Bundle parametros_1 = new Bundle();
                     parametros_1.putInt("iddocente", iddocente);
                     parametros_1.putInt("idgrupo", idgrupo);
                     parametros_1.putInt("idejercicio", idejercicio);
-                    tipo1LexicoUpdateFragment.setArguments(parametros_1);
+                    tipo2FonicoUpdateFragment.setArguments(parametros_1);
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1LexicoUpdateFragment)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2FonicoUpdateFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null).commit();*/
+                            .addToBackStack(null).commit();
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 }
                 if (idtipo == 3) {
@@ -251,10 +257,18 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
         } else if (buscar.equals("1")) {//**************AGREGADO
             String url_lh = Globals.url;
-            // String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjerG2_DET.php?idejercicioG2=" + idEjercicio;
+
             String url = "http://" + url_lh + "/proyecto_dconfo_v1/10wsJSONConsultarListaEjerG2_H_Img.php?idejercicioG2=" + idejercicio;
             url = url.replace(" ", "%20");
-            //Toast.makeText(getContext(), "consultar lista det imagenes: ", Toast.LENGTH_LONG).show();
+
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
+        } else if (buscar.equals("2")) {
+            String url_lh = Globals.url;
+
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/11wsJSON__ConsultarListaEjerG2_Has_Letra.php?idejercicioG2=" + idejercicio;
+            url = url.replace(" ", "%20");
+
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
             VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
         }
@@ -308,6 +322,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
                         idejercicio = listaEjercicios.get(rv_ejercicios_act.
                                 getChildAdapterPosition(v)).getIdEjercicioG2();
+
+                        Toast.makeText(getApplicationContext(), "idejercicio: " + idejercicio, Toast.LENGTH_LONG).show();
 
                         idactividad = listaEjercicios.get(rv_ejercicios_act.
                                 getChildAdapterPosition(v)).getIdActividad();
@@ -456,7 +472,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                 }
                 if (idtipo == 2) {
                     buscar = "2";
-                    //cargarEjerciciosPorActividad();
+                    cargarEjerciciosPorActividad();
                 }
 
 
@@ -467,7 +483,73 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             }
 
 
-        }//eje3
+        }// 1
+        else if (buscar.equals("2")) {//------------------------------------------------------------------------------------g2
+
+            //Toast.makeText(getApplicationContext(), "grupo g4 activo: ", Toast.LENGTH_LONG).show();
+
+            ejercicioG2HasLetrag2 = null;
+            JSONArray json = response.optJSONArray("ejerciciog2_has_letrag2");
+
+            ArrayList<EjercicioG2HasLetrag2> listaDEjerciciosg2HL = new ArrayList<>();
+            listaDEjerciciosg2HL = new ArrayList<>();
+
+            try {
+                for (int i = 0; i < json.length(); i++) {
+                    ejercicioG2HasLetrag2 = new EjercicioG2HasLetrag2();
+                    JSONObject jsonObject = null;
+                    jsonObject = json.getJSONObject(i);
+
+                    ejercicioG2HasLetrag2.setId_EjercicioG2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
+                    ejercicioG2HasLetrag2.setLetra(jsonObject.optString("Letra"));
+                    ejercicioG2HasLetrag2.setFila_Eg2H_Lg2(jsonObject.optInt("fila_Eg2H_Lg2"));
+                    ejercicioG2HasLetrag2.setCol_Eg2H_Lge(jsonObject.optInt("col_Eg2H_Lge"));
+
+
+                    listaDEjerciciosg2HL.add(ejercicioG2HasLetrag2);
+
+                }
+
+                int tipoEjercicioG2 = ejercicioG2.getIdTipo();
+                System.out.println("lista ejercicio has letra: " + listaDEjerciciosg2HL.size());
+
+                //Tipo1FonicoFragment tipo1FonicoFragment = new Tipo1FonicoFragment();
+                tipo2FonicoFragment = new Tipo2FonicoFragment();
+
+                // ArrayList<Integer> listaIDimagenes = new ArrayList<>();
+                //Bundle bundle = new Bundle();
+                Bundle bundle2_t2 = new Bundle();
+
+                int[] listaidImagenes = new int[listaDEjerciciosg2HL.size()];
+                for (int i = 0; i < listaDEjerciciosg2HL.size(); i++) {
+                    // listaIDimagenes.add(listaDEjerciciosg2HI.get(i).getIdImagen());
+
+                    parametros_1.putInt("idejercicioHletra" + (i + 1) + "", listaDEjerciciosg2HL.get(i).getId_EjercicioG2());
+                    parametros_1.putString("letra" + (i + 1) + "", listaDEjerciciosg2HL.get(i).getLetra());
+                    parametros_1.putInt("filaletra" + (i + 1) + "", listaDEjerciciosg2HL.get(i).getFila_Eg2H_Lg2());
+                    parametros_1.putInt("colletra" + (i + 1) + "", listaDEjerciciosg2HL.get(i).getCol_Eg2H_Lge());
+
+                    System.out.println("columna letra: " + listaDEjerciciosg2HL.get(i).getCol_Eg2H_Lge());
+                }
+
+
+                if (idtipo == 2) {
+                    //tipo2FonicoFragment.setArguments(bundle_t2);
+                    tipo2FonicoFragment.setArguments(parametros_1);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2FonicoFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null).commit();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                //Toast.makeText(getContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+
+        }// 2
 
 
     }//cargarEjerciciosPorActividad()
