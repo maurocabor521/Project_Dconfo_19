@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.asus.dconfo_app.MainActivity;
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.ConcienciaTipo;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.actividades.ActividadDocenteActivity;
@@ -170,6 +171,12 @@ public class HomeDocenteActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
+            return true;
+        } else if (id == R.id.action_off) {
+            finish();
+            Intent intent=new Intent(HomeDocenteActivity.this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
 
