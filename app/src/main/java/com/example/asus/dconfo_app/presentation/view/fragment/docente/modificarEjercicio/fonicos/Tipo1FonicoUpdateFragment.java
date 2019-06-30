@@ -426,7 +426,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
         String ip = Globals.url;
         //String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONRegistroTipo1Fonico.php";//p12.buena
-        String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/25wsJSON_Update_Fonico1.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -442,6 +442,8 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("No carga: " + response);
+                    progreso.hide();
                 }
             }
         }, new Response.ErrorListener() {
@@ -457,7 +459,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                //String idEjercicio = "7";
+                String id_ejercicio = String.valueOf(idejercicio);
                 String nameEjercicio = edt_nameEjercicio.getText().toString();
                 String docente_iddocente = String.valueOf(idDocente);
                 String Tipo_idTipo = "1";
@@ -473,17 +475,17 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                 Map<String, String> parametros = new HashMap<>();
 
-                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("idejercicio", id_ejercicio);
                 parametros.put("nameEjercicioG2", nameEjercicio);
-                parametros.put("docente_iddocente", docente_iddocente);
+                /*parametros.put("docente_iddocente", docente_iddocente);
                 parametros.put("Tipo_idTipo", Tipo_idTipo);
-                parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);
+                parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);*/
                 parametros.put("letra_inicial_EjercicioG2", letra_inicial);
-                parametros.put("letra_final_EjercicioG2", letra_final);
+               /* parametros.put("letra_final_EjercicioG2", letra_final);
 
                 parametros.put("imagen", imagen);
                 parametros.put("cantidadValidadEjercicio", cantidad);
-                parametros.put("oracion", oracion);
+                parametros.put("oracion", oracion);*/
 
                 return parametros;
             }
@@ -564,7 +566,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                         if (idEjercicio2 > 0) {
 
-                            ejerciciog2HI_adjuntarImagenes();
+                           // ejerciciog2HI_adjuntarImagenes();//*******************se comento para no generar nuevo ejercicio
 
                         }
 
@@ -662,7 +664,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                String EjercicioG2_idEjercicioG2 = String.valueOf(idEjercicio2);
+                String EjercicioG2_idEjercicioG2 = String.valueOf(idejercicio);
                 //String EjercicioG2_idEjercicioG2 = String.valueOf(10);
                 String Imagen_idImagen_Ejercicio = String.valueOf(id_Imagen);
                 String fila_E_h_I = String.valueOf(fila_imagen);
@@ -1048,7 +1050,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 imgFoto.setImageBitmap(bitmap);
                 ll_createImage.setVisibility(View.VISIBLE);
                 ll_createExercice.setVisibility(View.GONE);
-                cargarImagen();
+                //cargarImagen();
                 break;
         }
         bitmap = redimensionarImagen(bitmap, 600, 800);//part 14 redimencionar imágen,guarde en carpeta y BD
