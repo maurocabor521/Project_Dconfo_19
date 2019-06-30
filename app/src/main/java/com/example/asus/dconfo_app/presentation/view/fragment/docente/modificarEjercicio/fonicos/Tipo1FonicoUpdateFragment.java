@@ -133,6 +133,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
     int idejercicio;
     int idgrupo;
     int idImagen;
+    int flag = 0;
 
     ArrayList<Imagen> listaImagenes;
     ArrayList<EjercicioG2> listaEjerciciosG2;
@@ -566,7 +567,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                         if (idEjercicio2 > 0) {
 
-                           // ejerciciog2HI_adjuntarImagenes();//*******************se comento para no generar nuevo ejercicio
+                            ejerciciog2HI_adjuntarImagenes();//*******************se comento para no generar nuevo ejercicio
 
                         }
 
@@ -594,7 +595,7 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
     private void ejerciciog2HI_adjuntarImagenes() {
 
-        for (int i = 0; i < listaidImagenes.size(); i++) {
+      /*  for (int i = 0; i < listaidImagenes.size(); i++) {
             webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(i), listafilaImagen.get(i), listacolumnaImagen.get(i));
             try {
                 Thread.sleep(100);
@@ -602,6 +603,10 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
             } catch (InterruptedException e) {
 
             }
+        }*/
+        System.out.println("lista id imagenes: " + listaidImagenes.toString());
+        if (flag < listaidImagenes.size()) {
+            webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(flag), listafilaImagen.get(flag), listacolumnaImagen.get(flag));
         }
         edt_letra.setText("");
         edt_nameEjercicio.setText("");
@@ -632,8 +637,9 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
        /* progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...E_H_I");
         progreso.show();*/
+        flag++;
         String ip = Globals.url;
-        String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONCrearEjercicio2HasImagen.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/26wsJSON_Update_Ejercicio2HasImagen.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -643,11 +649,12 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
 
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
+                    ejerciciog2HI_adjuntarImagenes();
                     progreso.hide();
                     Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
-                    System.out.println("error no cargado con exito crearEHI");
+                    System.out.println("error no cargado con exito crearEHI: " + response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -675,12 +682,12 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 Map<String, String> parametros = new HashMap<>();
 
                 //parametros.put("idEjercicio", idEjercicio);
-                parametros.put("EjercicioG2_idEjercicioG2", EjercicioG2_idEjercicioG2);
-                parametros.put("Imagen_idImagen_Ejercicio", Imagen_idImagen_Ejercicio);
-                parametros.put("fila_E_h_I", fila_E_h_I);
-                parametros.put("columna_E_H_I", columna_E_H_I);
+                parametros.put("idejercicio", EjercicioG2_idEjercicioG2);
+                parametros.put("idimagen", Imagen_idImagen_Ejercicio);
+                parametros.put("fila", fila_E_h_I);
+                parametros.put("columna", columna_E_H_I);
 
-                System.out.println("Parametros: " + parametros.toString());
+                System.out.println("Parametros EJERCICIO HAS IMG: " + parametros.toString());
 
 
                 return parametros;
