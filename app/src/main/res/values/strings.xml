@@ -50,4 +50,5 @@
     <string name="home_tipo2">Tipo 2</string>
     <string name="Escuchar_Texto">Escuchar Texto</string>
     <string name="idGrupoCant">Cant. Estudiantes</string>
+    <string name="action_my_groups">Mis Grupos</string>
 </resources>
