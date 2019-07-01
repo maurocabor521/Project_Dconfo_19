@@ -231,6 +231,8 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_tipo2_fonico_update, container, false);
 
+        progreso=new ProgressDialog(getActivity());
+
         nameDocente = getArguments().getString("namedocente");
         idDocente = getArguments().getInt("iddocente");
 
@@ -371,6 +373,10 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
         listaLetras.add(edt_l4.getText().toString());
         listafilaLetra.add(4);
         listacolumnaLetra.add(1);
+
+        System.out.println("lista letras: "+listaLetras.toString());
+        System.out.println("lista fila letra: "+listafilaLetra.toString());
+        System.out.println("lista col letra: "+listacolumnaLetra.toString());
     }
 
     public void verificaRadioButton() {//f1
@@ -524,8 +530,8 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), "No se ha cargado con éxito" + response.toString(), Toast.LENGTH_LONG).show();
-                    System.out.println("response: " + response.toString());
+                    Toast.makeText(getContext(), "No se ha cargado con éxito ---" + response.toString(), Toast.LENGTH_LONG).show();
+                    System.out.println("response: " + response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -541,16 +547,8 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                String idEjercicio = String.valueOf(idejercicio);
+                String id_ejercicio = String.valueOf(idejercicio);
                 String nameEjercicio = edt_nameEjercicio.getText().toString();
-                System.out.println("edt_nameejercicio" + nameEjercicio);
-                String docente_iddocente = String.valueOf(idDocente);
-                String Tipo_idTipo = "2";
-                String Actividad_idActividad = "1";
-
-                String imagen = "";
-                String cantidad = "";
-                String oracion = "";
 
                 if (estado_RbletraInicial) {
 
@@ -571,26 +569,23 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
                     System.out.println("letra_final 2:" + letra_final);
                 }
 
+                String imagen = "";
+                String cantidad = "";
+                String oracion = "";
 
-                // System.out.println("letra inicial" + letra_inicial);
+                System.out.println("letra inicial" + letra_inicial);
 
                 Map<String, String> parametros = new HashMap<>();
 
-                parametros.put("idEjercicio", idEjercicio);
+                parametros.put("idejercicio", id_ejercicio);
                 parametros.put("nameEjercicioG2", nameEjercicio);
-                // parametros.put("docente_iddocente", docente_iddocente);
-                //parametros.put("Tipo_idTipo", Tipo_idTipo);
-                //parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);
+
                 parametros.put("letra_inicial_EjercicioG2", letra_inicial);
                 parametros.put("letra_final_EjercicioG2", letra_final);
 
-                //  parametros.put("imagen", imagen);
-                // parametros.put("cantidadValidadEjercicio", cantidad);
-                //  parametros.put("oracion", oracion);
-
+                System.out.println("parametros update fon 1: " + parametros.toString());
                 return parametros;
-                // Map<String, String> parametros = new HashMap<>();
-                // return parametros;
+
             }
         };
         //request.add(stringRequest);
@@ -1124,7 +1119,10 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
     private void ejerciciog2HI_adjuntarImagenes() {//f9
 
         System.out.println("lista id imagenes: " + listaidImagenes.toString());
+        System.out.println("lista id imagenes size: " + listaidImagenes.size());
+
         if (flag < listaidImagenes.size()) {
+            System.out.println("flag has_img_adjuntar: " + flag);
             webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(flag), listafilaImagen.get(flag), listacolumnaImagen.get(flag));
             webService_CrearEjercicioG2_Has_Letra(listaLetras.get(flag), listafilaLetra.get(flag), listacolumnaLetra.get(flag));
         }
@@ -1156,10 +1154,13 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
     // ----------------------------------------------------------------------------------------------
     private void webService_CrearEjercicioG2_Has_Imagen(final int id_Imagen, final int fila_imagen, final int columna_imagen) {
-       /* progreso = new ProgressDialog(getContext());
+        progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...E_H_I");
-        progreso.show();*/
-        flag++;
+        //progreso.show();
+
+        System.out.println("flag has_img: " + flag);
+
+
         String ip = Globals.url;
         String url = "http://" + ip + "/proyecto_dconfo_v1/26wsJSON_Update_Ejercicio2HasImagen.php";//p12.buena
 
@@ -1168,11 +1169,12 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
             public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
 //                progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
-
+                    flag++;
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
-                    ejerciciog2HI_adjuntarImagenes();
                     progreso.hide();
+                    ejerciciog2HI_adjuntarImagenes();
+
                     Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
@@ -1265,7 +1267,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
                 System.out.println("error" + error.toString());
-                //progreso.hide();
+                progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
             @Override
@@ -1310,9 +1312,9 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
 
     private void webService_CrearEjercicioG2_Has_Letra(final String letra, final int fila_letra, final int columna_letra) {//f10
-       /* progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
-        progreso.show();*/
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...letra");
+        progreso.show();
         System.out.println(" Entrando a CREAR EG2_HAS_LETRA");
         String ip = Globals.url;
         String url = "http://" + ip + "/proyecto_dconfo_v1/27wsJSON_Update_Ejercicio2HasLetra.php";//p12.buena
@@ -1325,9 +1327,9 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
-                    cont++;
-                    System.out.println("CREAR EG2_HAS_LETRA ,cont: " + cont);
-                    if (cont == 4) {
+                    //cont++;
+                    System.out.println("CREAR EG2_HAS_LETRA ,cont: " + flag);
+                    if (flag == 4) {
                         // Toast.makeText(getContext(), "limpia listas: " + i, Toast.LENGTH_LONG).show();
                         listaidImagenes.clear();
                         listafilaImagen.clear();
@@ -1335,7 +1337,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
                         listacolumnaLetra.clear();
                         listafilaLetra.clear();
                         listaLetras.clear();
-                        System.out.println(" listaidImagenes :" + listacolumnaLetra.toString());
+                        System.out.println(" listaidImagenes lista col letra :" + listacolumnaLetra.toString());
 
                     }
 
@@ -1353,14 +1355,14 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
                 System.out.println("error" + error.toString());
-                //progreso.hide();
+                progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                String EjercicioG2_idEjercicioG2 = String.valueOf(idEjercicio2);
+                String EjercicioG2_idEjercicioG2 = String.valueOf(idejercicio);
                 //String EjercicioG2_idEjercicioG2 = String.valueOf(10);
                 String Letra = String.valueOf(letra);
                 String fila_Eg2H_Lg2 = String.valueOf(fila_letra);
@@ -1377,7 +1379,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
                 parametros.put("fila", fila_Eg2H_Lg2);
                 parametros.put("columna", col_Eg2H_Lge);
 
-                System.out.println("Parametros: " + parametros.toString());
+                System.out.println("Parametros letra: " + parametros.toString());
 
 
                 return parametros;
