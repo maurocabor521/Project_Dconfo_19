@@ -188,6 +188,10 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
     File fileImagen;
     Bitmap bitmap;
 
+    int idejercicio;
+    int idgrupo;
+    int flag = 0;
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo2FonicoUpdateFragment() {
@@ -229,6 +233,10 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
         nameDocente = getArguments().getString("namedocente");
         idDocente = getArguments().getInt("iddocente");
+
+
+        idejercicio = getArguments().getInt("idejercicio");
+        idgrupo = getArguments().getInt("idgrupo");
 
         ejercicioG2HasImagen = new EjercicioG2HasImagen();
         ejercicioG2HasLetrag2 = new EjercicioG2HasLetrag2();
@@ -502,7 +510,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
         progreso.show();*/
         String ip = Globals.url;
         //String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONRegistroTipo1Fonico.php";//p12.buena
-        String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/25wsJSON_Update_Fonico1.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -533,7 +541,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                //String idEjercicio = "7";
+                String idEjercicio = String.valueOf(idejercicio);
                 String nameEjercicio = edt_nameEjercicio.getText().toString();
                 System.out.println("edt_nameejercicio" + nameEjercicio);
                 String docente_iddocente = String.valueOf(idDocente);
@@ -568,17 +576,17 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
                 Map<String, String> parametros = new HashMap<>();
 
-                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("idEjercicio", idEjercicio);
                 parametros.put("nameEjercicioG2", nameEjercicio);
-                parametros.put("docente_iddocente", docente_iddocente);
-                parametros.put("Tipo_idTipo", Tipo_idTipo);
-                parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);
+                // parametros.put("docente_iddocente", docente_iddocente);
+                //parametros.put("Tipo_idTipo", Tipo_idTipo);
+                //parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);
                 parametros.put("letra_inicial_EjercicioG2", letra_inicial);
                 parametros.put("letra_final_EjercicioG2", letra_final);
 
-                parametros.put("imagen", imagen);
-                parametros.put("cantidadValidadEjercicio", cantidad);
-                parametros.put("oracion", oracion);
+                //  parametros.put("imagen", imagen);
+                // parametros.put("cantidadValidadEjercicio", cantidad);
+                //  parametros.put("oracion", oracion);
 
                 return parametros;
                 // Map<String, String> parametros = new HashMap<>();
@@ -1115,36 +1123,12 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
     private void ejerciciog2HI_adjuntarImagenes() {//f9
 
-        System.out.println("ejerciciog2HI_adjuntarImagenes: ");
-
-        for (int i = 0; i < listaidImagenes.size(); i++) {
-
-            System.out.println(" listaidImagenes :" + listaidImagenes.toString());
-
-            webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(i), listafilaImagen.get(i), listacolumnaImagen.get(i));
-            webService_CrearEjercicioG2_Has_Letra(listaLetras.get(i), listafilaLetra.get(i), listacolumnaLetra.get(i));
-
-
-            System.out.println(" i :" + i);
-
-          /*  if (cont == 4) {
-                Toast.makeText(getContext(), "limpia listas: " + i, Toast.LENGTH_LONG).show();
-                listaidImagenes.clear();
-                listafilaImagen.clear();
-                listacolumnaImagen.clear();
-                listacolumnaLetra.clear();
-                listafilaLetra.clear();
-                listaLetras.clear();
-                System.out.println(" listaidImagenes :" + listacolumnaLetra.toString());
-
-            }*/
-            try {
-                Thread.sleep(100);
-                //System.out.println("Dormir for... " + listaidImagenes.get(i));
-            } catch (InterruptedException e) {
-
-            }
+        System.out.println("lista id imagenes: " + listaidImagenes.toString());
+        if (flag < listaidImagenes.size()) {
+            webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(flag), listafilaImagen.get(flag), listacolumnaImagen.get(flag));
+            webService_CrearEjercicioG2_Has_Letra(listaLetras.get(flag), listafilaLetra.get(flag), listacolumnaLetra.get(flag));
         }
+
         edt_nameEjercicio.setText("");
         edt_l1.setText("");
         edt_l2.setText("");
@@ -1169,12 +1153,87 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
 
     }
+
+    // ----------------------------------------------------------------------------------------------
+    private void webService_CrearEjercicioG2_Has_Imagen(final int id_Imagen, final int fila_imagen, final int columna_imagen) {
+       /* progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...E_H_I");
+        progreso.show();*/
+        flag++;
+        String ip = Globals.url;
+        String url = "http://" + ip + "/proyecto_dconfo_v1/26wsJSON_Update_Ejercicio2HasImagen.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+//                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    //edt_letra.setText("");
+                    // edt_nameEjercicio.setText("");
+                    ejerciciog2HI_adjuntarImagenes();
+                    progreso.hide();
+                    Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
+                    System.out.println("error no cargado con exito crearEHI: " + response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar EHI", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                String EjercicioG2_idEjercicioG2 = String.valueOf(idejercicio);
+                //String EjercicioG2_idEjercicioG2 = String.valueOf(10);
+                String Imagen_idImagen_Ejercicio = String.valueOf(id_Imagen);
+                String fila_E_h_I = String.valueOf(fila_imagen);
+                String columna_E_H_I = String.valueOf(columna_imagen);
+
+                //System.out.println("letra inicial" + letra_inicial);
+
+                Map<String, String> parametros = new HashMap<>();
+
+                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("idejercicio", EjercicioG2_idEjercicioG2);
+                parametros.put("idimagen", Imagen_idImagen_Ejercicio);
+                parametros.put("fila", fila_E_h_I);
+                parametros.put("columna", columna_E_H_I);
+
+                System.out.println("Parametros EJERCICIO HAS IMG: " + parametros.toString());
+
+
+                return parametros;
+            }
+        };
+        //request.add(stringRequest);
+        //p25 duplicar tiempo x defecto
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+
+        //reemplazar espacios en blanco del nombre por %20
+        // url = url.replace(" ", "%20");
+
+        //hace el llamado a la url,no usa en p12
+        /*jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+        request.add(jsonObjectRequest);*/
+    }
+    // ----------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------
 
 
     //para iniciar el proceso de llamado al webservice
 
-    private void webService_CrearEjercicioG2_Has_Imagen(final int id_Imagen, final int fila_imagen, final int columna_imagen) {//f8
+    private void webService_CrearEjercicioG2_Has_Imagen_original(final int id_Imagen, final int fila_imagen, final int columna_imagen) {//f8
        /* progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...");
         progreso.show();*/
@@ -1256,7 +1315,7 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
         progreso.show();*/
         System.out.println(" Entrando a CREAR EG2_HAS_LETRA");
         String ip = Globals.url;
-        String url = "http://" + ip + "/proyecto_dconfo_v1/6wsJSONCrearEjercicio2HasLetra.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/27wsJSON_Update_Ejercicio2HasLetra.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -1313,10 +1372,10 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
 
                 //parametros.put("idEjercicio", idEjercicio);
 
-                parametros.put("EjercicioG2_idEjercicioG2", EjercicioG2_idEjercicioG2);
-                parametros.put("Letra", Letra);
-                parametros.put("fila_Eg2H_Lg2", fila_Eg2H_Lg2);
-                parametros.put("col_Eg2H_Lge", col_Eg2H_Lge);
+                parametros.put("idejercicio", EjercicioG2_idEjercicioG2);
+                parametros.put("letra", Letra);
+                parametros.put("fila", fila_Eg2H_Lg2);
+                parametros.put("columna", col_Eg2H_Lge);
 
                 System.out.println("Parametros: " + parametros.toString());
 

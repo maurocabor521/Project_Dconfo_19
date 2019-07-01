@@ -482,9 +482,9 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
                 parametros.put("Tipo_idTipo", Tipo_idTipo);
                 parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);*/
                 parametros.put("letra_inicial_EjercicioG2", letra_inicial);
-               /* parametros.put("letra_final_EjercicioG2", letra_final);
+                parametros.put("letra_final_EjercicioG2", letra_final);
 
-                parametros.put("imagen", imagen);
+               /* parametros.put("imagen", imagen);
                 parametros.put("cantidadValidadEjercicio", cantidad);
                 parametros.put("oracion", oracion);*/
 
