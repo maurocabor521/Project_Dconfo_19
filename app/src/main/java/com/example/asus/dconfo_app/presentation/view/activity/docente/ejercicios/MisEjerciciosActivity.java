@@ -39,6 +39,7 @@ import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarE
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo2FonicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo1LexicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.lexicos.Tipo2LexicoUpdateFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.silabicos.Tipo1SilabicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo2Fragment;
 
 import org.json.JSONArray;
@@ -58,7 +59,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         Tipo2FonicoFragment.OnFragmentInteractionListener,
         Tipo2FonicoUpdateFragment.OnFragmentInteractionListener,
         Tipo2silabicoEstudianteFragment.OnFragmentInteractionListener,
-        Tipo1silabicoEstudianteFragment.OnFragmentInteractionListener {
+        Tipo1silabicoEstudianteFragment.OnFragmentInteractionListener,
+        Tipo1SilabicoUpdateFragment.OnFragmentInteractionListener {
 
     private int idgrupo;
     private int iddocente;
@@ -114,6 +116,8 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
 
     Tipo1FonicoUpdateFragment tipo1FonicoUpdateFragment;
     Tipo2FonicoUpdateFragment tipo2FonicoUpdateFragment;
+
+    Tipo1SilabicoUpdateFragment tipo1SilabicoUpdateFragment;
 
     Tipo2Fragment tipo2Fragment;
     //**********************************************************************************************
@@ -199,16 +203,16 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                             .addToBackStack(null).commit();
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 } else if (idtipo == 5) {
-                   /* tipo2LexicoUpdateFragment = new Tipo2LexicoUpdateFragment();
+                    tipo1SilabicoUpdateFragment = new Tipo1SilabicoUpdateFragment();
                     Bundle parametros_1 = new Bundle();
                     parametros_1.putInt("iddocente", iddocente);
                     parametros_1.putInt("idgrupo", idgrupo);
                     parametros_1.putInt("idejercicio", idejercicio);
-                    tipo2LexicoUpdateFragment.setArguments(parametros_1);
+                    tipo1SilabicoUpdateFragment.setArguments(parametros_1);
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2LexicoUpdateFragment)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1SilabicoUpdateFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null).commit();*/
+                            .addToBackStack(null).commit();
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 }
 
@@ -394,7 +398,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                         tipo2EstudianteFragment = new Tipo2EstudianteFragment();
                         tipo2EstudianteFragment.setArguments(parametros_1);
 
-                        tipo1silabicoEstudianteFragment=new Tipo1silabicoEstudianteFragment();
+                        tipo1silabicoEstudianteFragment = new Tipo1silabicoEstudianteFragment();
                         tipo1silabicoEstudianteFragment.setArguments(parametros_1);
                         //****************************************************************sil
                         //****************************************************************

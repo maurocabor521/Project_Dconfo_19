@@ -25,83 +25,201 @@
             android:layout_margin="20dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
+                android:id="@+id/ll_silabico_update_exe_imgs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rv_silabico_doc_img"
-                android:visibility="gone">
+                android:layout_margin="20dp"
+                android:orientation="vertical">
 
-            </android.support.v7.widget.RecyclerView>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_silabico_doc_t1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center|top"
-                android:layout_margin="5dp"
-                android:background="@drawable/ic_no_foto_80dp"
-                android:elevation="@dimen/elevation_ciecleimageprofile" />
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edittext_margin_createaccount"
-                android:theme="@style/EditTextBlack">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edt_silabica_doc_t1_nameejercicio"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_silabico_doc_img_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingrese Nombre Ejercicio">
+                    android:visibility="gone">
 
-                </android.support.design.widget.TextInputEditText>
+                </android.support.v7.widget.RecyclerView>
 
-            </android.support.design.widget.TextInputLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_silabico_doc_t1_update"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_no_foto_80dp"
+                    android:elevation="@dimen/elevation_ciecleimageprofile" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edittext_margin_createaccount"
-                android:theme="@style/EditTextBlack">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edt_silabica_doc_t1_oracion"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingrese Oración a trabajar">
+                    android:layout_marginTop="@dimen/edittext_margin_createaccount"
+                    android:theme="@style/EditTextBlack">
 
-                </android.support.design.widget.TextInputEditText>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edt_silabica_doc_t1_nameejercicio_update"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese Nombre Ejercicio">
 
-            </android.support.design.widget.TextInputLayout>
+                    </android.support.design.widget.TextInputEditText>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edittext_margin_createaccount"
+                    android:theme="@style/EditTextBlack">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edt_silabica_doc_t1_oracion_update"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese Oración a trabajar">
+
+                    </android.support.design.widget.TextInputEditText>
+
+                </android.support.design.widget.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/edt_silabica_doc_t1_cant_silabas"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:digits="123456789"
-                android:gravity="center"
-                android:maxLength="1"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edt_silabica_doc_t1_cant_silabas_update"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:digits="123456789"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Ingrese la cantidad de sílabas"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_silabico_doc_t1_crear_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Crear"
+                    android:textStyle="bold"
+                    android:theme="@style/RaisedButtonDark" />
+
+            </LinearLayout>
+
+            <!-- /////////////////////////////////////////////////////////-->
+
+            <LinearLayout
+                android:id="@+id/ll_silabico_update_form_create_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ingrese la cantidad de sílabas"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:visibility="invisible">
 
-            <Button
-                android:id="@+id/btn_silabico_doc_t1_crear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Crear"
-                android:textStyle="bold"
-                android:theme="@style/RaisedButtonDark" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edittext_margin_createaccount"
+                    android:theme="@style/EditTextBlack">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edt_silabico_update_name_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese Nombre Imagen">
+
+                    </android.support.design.widget.TextInputEditText>
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/edt_silabico_update_let_ini"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:digits="abcdefghijlklmnñopqrstuvwxyz
+                             ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                            android:inputType="textCapSentences"
+                            android:maxLength="1"
+                            android:textSize="50dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Letra inicial de imagen" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/edt_silabico_update_let_final"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:digits="abcdefghijlklmnñopqrstuvwxyz
+                             ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                            android:inputType="textCapSentences"
+                            android:maxLength="1"
+                            android:textSize="50dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Letra final de imagen" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edt_silabico_update_cant_silabas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:digits="123456789"
+                    android:inputType="textCapSentences"
+                    android:maxLength="1"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Cantidad de silabas de imagen" />
+
+                <Button
+                    android:id="@+id/btn_silabico_update_create_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Crear Imagen"
+                    android:textStyle="bold"
+                    android:theme="@style/RaisedButtonDark" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
