@@ -213,7 +213,7 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tipo2_silabico, container, false);
+        View view = inflater.inflate(R.layout.fragment_tipo2_silabico_update, container, false);
 
         nameDocente = getArguments().getString("namedocente");
         idDocente = getArguments().getInt("iddocente");

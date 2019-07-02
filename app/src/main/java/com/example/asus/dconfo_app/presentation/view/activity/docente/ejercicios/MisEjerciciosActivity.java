@@ -218,16 +218,16 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                             .addToBackStack(null).commit();
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 } else if (idtipo == 6) {
-                  /*  tipo1SilabicoUpdateFragment = new Tipo1SilabicoUpdateFragment();
+                    tipo2SilabicoUpdateFragment = new Tipo2SilabicoUpdateFragment();
                     Bundle parametros_1 = new Bundle();
                     parametros_1.putInt("iddocente", iddocente);
                     parametros_1.putInt("idgrupo", idgrupo);
                     parametros_1.putInt("idejercicio", idejercicio);
-                    tipo1SilabicoUpdateFragment.setArguments(parametros_1);
+                    tipo2SilabicoUpdateFragment.setArguments(parametros_1);
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo1SilabicoUpdateFragment)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_docente_edit_ejer, tipo2SilabicoUpdateFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null).commit();*/
+                            .addToBackStack(null).commit();
                     //Toast.makeText(getApplicationContext(), "floating action button", Toast.LENGTH_SHORT).show();
                 }
 
