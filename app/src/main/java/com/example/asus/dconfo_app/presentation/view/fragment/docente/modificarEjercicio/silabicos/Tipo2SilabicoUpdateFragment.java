@@ -232,45 +232,45 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
         listafilaLetra = new ArrayList<>();
         listacolumnaLetra = new ArrayList<>();
 
-        rv_imagenesBancoDatos = (RecyclerView) view.findViewById(R.id.rv_docente_sil2_imgs);
+        rv_imagenesBancoDatos = (RecyclerView) view.findViewById(R.id.rv_docente_sil2_imgs_update);
         rv_imagenesBancoDatos.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_imagenesBancoDatos.setHasFixedSize(true);
         //rv_imagenesBancoDatos.setVisibility(View.INVISIBLE);
 
-        rb_letraInicial = (RadioButton) view.findViewById(R.id.rb_letraInicial_sil2);
-        rb_letraFinal = (RadioButton) view.findViewById(R.id.rb_letraFinal_sil2);
+        rb_letraInicial = (RadioButton) view.findViewById(R.id.rb_letraInicial_sil2_update);
+        rb_letraFinal = (RadioButton) view.findViewById(R.id.rb_letraFinal_sil2_update);
 
-        ll_c1f1 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f1);
-        ll_c1f2 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f2);
-        ll_c1f3 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f3);
-        ll_c1f4 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f4);
+        ll_c1f1 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f1_update);
+        ll_c1f2 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f2_update);
+        ll_c1f3 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f3_update);
+        ll_c1f4 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c1_f4_update);
 
-        ll_c2f1 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f1);
-        ll_c2f2 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f2);
-        ll_c2f3 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f3);
-        ll_c2f4 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f4);
+        ll_c2f1 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f1_update);
+        ll_c2f2 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f2_update);
+        ll_c2f3 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f3_update);
+        ll_c2f4 = (LinearLayout) view.findViewById(R.id.ll_docente_sil2_c2_f4_update);
 
-        txt_name_c1f1 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f1);
-        txt_name_c1f2 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f2);
-        txt_name_c1f3 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f3);
-        txt_name_c1f4 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f4);
+        txt_name_c1f1 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f1_update);
+        txt_name_c1f2 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f2_update);
+        txt_name_c1f3 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f3_update);
+        txt_name_c1f4 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c1f4_update);
 
-        txt_name_c2f1 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f1);
-        txt_name_c2f2 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f2);
-        txt_name_c2f3 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f3);
-        txt_name_c2f4 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f4);
+        txt_name_c2f1 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f1_update);
+        txt_name_c2f2 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f2_update);
+        txt_name_c2f3 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f3_update);
+        txt_name_c2f4 = (TextView) view.findViewById(R.id.txt_docente_sil2_nom_c2f4_update);
 
-        cv_c1f1 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f1);
-        cv_c1f2 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f2);
-        cv_c1f3 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f3);
-        cv_c1f4 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f4);
+        cv_c1f1 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f1_update);
+        cv_c1f2 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f2_update);
+        cv_c1f3 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f3_update);
+        cv_c1f4 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c1_f4_update);
 
-        cv_c2f1 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f1);
-        cv_c2f2 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f2);
-        cv_c2f3 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f3);
-        cv_c2f4 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f4);
+        cv_c2f1 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f1_update);
+        cv_c2f2 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f2_update);
+        cv_c2f3 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f3_update);
+        cv_c2f4 = (CircleImageView) view.findViewById(R.id.iv_docente_sil2_c2_f4_update);
 
-        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_docente_sil2_nameEjercicio);
+        edt_nameEjercicio = (EditText) view.findViewById(R.id.edt_docente_sil2_nameEjercicio_update);
 
         cv_c1f1.setOnClickListener(this);
         cv_c1f2.setOnClickListener(this);
@@ -282,7 +282,7 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
         cv_c2f4.setOnClickListener(this);
 
 
-        btn_enviar = (Button) view.findViewById(R.id.btn_docente_sil2_enviar);
+        btn_enviar = (Button) view.findViewById(R.id.btn_docente_sil2_enviar_update);
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

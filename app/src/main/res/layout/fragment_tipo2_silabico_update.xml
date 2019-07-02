@@ -28,7 +28,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_docente_sil2_imgs"
+                    android:id="@+id/rv_docente_sil2_imgs_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone">
@@ -52,14 +52,14 @@
 
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c1_f1"
+                            android:id="@+id/ll_docente_sil2_c1_f1_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c1_f1"
+                                android:id="@+id/iv_docente_sil2_c1_f1_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -68,7 +68,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c1f1"
+                                android:id="@+id/txt_docente_sil2_nom_c1f1_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -78,13 +78,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c1_f2"
+                            android:id="@+id/ll_docente_sil2_c1_f2_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c1_f2"
+                                android:id="@+id/iv_docente_sil2_c1_f2_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -93,7 +93,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c1f2"
+                                android:id="@+id/txt_docente_sil2_nom_c1f2_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -103,13 +103,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c1_f3"
+                            android:id="@+id/ll_docente_sil2_c1_f3_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c1_f3"
+                                android:id="@+id/iv_docente_sil2_c1_f3_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -118,7 +118,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c1f3"
+                                android:id="@+id/txt_docente_sil2_nom_c1f3_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -128,13 +128,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c1_f4"
+                            android:id="@+id/ll_docente_sil2_c1_f4_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c1_f4"
+                                android:id="@+id/iv_docente_sil2_c1_f4_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -143,7 +143,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c1f4"
+                                android:id="@+id/txt_docente_sil2_nom_c1f4_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -166,14 +166,14 @@
 
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c2_f1"
+                            android:id="@+id/ll_docente_sil2_c2_f1_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c2_f1"
+                                android:id="@+id/iv_docente_sil2_c2_f1_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -182,7 +182,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c2f1"
+                                android:id="@+id/txt_docente_sil2_nom_c2f1_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -192,13 +192,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c2_f2"
+                            android:id="@+id/ll_docente_sil2_c2_f2_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c2_f2"
+                                android:id="@+id/iv_docente_sil2_c2_f2_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -207,7 +207,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c2f2"
+                                android:id="@+id/txt_docente_sil2_nom_c2f2_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -217,13 +217,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c2_f3"
+                            android:id="@+id/ll_docente_sil2_c2_f3_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c2_f3"
+                                android:id="@+id/iv_docente_sil2_c2_f3_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -232,7 +232,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c2f3"
+                                android:id="@+id/txt_docente_sil2_nom_c2f3_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -242,13 +242,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_docente_sil2_c2_f4"
+                            android:id="@+id/ll_docente_sil2_c2_f4_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/iv_docente_sil2_c2_f4"
+                                android:id="@+id/iv_docente_sil2_c2_f4_update"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center|top"
@@ -257,7 +257,7 @@
                                 android:elevation="@dimen/elevation_ciecleimageprofile" />
 
                             <TextView
-                                android:id="@+id/txt_docente_sil2_nom_c2f4"
+                                android:id="@+id/txt_docente_sil2_nom_c2f4_update"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -284,7 +284,7 @@
                         android:theme="@style/EditTextBlack">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/edt_docente_sil2_nameEjercicio"
+                            android:id="@+id/edt_docente_sil2_nameEjercicio_update"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Ingrese nombre Ejercicio">
@@ -300,18 +300,18 @@
                         <RadioGroup
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:checkedButton="@id/rb_letraInicial_sil2"
+                            android:checkedButton="@id/rb_letraInicial_sil2_update"
                             android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/rb_letraInicial_sil2"
+                                android:id="@+id/rb_letraInicial_sil2_update"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="50dp"
                                 android:text="Letra Inicial" />
 
                             <RadioButton
-                                android:id="@+id/rb_letraFinal_sil2"
+                                android:id="@+id/rb_letraFinal_sil2_update"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
@@ -326,7 +326,7 @@
 
 
                     <Button
-                        android:id="@+id/btn_docente_sil2_enviar"
+                        android:id="@+id/btn_docente_sil2_enviar_update"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
