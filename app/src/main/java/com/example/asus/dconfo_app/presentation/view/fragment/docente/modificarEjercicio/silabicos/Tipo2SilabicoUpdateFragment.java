@@ -201,6 +201,8 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
     int flag = 0;
 
     int id_ejercicio = 0;
+
+    String nameImagen;
     //***************************
 
     private OnFragmentInteractionListener mListener;
@@ -696,7 +698,7 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
                     String rutaImagen = listaImagenes.get(rv_imagenesBancoDatos.
                             getChildAdapterPosition(v)).getRutaImagen();
 
-                    String nameImagen = listaImagenes.get(rv_imagenesBancoDatos.
+                    nameImagen = listaImagenes.get(rv_imagenesBancoDatos.
                             getChildAdapterPosition(v)).getNameImagen();
 
                     int idImagen = listaImagenes.get(rv_imagenesBancoDatos.
@@ -747,13 +749,184 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
                     //rv_tipo1Fonico.setVisibility(View.GONE);
                     //txt_id_img1.setText(nameImagen);*/
 
-        int fila = 1;
-        int columna = 1;
-        cargarImagen_boolen = false;
-        ll_createExercice.setVisibility(View.VISIBLE);
+        if (flag_iv_c1f1) {
+            cv_c1f1.setBackground(null);
+            cv_c1f1.setImageBitmap(bitmap);
+            //iv_c1f1.setBackground(null);
+            //iv_c1f1.setImageBitmap(response);
+            flag_iv_c1f1 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c1f1.setText(nameImagen);
 
-        // btn_Tipo1_pic_Ejercicio.setBackground(drawable);
-        //imageView_muestra.setBackground(drawable);
+            int fila = 1;
+            int columna = 1;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c1f2) {
+            cv_c1f2.setBackground(null);
+            cv_c1f2.setImageBitmap(bitmap);
+            flag_iv_c1f2 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c1f2.setText(nameImagen);
+
+            int fila = 2;
+            int columna = 1;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+        }
+        if (flag_iv_c1f3) {
+            cv_c1f3.setBackground(null);
+            cv_c1f3.setImageBitmap(bitmap);
+            flag_iv_c1f3 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c1f3.setText(nameImagen);
+
+            int fila = 3;
+            int columna = 1;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c1f4) {
+            cv_c1f4.setBackground(null);
+            cv_c1f4.setImageBitmap(bitmap);
+            flag_iv_c1f4 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c1f4.setText(nameImagen);
+
+            int fila = 4;
+            int columna = 1;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c2f1) {
+            cv_c2f1.setBackground(null);
+            cv_c2f1.setImageBitmap(bitmap);
+            flag_iv_c2f1 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c2f1.setText(nameImagen);
+
+            int fila = 1;
+            int columna = 2;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c2f2) {
+            cv_c2f2.setBackground(null);
+            cv_c2f2.setImageBitmap(bitmap);
+            flag_iv_c2f2 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c2f2.setText(nameImagen);
+
+            int fila = 2;
+            int columna = 2;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c2f3) {
+            cv_c2f3.setBackground(null);
+            cv_c2f3.setImageBitmap(bitmap);
+            flag_iv_c2f3 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+            txt_name_c2f3.setText(nameImagen);
+
+            int fila = 3;
+            int columna = 2;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
+        if (flag_iv_c2f4) {
+            cv_c2f4.setBackground(null);
+            cv_c2f4.setImageBitmap(bitmap);
+            flag_iv_c2f4 = false;
+            rv_imagenesBancoDatos.setVisibility(View.GONE);
+
+            txt_name_c2f4.setText(nameImagen);
+
+            int fila = 4;
+            int columna = 2;
+
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            ll_createExercice.setVisibility(View.VISIBLE);
+            ll_createImage.setVisibility(View.GONE);
+
+        }
     }
     //**********************************************************************************************
 
@@ -949,7 +1122,7 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
         progreso.show();*/
         String ip = Globals.url;
         //String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONRegistroTipo1Fonico.php";//p12.buena
-        String url = "http://" + ip + "/proyecto_dconfo_v1/1wsJSONCrearEjercicio.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/25wsJSON_Update_Fonico1.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -959,7 +1132,8 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
 
                     //edt_letra.setText("");
                     edt_nameEjercicio.setText("");
-                    listarEjerciciosG2Docente();
+                    //listarEjerciciosG2Docente();
+                    ejerciciog2HI_adjuntarImagenes();
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
@@ -980,12 +1154,10 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                //String idEjercicio = "7";
+                String idejercicio = String.valueOf(id_ejercicio);
                 String nameEjercicio = edt_nameEjercicio.getText().toString();
                 System.out.println("edt_nameejercicio" + nameEjercicio);
-                String docente_iddocente = String.valueOf(idDocente);
-                String Tipo_idTipo = "6";
-                String Actividad_idActividad = "3";
+
                 if (estado_RbletraInicial) {
 
                     letra_inicial = "s";
@@ -1005,26 +1177,18 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
                     System.out.println("letra_final 2:" + letra_final);
                 }
 
-                String imagen = "";
-                String cantidad = "";
-                String oracion = "";
-
 
                 // System.out.println("letra inicial" + letra_inicial);
 
                 Map<String, String> parametros = new HashMap<>();
 
-                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("idejercicio", idejercicio);
                 parametros.put("nameEjercicioG2", nameEjercicio);
-                parametros.put("docente_iddocente", docente_iddocente);
-                parametros.put("Tipo_idTipo", Tipo_idTipo);
-                parametros.put("Tipo_Actividad_idActividad", Actividad_idActividad);
+
                 parametros.put("letra_inicial_EjercicioG2", letra_inicial);
                 parametros.put("letra_final_EjercicioG2", letra_final);
 
-                parametros.put("imagen", imagen);
-                parametros.put("cantidadValidadEjercicio", cantidad);
-                parametros.put("oracion", oracion);
+                System.out.println(" parametros" + parametros.toString());
 
                 return parametros;
                 // Map<String, String> parametros = new HashMap<>();
@@ -1132,34 +1296,26 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
 
         System.out.println("ejerciciog2HI_adjuntarImagenes: ");
 
-        for (int i = 0; i < listaidImagenes.size(); i++) {
+        if (flag < listaidImagenes.size()) {
+            System.out.println("flag has_img_adjuntar: " + flag);
+            webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(flag), listafilaImagen.get(flag), listacolumnaImagen.get(flag));
+            //webService_CrearEjercicioG2_Has_Letra(listaLetras.get(flag), listafilaLetra.get(flag), listacolumnaLetra.get(flag));
+        }
+
+     /*   for (int i = 0; i < listaidImagenes.size(); i++) {
 
             System.out.println(" listaidImagenes :" + listaidImagenes.toString());
 
             webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(i), listafilaImagen.get(i), listacolumnaImagen.get(i));
             //webService_CrearEjercicioG2_Has_Letra(listaLetras.get(i), listafilaLetra.get(i), listacolumnaLetra.get(i));
-
-
             System.out.println(" i :" + i);
-
-          /*  if (cont == 4) {
-                Toast.makeText(getContext(), "limpia listas: " + i, Toast.LENGTH_LONG).show();
-                listaidImagenes.clear();
-                listafilaImagen.clear();
-                listacolumnaImagen.clear();
-                listacolumnaLetra.clear();
-                listafilaLetra.clear();
-                listaLetras.clear();
-                System.out.println(" listaidImagenes :" + listacolumnaLetra.toString());
-
-            }*/
             try {
                 Thread.sleep(100);
                 //System.out.println("Dormir for... " + listaidImagenes.get(i));
             } catch (InterruptedException e) {
 
             }
-        }
+        }*/
         edt_nameEjercicio.setText("");
 
         imgFoto.setBackgroundResource(R.drawable.ic_no_foto_80dp);
@@ -1194,28 +1350,31 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
     // ----------------------------------------------------------------------------------------------
 
     private void webService_CrearEjercicioG2_Has_Imagen(final int id_Imagen, final int fila_imagen, final int columna_imagen) {//f8
-       /* progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
-        progreso.show();*/
-        System.out.println(" Entrando a CREAR EG2_HAS_IMG");
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...E_H_I");
+        //progreso.show();
+
+        System.out.println("flag has_img: " + flag);
+
+
         String ip = Globals.url;
-        String url = "http://" + ip + "/proyecto_dconfo_v1/wsJSONCrearEjercicio2HasImagen.php";//p12.buena
+        String url = "http://" + ip + "/proyecto_dconfo_v1/26wsJSON_Update_Ejercicio2HasImagen.php";//p12.buena
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
 //                progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
-
+                    flag++;
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
-                    System.out.println("CREAR EG2_HAS_IMG" + response.toString());
-
+                    progreso.hide();
+                    ejerciciog2HI_adjuntarImagenes();
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
-                    System.out.println("error no cargado con exito crearEHI");
+                    System.out.println("error no cargado con exito crearEHI: " + response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -1225,14 +1384,14 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
                 System.out.println("error" + error.toString());
-                //progreso.hide();
+                progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                String EjercicioG2_idEjercicioG2 = String.valueOf(idEjercicio2);
+                String EjercicioG2_idEjercicioG2 = String.valueOf(id_ejercicio);
                 //String EjercicioG2_idEjercicioG2 = String.valueOf(10);
                 String Imagen_idImagen_Ejercicio = String.valueOf(id_Imagen);
                 String fila_E_h_I = String.valueOf(fila_imagen);
@@ -1243,12 +1402,12 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
                 Map<String, String> parametros = new HashMap<>();
 
                 //parametros.put("idEjercicio", idEjercicio);
-                parametros.put("EjercicioG2_idEjercicioG2", EjercicioG2_idEjercicioG2);
-                parametros.put("Imagen_idImagen_Ejercicio", Imagen_idImagen_Ejercicio);
-                parametros.put("fila_E_h_I", fila_E_h_I);
-                parametros.put("columna_E_H_I", columna_E_H_I);
+                parametros.put("idejercicio", EjercicioG2_idEjercicioG2);
+                parametros.put("idimagen", Imagen_idImagen_Ejercicio);
+                parametros.put("fila", fila_E_h_I);
+                parametros.put("columna", columna_E_H_I);
 
-                System.out.println("Parametros: " + parametros.toString());
+                System.out.println("Parametros EJERCICIO HAS IMG: " + parametros.toString());
 
 
                 return parametros;
