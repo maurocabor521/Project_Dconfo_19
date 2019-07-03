@@ -5,15 +5,22 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +57,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -163,6 +172,22 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
     File fileImagen;
     Bitmap bitmap;
 
+    //----------------------------------------------------------------------------------------------
+    private boolean isGalleryChoise = false;
+    private boolean cargarImagen_boolen = false;
+    private LinearLayout ll_createImage;
+    private LinearLayout ll_createExercice;
+
+    private EditText edt_nameImagen;
+    private EditText edt_letraInicial;
+    private EditText edt_letraFinal;
+    private EditText edt_cantSilabas;
+    private Button btn_crearImg;
+    int idImagen;
+    int flag = 0;
+    String nameImagen;
+    //----------------------------------------------------------------------------------------------
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo2FonicoFragment() {
@@ -201,6 +226,23 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_tipo2_fonico, container, false);
+
+        //------------------------------------------------------------------------------------------
+        ll_createImage = (LinearLayout) view.findViewById(R.id.ll_fonico2_form_create_img);
+        ll_createExercice = (LinearLayout) view.findViewById(R.id.ll_createExercice_fon2);
+
+        edt_nameImagen = (EditText) view.findViewById(R.id.edt_fonico2_name_image);
+        edt_letraInicial = (EditText) view.findViewById(R.id.edt_fonico2_let_ini);
+        edt_letraFinal = (EditText) view.findViewById(R.id.edt_fonico2_let_final);
+        edt_cantSilabas = (EditText) view.findViewById(R.id.edt_fonico2_cant_silabas);
+        btn_crearImg = (Button) view.findViewById(R.id.btn_fonico2_create_img);
+        btn_crearImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearImagen();
+            }
+        });
+        //------------------------------------------------------------------------------------------
 
         nameDocente = getArguments().getString("namedocente");
         idDocente = getArguments().getInt("iddocente");
@@ -658,7 +700,7 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                     String rutaImagen = listaImagenes.get(rv_imagenesBancoDatos.
                             getChildAdapterPosition(v)).getRutaImagen();
 
-                    String nameImagen = listaImagenes.get(rv_imagenesBancoDatos.
+                    nameImagen = listaImagenes.get(rv_imagenesBancoDatos.
                             getChildAdapterPosition(v)).getNameImagen();
 
                     int idImagen = listaImagenes.get(rv_imagenesBancoDatos.
@@ -687,13 +729,109 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
 
             //progreso.hide();
         }
+        if (cargarImagen_boolen) {
+
+            cargarImagen();
+        }
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    private void cargarImagen() {
+        Drawable drawable = imgFoto.getDrawable();
+        idImagen = listaImagenes.get(listaImagenes.size() - 1).getIdImagen();
+       /* btn_img_4.setBackground(null);
+        btn_img_4.setImageBitmap(response);
+        btn_4Activo = false;
+        rv_tipo1Fonico.setVisibility(View.GONE);
+        txt_id_img4.setText(nameImagen);*/
+        System.out.println("Lista imagenes size CI: " + listaImagenes.size());
+        System.out.println("Lista imagenes: " + listaImagenes.get(listaImagenes.size() - 1).getIdImagen());
+        if (flag_iv_c1f1) {
+            cv_c1f1.setBackground(null);
+            cv_c1f1.setImageBitmap(bitmap);
+            flag_iv_c1f1 = false;
+
+            int fila = 1;
+            int columna = 1;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+            //*************
+            txt_name_c1f1.setText(nameImagen);
+
+        } else if (flag_iv_c1f2) {
+            cv_c1f2.setBackground(null);
+            cv_c1f2.setImageBitmap(bitmap);
+            flag_iv_c1f2 = false;
+
+            int fila = 1;
+            int columna = 2;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+            txt_name_c1f2.setText(nameImagen);
+
+        } else if (flag_iv_c1f3) {
+            cv_c1f3.setBackground(null);
+            cv_c1f3.setImageBitmap(bitmap);
+            flag_iv_c1f3 = false;
+            int fila = 1;
+            int columna = 3;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+            txt_name_c1f3.setText(nameImagen);
+
+        } else if (flag_iv_c1f4) {
+            cv_c1f4.setBackground(null);
+            cv_c1f4.setImageBitmap(bitmap);
+            flag_iv_c1f4 = false;
+
+            int fila = 1;
+            int columna = 4;
+            ejercicioG2HasImagen.setIdImagen(idImagen);
+            ejercicioG2HasImagen.setFilaImagen(fila);
+            ejercicioG2HasImagen.setColumnaImagen(columna);
+            listaidImagenes.add(idImagen);
+            listafilaImagen.add(fila);
+            listacolumnaImagen.add(columna);
+
+            cargarImagen_boolen = false;
+            ll_createExercice.setVisibility(View.VISIBLE);
+            txt_name_c1f4.setText(nameImagen);
+        }
+        // btn_Tipo1_pic_Ejercicio.setBackground(drawable);
+        //imageView_muestra.setBackground(drawable);
+    }
+
+    //**********************************************************************************************
+
 
 
     //**********************************************************************************************
 
     private void mostrarDialogOpciones() {//part 9 //f6
-        final CharSequence[] opciones = {"Elegir de Banco de Imágenes", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {"Tomar Foto","Elegir de Banco de Imágenes", "Elegir de Galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
@@ -714,11 +852,202 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                         dialogInterface.dismiss();
                     }
                 }
+                if (opciones[i].equals("Tomar Foto")) {
+                    abriCamara();//part 10 tomar foto
+                    Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
+                }
             }
         });
         builder.show();
 
     }//*********************************************************************************************
+
+    private void abriCamara() {//part 10
+        Toast.makeText(getContext(), "abricamara", Toast.LENGTH_LONG).show();
+        File miFile = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
+        boolean isCreada = miFile.exists();
+
+        if (isCreada == false) {
+            isCreada = miFile.mkdirs();
+        }
+
+        if (isCreada == true) {
+            Toast.makeText(getContext(), "abricamara, istrue", Toast.LENGTH_LONG).show();
+            Long consecutivo = System.currentTimeMillis() / 1000;
+            String nombre = consecutivo.toString() + ".jpg";
+
+            path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
+                    + File.separator + nombre;//indicamos la ruta de almacenamiento
+
+            fileImagen = new File(path);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));//necesario para activar la cámara,como minimo
+
+            ////
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Toast.makeText(getContext(), "abricamara, N", Toast.LENGTH_LONG).show();
+                String authorities = getContext().getPackageName() + ".provider";
+                Uri imageUri = FileProvider.getUriForFile(getContext(), authorities, fileImagen);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            } else {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
+                Toast.makeText(getContext(), "abricamara, Not N", Toast.LENGTH_LONG).show();
+            }
+
+            startActivityForResult(intent, COD_FOTO);
+
+            ////
+
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {//p9 de startActivityForResult
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case COD_SELECCIONA:
+                Uri miPath = data.getData();
+                imgFoto.setImageURI(miPath);
+                try {//p12
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
+                    imgFoto.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //  cargarImagen();
+                ll_createImage.setVisibility(View.VISIBLE);
+                ll_createExercice.setVisibility(View.GONE);
+                break;
+
+            case COD_FOTO://p10
+                MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            @Override
+                            public void onScanCompleted(String path, Uri uri) {
+                                Log.i("Path", "" + path);
+                            }
+                        });
+
+                bitmap = BitmapFactory.decodeFile(path);
+                imgFoto.setImageBitmap(bitmap);
+                ll_createImage.setVisibility(View.VISIBLE);
+                ll_createExercice.setVisibility(View.GONE);
+                //cargarImagen();
+                break;
+        }
+        bitmap = redimensionarImagen(bitmap, 600, 800);//part 14 redimencionar imágen,guarde en carpeta y BD
+    }
+
+    private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {//part 14
+
+        int ancho = bitmap.getWidth();
+        int alto = bitmap.getHeight();
+
+        if (ancho > anchoNuevo || alto > altoNuevo) {
+            float escalaAncho = anchoNuevo / ancho;
+            float escalaAlto = altoNuevo / alto;
+
+            Matrix matrix = new Matrix();//manipular datos internos de la imagen
+            matrix.postScale(escalaAncho, escalaAlto);
+
+            return Bitmap.createBitmap(bitmap, 0, 0, ancho, alto, matrix, false);
+
+        } else {
+            return bitmap;
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private void crearImagen() {
+
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+        String ip = Globals.url;
+
+        String url = "http://" + ip + "/proyecto_dconfo_v1/24wsJSONCrearImagen.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+//                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    edt_nameImagen.setText("");
+                    edt_letraInicial.setText("");
+                    edt_letraFinal.setText("");
+                    edt_cantSilabas.setText("");
+                    progreso.hide();
+                    ll_createImage.setVisibility(View.GONE);
+
+                    cargarImagen_boolen = true;
+
+                    consultarListaImagenes();
+
+                    Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("error: " + response);
+                    progreso.hide();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                //progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                //String idEjercicio = "7";
+                String nameimagen = edt_nameImagen.getText().toString();
+                String letra_inicial = edt_letraInicial.getText().toString();
+                String letra_final = edt_letraFinal.getText().toString();
+                String cant_silabas = edt_cantSilabas.getText().toString();
+                String imagen = convertirImgString(bitmap);
+
+                System.out.println("letra inicial" + letra_inicial);
+
+                Map<String, String> parametros = new HashMap<>();
+
+                //parametros.put("idEjercicio", idEjercicio);
+                parametros.put("name_Imagen", nameimagen);
+                parametros.put("letra_inicial", letra_inicial);
+                parametros.put("letra_final", letra_final);
+                parametros.put("cant_silabas", cant_silabas);
+                parametros.put("imagen", imagen);
+
+                //System.out.println("parametros: " + parametros);
+                return parametros;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private String convertirImgString(Bitmap bitmap) {
+        //recibe un bitmap
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
+        byte[] imagenByte = array.toByteArray();
+        //codifica a base64
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return imagenString;
+    }
+
+    // ----------------------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------------------
 
@@ -803,7 +1132,7 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
 
         System.out.println("ejerciciog2HI_adjuntarImagenes: ");
 
-        for (int i = 0; i < listaidImagenes.size(); i++) {
+       /* for (int i = 0; i < listaidImagenes.size(); i++) {
 
             System.out.println(" listaidImagenes :" + listaidImagenes.toString());
 
@@ -813,23 +1142,21 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
 
             System.out.println(" i :" + i);
 
-          /*  if (cont == 4) {
-                Toast.makeText(getContext(), "limpia listas: " + i, Toast.LENGTH_LONG).show();
-                listaidImagenes.clear();
-                listafilaImagen.clear();
-                listacolumnaImagen.clear();
-                listacolumnaLetra.clear();
-                listafilaLetra.clear();
-                listaLetras.clear();
-                System.out.println(" listaidImagenes :" + listacolumnaLetra.toString());
 
-            }*/
             try {
                 Thread.sleep(100);
                 //System.out.println("Dormir for... " + listaidImagenes.get(i));
             } catch (InterruptedException e) {
 
             }
+        }*/
+
+        System.out.println("lista imagenes: "+listaidImagenes.toString());
+        System.out.println("lista letras: "+listaLetras.toString());
+        if (flag < listaidImagenes.size()) {
+            System.out.println("flag has_img_adjuntar: " + flag);
+            webService_CrearEjercicioG2_Has_Imagen(listaidImagenes.get(flag), listafilaImagen.get(flag), listacolumnaImagen.get(flag));
+            webService_CrearEjercicioG2_Has_Letra(listaLetras.get(flag), listafilaLetra.get(flag), listacolumnaLetra.get(flag));
         }
         edt_nameEjercicio.setText("");
         edt_l1.setText("");
@@ -873,10 +1200,11 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
             public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
 //                progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
-
+                    flag++;
+                    ejerciciog2HI_adjuntarImagenes();
                     //edt_letra.setText("");
                     // edt_nameEjercicio.setText("");
-                   // System.out.println("CREAR EG2_HAS_IMG" + response.toString());
+                    // System.out.println("CREAR EG2_HAS_IMG" + response.toString());
 
 
                     Toast.makeText(getContext(), "Se ha cargado con éxito EHI", Toast.LENGTH_LONG).show();
@@ -954,7 +1282,7 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                     // edt_nameEjercicio.setText("");
                     cont++;
                     System.out.println("CREAR EG2_HAS_LETRA ,cont: " + cont);
-                    if (cont == 4) {
+                    if (flag == 4) {
                         // Toast.makeText(getContext(), "limpia listas: " + i, Toast.LENGTH_LONG).show();
                         listaidImagenes.clear();
                         listafilaImagen.clear();
@@ -979,7 +1307,7 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                 Toast.makeText(getContext(), "No se ha podido conectar EHL", Toast.LENGTH_LONG).show();
                 String ERROR = "error";
                 Log.d(ERROR, error.toString());
-                System.out.println("error" + error.toString());
+                System.out.println("error: " + error.toString());
                 //progreso.hide();
             }
         }) {//enviar para metros a webservice, mediante post
@@ -1004,7 +1332,7 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
                 parametros.put("fila_Eg2H_Lg2", fila_Eg2H_Lg2);
                 parametros.put("col_Eg2H_Lge", col_Eg2H_Lge);
 
-                System.out.println("Parametros: " + parametros.toString());
+                System.out.println("Parametros letra: " + parametros.toString());
 
 
                 return parametros;
