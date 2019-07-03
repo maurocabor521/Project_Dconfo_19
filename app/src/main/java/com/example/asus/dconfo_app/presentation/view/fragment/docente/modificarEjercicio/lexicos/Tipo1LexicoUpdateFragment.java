@@ -189,7 +189,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tipo_lexico, container, false);
+        View view = inflater.inflate(R.layout.fragment_tipo_lexico_update, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.home_tipo1);
 
         //******************************************************************************************
@@ -205,7 +205,6 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
         btn_crearImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 crearImagen();
             }
         });
@@ -233,35 +232,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
 
         imageView_muestra = (ImageView) view.findViewById(R.id.iv_imagen_muestra);
 
-        mSeekBarPitch = (SeekBar) view.findViewById(R.id.seek_bar_pitch);
-        mSeekBarSpeed = (SeekBar) view.findViewById(R.id.seek_bar_speed);
 
-        mButtonSpeak = (Button) view.findViewById(R.id.btn_tipo1_textToS);
-        mButtonSpeak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speak();
-            }
-        });
-
-        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    //int result = mTTS.setLanguage(Locale.getDefault());
-                    int result = mTTS.setLanguage(new Locale("spa", "ESP"));
-
-                    if (result == TextToSpeech.LANG_MISSING_DATA
-                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Log.e("TTS", "Language not supported");
-                    } else {
-                        // mButtonSpeak.setEnabled(true);
-                    }
-                } else {
-                    Log.e("TTS", "Initialization failed");
-                }
-            }
-        });
 
         imgFoto = new ImageView(getContext());
 
@@ -273,7 +244,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
 
         //********************************CIRCLEVIEW NO BOTÓN
 
-        btn_Tipo1_pic_Ejercicio = (CircleImageView) view.findViewById(R.id.civ_tipo1_pic);
+        btn_Tipo1_pic_Ejercicio = (CircleImageView) view.findViewById(R.id.civ_tipo1_pic_update);
         btn_Tipo1_pic_Ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -335,6 +306,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
                         dialogInterface.dismiss();
                     }
                     if (opciones[i].equals("Tomar Foto")) {
+                        isGalleryChoise = true;
                         abriCamara();//part 10 tomar foto
                         Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
                     }
@@ -442,7 +414,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
         btn_Tipo1_pic_Ejercicio.setBackground(null);
         btn_Tipo1_pic_Ejercicio.setImageBitmap(bitmap);
         rv_tipo1Lexico.setVisibility(View.GONE);
-        ll_body.setVisibility(View.VISIBLE);
+
                    /* btn_1Activo = false;
                     rv_tipo1Fonico.setVisibility(View.GONE);
                     txt_id_img1.setText(nameImagen);*/
@@ -576,8 +548,8 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
                     // edt_CodigoEjercicio.setText("");
                     edt_nameEjercicio.setText("");
                     // edt_OrtacionEjercicio.setText("");
-                    ll_tipo_ejercicio.setVisibility(View.VISIBLE);
-                    ll_tipo_ejercicio_form.setVisibility(View.GONE);
+                    //ll_tipo_ejercicio.setVisibility(View.VISIBLE);
+                    //ll_tipo_ejercicio_form.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
