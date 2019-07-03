@@ -20,8 +20,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,135 +59,94 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="4" />
-          <entry key="java" value="269" />
+          <entry key="java" value="273" />
           <entry key="jpg" value="1" />
           <entry key="png" value="1" />
-          <entry key="xml" value="175" />
+          <entry key="xml" value="176" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="4" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="269" />
-          <entry key="XML" value="175" />
+          <entry key="JAVA" value="273" />
+          <entry key="XML" value="176" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="7" />
           <entry key="gradle" value="1" />
-          <entry key="java" value="8077" />
+          <entry key="java" value="8213" />
           <entry key="txt" value="12" />
-          <entry key="xml" value="3339" />
+          <entry key="xml" value="3370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="8077" />
+          <entry key="JAVA" value="8213" />
           <entry key="PLAIN_TEXT" value="19" />
-          <entry key="XML" value="3339" />
+          <entry key="XML" value="3370" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="799" column="33" selection-start-line="799" selection-start-column="33" selection-end-line="799" selection-end-column="33" />
+            <state relative-caret-position="101">
+              <caret line="181" column="40" selection-start-line="181" selection-start-column="40" selection-end-line="181" selection-end-column="40" />
               <folding>
-                <element signature="e#7500#7647#0" expanded="true" />
-                <element signature="e#7646#7647#0" expanded="true" />
-                <element signature="e#10709#10866#0" expanded="true" />
-                <element signature="e#10865#10866#0" expanded="true" />
-                <element signature="e#11062#11215#0" expanded="true" />
-                <element signature="e#11214#11215#0" expanded="true" />
-                <element signature="e#12045#13527#0" expanded="true" />
-                <element signature="e#13526#13527#0" expanded="true" />
-                <element signature="e#16255#16541#0" expanded="true" />
-                <element signature="e#16540#16541#0" expanded="true" />
-                <element signature="e#32017#33001#0" expanded="true" />
-                <element signature="e#33000#33001#0" expanded="true" />
-                <element signature="e#34209#35330#0" expanded="true" />
-                <element signature="e#35329#35330#0" expanded="true" />
-                <element signature="e#35372#35611#0" expanded="true" />
-                <element signature="e#35610#35611#0" expanded="true" />
+                <element signature="e#8778#8816#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/silabico/Tipo2SilabicoFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5013">
-              <caret line="674" column="17" selection-start-line="674" selection-start-column="17" selection-end-line="674" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/silabicos/Tipo1SilabicoUpdateFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="634" selection-start-line="634" selection-end-line="709" selection-end-column="100" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo2LexicoUpdateFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="123" column="63" selection-start-line="123" selection-start-column="63" selection-end-line="123" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lex_tipo2_uddate.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/fonicos/Tipo1FonicoUpdateFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="904" column="46" selection-start-line="904" selection-start-column="46" selection-end-line="904" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="757">
-              <caret line="285" column="26" selection-start-line="285" selection-start-column="26" selection-end-line="285" selection-end-column="26" />
+            <state relative-caret-position="213">
+              <caret line="817" column="21" selection-start-line="817" selection-start-column="21" selection-end-line="817" selection-end-column="21" />
               <folding>
-                <element signature="e#7902#8055#0" expanded="true" />
-                <element signature="e#8054#8055#0" expanded="true" />
-                <element signature="e#8823#9886#0" expanded="true" />
-                <element signature="e#9885#9886#0" expanded="true" />
-                <element signature="e#10252#11782#0" expanded="true" />
-                <element signature="e#11781#11782#0" expanded="true" />
-                <element signature="e#14388#14674#0" expanded="true" />
-                <element signature="e#14673#14674#0" expanded="true" />
+                <element signature="e#10471#10624#0" expanded="true" />
+                <element signature="e#10623#10624#0" expanded="true" />
+                <element signature="e#19785#20771#0" expanded="true" />
+                <element signature="e#20770#20771#0" expanded="true" />
+                <element signature="e#21979#23115#0" expanded="true" />
+                <element signature="e#23114#23115#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo1.xml">
-          <provider editor-type-id="android-designer2" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/fonico/Tipo1FonicoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="83" column="65" selection-start-line="83" selection-start-column="65" selection-end-line="83" selection-end-column="65" />
+            <state relative-caret-position="-852">
+              <caret line="391" column="17" selection-start-line="391" selection-start-column="17" selection-end-line="391" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/silabico/Tipo1SilabicoFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="186" selection-start-line="186" selection-end-line="287" selection-end-column="101" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2545">
+              <caret line="672" column="17" selection-start-line="672" selection-start-column="17" selection-end-line="672" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -196,21 +155,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico_update.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-239">
+            <state relative-caret-position="169">
               <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-              <folding>
-                <element signature="e#8409#8447#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -248,6 +194,7 @@
       <find>Abri</find>
       <find>red</find>
       <find>cargarImagen()</find>
+      <find>civ_tipo1_pic</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -303,10 +250,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/ejercicios/MisEjerciciosActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo2_silabico_update.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/silabicos/Tipo2SilabicoUpdateFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico_update.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java" />
       </list>
     </option>
   </component>
@@ -427,6 +374,16 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="fragment" type="462c0819:PsiDirectoryNode" />
               <item name="docente" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dconfo_app" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment" type="462c0819:PsiDirectoryNode" />
+              <item name="docente" type="462c0819:PsiDirectoryNode" />
+              <item name="fonico" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
@@ -655,13 +612,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560433111516</updated>
-    </task>
-    <task id="LOCAL-00005" summary="nuevo commit">
-      <created>1560617220982</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1560617220982</updated>
     </task>
     <task id="LOCAL-00006" summary="nuevo commit">
       <created>1560634757157</created>
@@ -999,7 +949,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562165012928</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="nuevo commit">
+      <created>1562166016693</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1562166016693</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1024,7 +981,7 @@
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.32879046" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="1" visible="true" weight="0.5229983" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="1" visible="true" weight="0.34582624" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32879046" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
@@ -1037,7 +994,7 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.23373677" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.2624811" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
     <layout-to-restore>
@@ -1293,13 +1250,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/fonico/Tipo1FonicoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5610">
-          <caret line="391" column="17" selection-start-line="391" selection-start-column="17" selection-end-line="391" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/fonico/Tipo2FonicoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5525">
@@ -1352,13 +1302,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/silabico/Tipo1SilabicoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-936">
-          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/silabico/Tipo2SilabicoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5013">
@@ -1370,14 +1313,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="634" selection-start-line="634" selection-end-line="709" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1402,60 +1337,62 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo1.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="83" column="65" selection-start-line="83" selection-start-column="65" selection-end-line="83" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="285" column="26" selection-start-line="285" selection-start-column="26" selection-end-line="285" selection-end-column="26" />
-          <folding>
-            <element signature="e#7902#8055#0" expanded="true" />
-            <element signature="e#8054#8055#0" expanded="true" />
-            <element signature="e#8823#9886#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#10252#11782#0" expanded="true" />
-            <element signature="e#11781#11782#0" expanded="true" />
-            <element signature="e#14388#14674#0" expanded="true" />
-            <element signature="e#14673#14674#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="169">
+          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico_update.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-239">
+        <state relative-caret-position="169">
           <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-          <folding>
-            <element signature="e#8409#8447#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/lexicos/Tipo1LexicoUpdateFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="799" column="33" selection-start-line="799" selection-start-column="33" selection-end-line="799" selection-end-column="33" />
+        <state relative-caret-position="2545">
+          <caret line="672" column="17" selection-start-line="672" selection-start-column="17" selection-end-line="672" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/silabico/Tipo1SilabicoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="186" selection-start-line="186" selection-end-line="287" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/fonico/Tipo1FonicoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-852">
+          <caret line="391" column="17" selection-start-line="391" selection-start-column="17" selection-end-line="391" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo_lexico.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="181" column="40" selection-start-line="181" selection-start-column="40" selection-end-line="181" selection-end-column="40" />
           <folding>
-            <element signature="e#7500#7647#0" expanded="true" />
-            <element signature="e#7646#7647#0" expanded="true" />
-            <element signature="e#10709#10866#0" expanded="true" />
-            <element signature="e#10865#10866#0" expanded="true" />
-            <element signature="e#11062#11215#0" expanded="true" />
-            <element signature="e#11214#11215#0" expanded="true" />
-            <element signature="e#12045#13527#0" expanded="true" />
-            <element signature="e#13526#13527#0" expanded="true" />
-            <element signature="e#16255#16541#0" expanded="true" />
-            <element signature="e#16540#16541#0" expanded="true" />
-            <element signature="e#32017#33001#0" expanded="true" />
-            <element signature="e#33000#33001#0" expanded="true" />
-            <element signature="e#34209#35330#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35372#35611#0" expanded="true" />
-            <element signature="e#35610#35611#0" expanded="true" />
+            <element signature="e#8778#8816#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="817" column="21" selection-start-line="817" selection-start-column="21" selection-end-line="817" selection-end-column="21" />
+          <folding>
+            <element signature="e#10471#10624#0" expanded="true" />
+            <element signature="e#10623#10624#0" expanded="true" />
+            <element signature="e#19785#20771#0" expanded="true" />
+            <element signature="e#20770#20771#0" expanded="true" />
+            <element signature="e#21979#23115#0" expanded="true" />
+            <element signature="e#23114#23115#0" expanded="true" />
           </folding>
         </state>
       </provider>
