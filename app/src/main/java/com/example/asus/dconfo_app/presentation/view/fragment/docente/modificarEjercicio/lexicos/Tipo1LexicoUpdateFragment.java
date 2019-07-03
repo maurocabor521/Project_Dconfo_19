@@ -213,7 +213,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
 
         listaImagenes = new ArrayList<>();
 
-        ll_rv_ejercicios = (LinearLayout) view.findViewById(R.id.ll_docente_mod_lex_t1);
+        ll_rv_ejercicios = (LinearLayout) view.findViewById(R.id.ll_docente_mod_lex_t1_update);
         ll_body = (LinearLayout) view.findViewById(R.id.ll_docente_mod_body_lext1);
 
         rv_tipo1Lexico = (RecyclerView) view.findViewById(R.id.rv_docente_mod_lex_t1_update);
@@ -291,7 +291,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
                 if (opciones[i].equals("Elegir de Banco de Datos")) {
                     //abriCamara();//part 10 tomar foto
                     ll_rv_ejercicios.setVisibility(View.VISIBLE);
-                    ll_body.setVisibility(View.GONE);
+                    ll_createExercice.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
@@ -797,7 +797,7 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
                 btn_Tipo1_pic_Ejercicio.setBackground(null);
                 btn_Tipo1_pic_Ejercicio.setImageBitmap(response);
                 rv_tipo1Lexico.setVisibility(View.GONE);
-                ll_body.setVisibility(View.VISIBLE);
+                ll_createExercice.setVisibility(View.VISIBLE);
                    /* btn_1Activo = false;
                     rv_tipo1Fonico.setVisibility(View.GONE);
                     txt_id_img1.setText(nameImagen);*/

@@ -10,10 +10,13 @@ import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -228,7 +231,7 @@ public class Tipo1Fragment extends Fragment {
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    private void mostrarDialogOpciones() {//part 9
+    private void mostrarDialogOpciones_() {//part 9
         final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
@@ -253,6 +256,83 @@ public class Tipo1Fragment extends Fragment {
             }
         });
         builder.show();
+
+    }
+    private void mostrarDialogOpciones() {//part 9
+        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Banco de Datos", "Elegir de Galeria", "Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Elige una Opción");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Elegir de Banco de Datos")) {
+                    //abriCamara();//part 10 tomar foto
+                   // ll_rv_ejercicios.setVisibility(View.VISIBLE);
+                    //ll_body.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
+                } else {
+                    if (opciones[i].equals("Elegir de Galeria")) {
+                        /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);*/
+                        //directamente de galeria
+                        //isGalleryChoise = true;
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/");
+                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+                    } else {
+                        dialogInterface.dismiss();
+                    }
+                    if (opciones[i].equals("Tomar Foto")) {
+                        //isGalleryChoise = true;
+                        abriCamara();//part 10 tomar foto
+                        Toast.makeText(getContext(), "Cargar Cámara", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+        builder.show();
+
+    }
+
+    private void abriCamara() {//part 10
+        Toast.makeText(getContext(), "abricamara", Toast.LENGTH_LONG).show();
+        File miFile = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
+        boolean isCreada = miFile.exists();
+
+        if (isCreada == false) {
+            isCreada = miFile.mkdirs();
+        }
+
+        if (isCreada == true) {
+            Toast.makeText(getContext(), "abricamara, istrue", Toast.LENGTH_LONG).show();
+            Long consecutivo = System.currentTimeMillis() / 1000;
+            String nombre = consecutivo.toString() + ".jpg";
+
+            path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
+                    + File.separator + nombre;//indicamos la ruta de almacenamiento
+
+            fileImagen = new File(path);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));//necesario para activar la cámara,como minimo
+
+            ////
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Toast.makeText(getContext(), "abricamara, N", Toast.LENGTH_LONG).show();
+                String authorities = getContext().getPackageName() + ".provider";
+                Uri imageUri = FileProvider.getUriForFile(getContext(), authorities, fileImagen);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            } else {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
+                Toast.makeText(getContext(), "abricamara, Not N", Toast.LENGTH_LONG).show();
+            }
+
+            startActivityForResult(intent, COD_FOTO);
+
+            ////
+
+        }
 
     }
 
