@@ -13,6 +13,14 @@
         android:gravity="center_horizontal"
         android:text="Silábico tipo 2 update" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_docente_sil2_imgs_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </android.support.v7.widget.RecyclerView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,22 +33,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/ll_createExercice_silabico2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/ll_createExercice_silabico2">
+                    android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_docente_sil2_imgs_update"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
-                    </android.support.v7.widget.RecyclerView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
