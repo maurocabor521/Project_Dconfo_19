@@ -101,8 +101,8 @@ public class HomeTiposFragment extends Fragment
     String namedocente;
     private RecyclerView rv_tipoLexico;
     ArrayList<Imagen> listaImagenes;
-Tipo1EstudianteFragment tipo1EstudianteFragment=new Tipo1EstudianteFragment();
-Tipo2EstudianteFragment tipo2EstudianteFragment=new Tipo2EstudianteFragment();
+    Tipo1EstudianteFragment tipo1EstudianteFragment=new Tipo1EstudianteFragment();
+    Tipo2EstudianteFragment tipo2EstudianteFragment=new Tipo2EstudianteFragment();
 
     private OnFragmentInteractionListener mListener;
 

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.silabico.Tipo1silabicoEstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.silabico.Tipo2silabicoEstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.HomeFonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.Tipo1FonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.Tipo2FonicoFragment;
@@ -20,11 +22,14 @@ public class NewEjercicioSilabicoDocenteActivity extends AppCompatActivity
         implements
         Tipo1SilabicoFragment.OnFragmentInteractionListener,
         Tipo2SilabicoFragment.OnFragmentInteractionListener,
-        HomeSilabicoFragment.OnFragmentInteractionListener {
+        HomeSilabicoFragment.OnFragmentInteractionListener,
+        Tipo1silabicoEstudianteFragment.OnFragmentInteractionListener ,
+        Tipo2silabicoEstudianteFragment.OnFragmentInteractionListener {
 
     private BottomBar bottomBar;
     private String nameDocente = "";
     private int idDocente = 0;
+    private int idgrupo ;
 
     private Tipo1SilabicoFragment tipo1SilabicoFragment;
     private Tipo2SilabicoFragment tipo2SilabicoFragment;
@@ -39,6 +44,7 @@ public class NewEjercicioSilabicoDocenteActivity extends AppCompatActivity
 
         nameDocente = extra.getString("namedocente");
         idDocente = extra.getInt("iddocente");
+        idgrupo = extra.getInt("idgrupo");
 
         showToolbar("Nuevo Ejercicio Silábico, Docente: " + nameDocente, true);
         bottomBar = findViewById(R.id.bottombar_CED_activity);

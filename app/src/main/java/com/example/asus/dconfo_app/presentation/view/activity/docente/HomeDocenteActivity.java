@@ -298,6 +298,7 @@ public class HomeDocenteActivity extends AppCompatActivity
             Bundle parametros1 = new Bundle();
             parametros1.putInt("iddocente", iddocente);
             parametros1.putString("namedocente", namedocente);
+            parametros1.putInt("idgrupo", idgrupo);
 
             intentCreateEjercicioFonico = new Intent(HomeDocenteActivity.this, NewEjercicioSilabicoDocenteActivity.class);
             intentCreateEjercicioFonico.putExtras(parametros1);
