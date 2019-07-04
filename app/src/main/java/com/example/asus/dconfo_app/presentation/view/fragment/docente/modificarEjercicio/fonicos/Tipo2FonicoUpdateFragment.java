@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
@@ -258,8 +259,11 @@ public class Tipo2FonicoUpdateFragment extends Fragment implements Response.Erro
         ll_createExercice = (LinearLayout) view.findViewById(R.id.ll_fonico2_update_exe_imgs);
 
         rv_imagenesBancoDatos = (RecyclerView) view.findViewById(R.id.rv_docente_fon2_imgs_update);
-        rv_imagenesBancoDatos.setLayoutManager(new LinearLayoutManager(getContext()));
+       // rv_imagenesBancoDatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_imagenesBancoDatos.setHasFixedSize(true);
+        rv_imagenesBancoDatos.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_imagenesBancoDatos.setHasFixedSize(true);
+
         //rv_imagenesBancoDatos.setVisibility(View.INVISIBLE);
 
         rb_letraInicial = (RadioButton) view.findViewById(R.id.rb_letraInicial_update);

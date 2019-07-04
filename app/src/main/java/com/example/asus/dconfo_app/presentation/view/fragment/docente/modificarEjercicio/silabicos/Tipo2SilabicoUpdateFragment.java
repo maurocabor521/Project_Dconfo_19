@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -282,8 +283,11 @@ public class Tipo2SilabicoUpdateFragment extends Fragment implements View.OnClic
         listacolumnaLetra = new ArrayList<>();
 
         rv_imagenesBancoDatos = (RecyclerView) view.findViewById(R.id.rv_docente_sil2_imgs_update);
-        rv_imagenesBancoDatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_imagenesBancoDatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_imagenesBancoDatos.setHasFixedSize(true);
+        rv_imagenesBancoDatos.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_imagenesBancoDatos.setHasFixedSize(true);
+
         //rv_imagenesBancoDatos.setVisibility(View.INVISIBLE);
 
         rb_letraInicial = (RadioButton) view.findViewById(R.id.rb_letraInicial_sil2_update);

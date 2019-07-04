@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -217,7 +218,9 @@ public class Tipo1LexicoUpdateFragment extends Fragment implements Response.List
         ll_body = (LinearLayout) view.findViewById(R.id.ll_docente_mod_body_lext1);
 
         rv_tipo1Lexico = (RecyclerView) view.findViewById(R.id.rv_docente_mod_lex_t1_update);
-        rv_tipo1Lexico.setLayoutManager(new LinearLayoutManager(getContext()));
+       // rv_tipo1Lexico.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_tipo1Lexico.setHasFixedSize(true);
+        rv_tipo1Lexico.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_tipo1Lexico.setHasFixedSize(true);
 
         nameDocente = getArguments().getString("namedocente");

@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -208,7 +209,9 @@ public class Tipo1SilabicoUpdateFragment extends Fragment implements View.OnClic
         edt_nombre_ejercicio = (EditText) view.findViewById(R.id.edt_silabica_doc_t1_nameejercicio_update);
 
         rv_silabico_doc_img = (RecyclerView) view.findViewById(R.id.rv_silabico_doc_img_update);
-        rv_silabico_doc_img.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_silabico_doc_img.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_silabico_doc_img.setHasFixedSize(true);
+        rv_silabico_doc_img.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_silabico_doc_img.setHasFixedSize(true);
         rv_silabico_doc_img.setVisibility(View.GONE);
 

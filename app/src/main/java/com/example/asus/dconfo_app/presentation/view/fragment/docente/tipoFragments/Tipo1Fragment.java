@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -206,7 +207,9 @@ public class Tipo1Fragment extends Fragment implements Response.Listener<JSONObj
         listaImagenes = new ArrayList<>();
 
         rv_tipo1Lexico = (RecyclerView) view.findViewById(R.id.rv_docente_mod_lex_t1);
-        rv_tipo1Lexico.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_tipo1Lexico.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_tipo1Lexico.setHasFixedSize(true);
+        rv_tipo1Lexico.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_tipo1Lexico.setHasFixedSize(true);
 
         ll_rv_ejercicios = (LinearLayout) view.findViewById(R.id.ll_docente_mod_lex_t1);

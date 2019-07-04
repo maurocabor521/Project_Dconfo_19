@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
@@ -332,7 +333,9 @@ public class Tipo1FonicoUpdateFragment extends Fragment implements View.OnClickL
         consultarListaImagenes();
 
         rv_tipo1Fonico = (RecyclerView) view.findViewById(R.id.rv_tipo1Fonico_update);
-        rv_tipo1Fonico.setLayoutManager(new LinearLayoutManager(getContext()));
+        //rv_tipo1Fonico.setLayoutManager(new LinearLayoutManager(getContext()));
+       //rv_tipo1Fonico.setHasFixedSize(true);
+        rv_tipo1Fonico.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rv_tipo1Fonico.setHasFixedSize(true);
         rv_tipo1Fonico.setVisibility(View.GONE);
 
