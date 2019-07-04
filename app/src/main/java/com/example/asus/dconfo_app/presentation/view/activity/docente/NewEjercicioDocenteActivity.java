@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.asus.dconfo_app.R;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo1EstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.Tipo2EstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.HomeEjerciciosDocenteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.NewEjercicioDocenteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.HomeTiposFragment;
@@ -18,13 +20,16 @@ import com.roughike.bottombar.OnTabSelectListener;
 public class NewEjercicioDocenteActivity extends AppCompatActivity implements
         HomeTiposFragment.OnFragmentInteractionListener,
         Tipo1Fragment.OnFragmentInteractionListener,
-        Tipo2Fragment.OnFragmentInteractionListener {
+        Tipo2Fragment.OnFragmentInteractionListener,
+        Tipo1EstudianteFragment.OnFragmentInteractionListener,
+        Tipo2EstudianteFragment.OnFragmentInteractionListener {
     private BottomBar bottomBar;
     private HomeTiposFragment homeTiposFragment;
     private Tipo1Fragment tipo1Fragment;
     private Tipo2Fragment tipo2Fragment;
-    String nameDocente="";
-    int idDocente=0;
+    String nameDocente = "";
+    int idDocente = 0;
+    int idgrupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,10 @@ public class NewEjercicioDocenteActivity extends AppCompatActivity implements
         Bundle extra = intent.getExtras();
 
         nameDocente = extra.getString("namedocente");
-        idDocente= extra.getInt("iddocente");
+        idDocente = extra.getInt("iddocente");
+        idgrupo = extra.getInt("idgrupo");
 
-        showToolbar("Nuevo Ejercicio Léxico, Docente: "+nameDocente, true);
+        showToolbar("Nuevo Ejercicio Léxico, Docente: " + nameDocente, true);
         bottomBar = findViewById(R.id.bottombar_CED_activity);
         cargarBottombar();
     }
@@ -61,6 +67,7 @@ public class NewEjercicioDocenteActivity extends AppCompatActivity implements
                         //  String
                         args1.putString("namedocente", nameDocente);
                         args1.putInt("iddocente", idDocente);
+                        args1.putInt("idgrupo", idgrupo);
 
                         homeTiposFragment = new HomeTiposFragment();
                         homeTiposFragment.setArguments(args1);

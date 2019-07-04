@@ -69,7 +69,7 @@ public class HomeFonicoFragment extends Fragment implements View.OnClickListener
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView rv_tipo1Fonico;
+
     ArrayList<Imagen> listaImagenes;
 
     private final int MIS_PERMISOS = 100;
@@ -93,6 +93,7 @@ public class HomeFonicoFragment extends Fragment implements View.OnClickListener
     int iddocente;
     int idgrupo;
     String namedocente;
+    private RecyclerView rv_tipo1Fonico;
 
     ArrayList<EjercicioG2> listaEjercicios;
 
