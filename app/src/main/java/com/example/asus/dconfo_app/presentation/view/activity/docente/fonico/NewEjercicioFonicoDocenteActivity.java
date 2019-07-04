@@ -11,6 +11,8 @@ import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.HomeFonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.Tipo1FonicoFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.fonico.Tipo2FonicoFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo1FonicoUpdateFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.modificarEjercicio.fonicos.Tipo2FonicoUpdateFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.HomeTiposFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo1Fragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.Tipo2Fragment;
@@ -20,7 +22,9 @@ import com.roughike.bottombar.OnTabSelectListener;
 public class NewEjercicioFonicoDocenteActivity extends AppCompatActivity implements
         HomeFonicoFragment.OnFragmentInteractionListener,
         Tipo1FonicoFragment.OnFragmentInteractionListener,
-        Tipo2FonicoFragment.OnFragmentInteractionListener {
+        Tipo2FonicoFragment.OnFragmentInteractionListener,
+        com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo1FonicoFragment.OnFragmentInteractionListener,
+        com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico.Tipo2FonicoFragment.OnFragmentInteractionListener {
 
     private BottomBar bottomBar;
     private HomeFonicoFragment homeFonicoFragment;
@@ -29,6 +33,7 @@ public class NewEjercicioFonicoDocenteActivity extends AppCompatActivity impleme
 
     String nameDocente = "";
     int idDocente = 0;
+    int idgrupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class NewEjercicioFonicoDocenteActivity extends AppCompatActivity impleme
 
         nameDocente = extra.getString("namedocente");
         idDocente = extra.getInt("iddocente");
+        idgrupo = extra.getInt("idgrupo");
 
         showToolbar("Nuevo Ejercicio Fónico, Docente: " + nameDocente, true);
         bottomBar = findViewById(R.id.bottombar_CED_activity);
@@ -65,6 +71,7 @@ public class NewEjercicioFonicoDocenteActivity extends AppCompatActivity impleme
                         //  String
                         args1.putString("namedocente", nameDocente);
                         args1.putInt("iddocente", idDocente);
+                        args1.putInt("idgrupo", idgrupo);
 
                         homeFonicoFragment = new HomeFonicoFragment();
                         homeFonicoFragment.setArguments(args1);

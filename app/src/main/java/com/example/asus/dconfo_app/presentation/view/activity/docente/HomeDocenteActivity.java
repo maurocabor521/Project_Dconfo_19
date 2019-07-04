@@ -251,6 +251,7 @@ public class HomeDocenteActivity extends AppCompatActivity
             Bundle parametros = new Bundle();
             parametros.putInt("iddocente", iddocente);
             parametros.putString("namedocente", namedocente);
+            parametros.putInt("idgrupo", idgrupo);//nuevo 040719
 
             //intentCED = new Intent(HomeDocenteActivity.this, ManageEjercicioDocenteActivity.class);
             intentCED = new Intent(HomeDocenteActivity.this, NewEjercicioDocenteActivity.class);
@@ -262,6 +263,7 @@ public class HomeDocenteActivity extends AppCompatActivity
             Bundle parametros1 = new Bundle();
             parametros1.putInt("iddocente", iddocente);
             parametros1.putString("namedocente", namedocente);
+            parametros1.putInt("idgrupo", idgrupo);//nuevo 040719
 
             intentCreateEjercicioFonico = new Intent(HomeDocenteActivity.this, NewEjercicioFonicoDocenteActivity.class);
             intentCreateEjercicioFonico.putExtras(parametros1);

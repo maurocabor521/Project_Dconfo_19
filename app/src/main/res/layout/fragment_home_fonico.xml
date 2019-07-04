@@ -13,6 +13,13 @@
         android:gravity="center_horizontal"
         android:text="Fónico home" />
 
+    <FrameLayout
+        android:id="@+id/container_ejercicice_fonico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home_fonicos_ejercicios"
         android:layout_width="match_parent"
