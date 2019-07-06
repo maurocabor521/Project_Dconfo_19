@@ -173,6 +173,8 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
     File fileImagen;
     Bitmap bitmap;
 
+
+
     //----------------------------------------------------------------------------------------------
     private boolean isGalleryChoise = false;
     private boolean cargarImagen_boolen = false;
@@ -229,6 +231,8 @@ public class Tipo2FonicoFragment extends Fragment implements Response.ErrorListe
         final View view = inflater.inflate(R.layout.fragment_tipo2_fonico, container, false);
 
         //------------------------------------------------------------------------------------------
+
+
         ll_createImage = (LinearLayout) view.findViewById(R.id.ll_fonico2_form_create_img);
         ll_createExercice = (LinearLayout) view.findViewById(R.id.ll_createExercice_fon2);
 

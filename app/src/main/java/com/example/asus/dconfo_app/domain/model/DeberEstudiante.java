@@ -1,7 +1,7 @@
 package com.example.asus.dconfo_app.domain.model;
 
 public class DeberEstudiante {
-    //Integer idEjercicio;
+    Integer idEstHasDeber;
     Integer idEjercicio2;
     Integer idDocente;
     String TipoDeber;
@@ -16,6 +16,14 @@ public class DeberEstudiante {
     public void setIdEjercicio(Integer idEjercicio) {
         this.idEjercicio = idEjercicio;
     }*/
+
+    public Integer getIdEstHasDeber() {
+        return idEstHasDeber;
+    }
+
+    public void setIdEstHasDeber(Integer idEstHasDeber) {
+        this.idEstHasDeber = idEstHasDeber;
+    }
 
     public Integer getIdDocente() {
         return idDocente;

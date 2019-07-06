@@ -63,6 +63,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     private String letraInicial;
     private String letraFinal;
 
+    private String letrainicial;
+    private String letrafinal;
+
     private RecyclerView rv_misDeberes;
 
     private EjercicioG2HasImagen ejercicioG2HasImagen;
@@ -92,7 +95,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     ArrayList<String> listaTipoDeber2;
 
     private int idEjercicio;
-    private Bundle bundle_t2;
+    private Bundle bundle_t2 = new Bundle();;
 
     private String buscar = "deber";
     int flag = 0;
@@ -100,6 +103,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     boolean puedeg1 = false;
     boolean puedeg2 = false;
     boolean flag_cws = false;
+
+    int idDeber;
 
     JSONArray jsonArray1;
 
@@ -257,6 +262,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     deberEstudiante.setTipoDeber(jsonObject.optString("tipoDeber"));
                     deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
                     deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
+                    deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
                     listaDeberes.add(deberEstudiante);
                     listaEjercicios_g2.add(deberEstudiante.getIdEjercicio2());
 
@@ -421,7 +427,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
                 // ArrayList<Integer> listaIDimagenes = new ArrayList<>();
                 //Bundle bundle = new Bundle();
-                bundle_t2 = new Bundle();
+               // bundle_t2 = new Bundle();
+
 
                 int[] listaidImagenes = new int[listaDEjerciciosg2HI.size()];
                 for (int i = 0; i < listaDEjerciciosg2HI.size(); i++) {
@@ -572,6 +579,12 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 letraInicial = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getLetra_inicial_EjercicioG2();
                 letraFinal = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getLetra_final_EjercicioG2();
 
+                letrainicial = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getLetra_inicial_EjercicioG2();
+                letrafinal = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getLetra_final_EjercicioG2();
+
+                idDeber = listaDeberes.get(rv_misDeberes.getChildAdapterPosition(v)).getIdEstHasDeber();//***********
+
+
                 String cantLex = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getCantidadLexemas();
                 String oracion = listaEjerciciosG2.get(rv_misDeberes.getChildAdapterPosition(v)).getOracion();
                 Toast.makeText(getContext(), "Cant lexe: " + cantLex, Toast.LENGTH_LONG).show();
@@ -598,7 +611,20 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("idejercicio", ejerpos2);
+
                 bundle1.putString("letrainicial", letraInicial);
+                bundle1.putString("letrafinal", letraFinal);
+                if (!letrainicial.equals(null)) {
+                    bundle_t2.putString("letrainicial", letrainicial);
+                    System.out.println("letraInicial *******: " + letrainicial);
+                }
+                if (!letrafinal.equals(null)) {
+                   bundle_t2.putString("letrafinal", letrafinal);
+                    System.out.println("letraFinal *******: " + letrafinal);
+                }
+
+                bundle_t2.putInt("idesthasdeber", idDeber);
+
 
                 Bundle bundle2 = new Bundle();
                 Bundle bundle3 = new Bundle();

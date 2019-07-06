@@ -1,5 +1,6 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -117,6 +122,10 @@ public class Tipo1FonicoFragment extends Fragment
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
 
+    int iddeber;
+    ProgressDialog progreso;
+    int nota;
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo1FonicoFragment() {
@@ -163,11 +172,15 @@ public class Tipo1FonicoFragment extends Fragment
         letra = getArguments().getString("letrainicial");
         usuario = getArguments().getString("usuario");
 
+        iddeber = getArguments().getInt("idesthasdeber");
+        System.out.println("iddeber: " + iddeber);
+
         btn_verificar_tipo1 = (Button) view.findViewById(R.id.btn_estudiante_fonico_enviar_tipo1);
         btn_verificar_tipo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verificarEjercicio();
+
             }
         });
 
@@ -229,6 +242,7 @@ public class Tipo1FonicoFragment extends Fragment
                     flagc1++;
                     btn_selected_c1.setVisibility(View.VISIBLE);
                     System.out.println(" flagf1_c1 : " + flagf1_c1);
+                    Toast.makeText(getContext(), "iv_f1_c1", Toast.LENGTH_LONG).show();
                 } else {
                     flagf1_c1 = false;
                     flagc1--;
@@ -294,7 +308,67 @@ public class Tipo1FonicoFragment extends Fragment
         llamarWebService();
 
         return view;
+    }//create
+
+    // ----------------------------------------------------------------------------------------------
+
+    private void cargarWebService_1() {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        String ip = Globals.url;
+        String url = "http://" + ip + "/proyecto_dconfo_v1/28wsJSONAsignarCalificacionDeberEstudiante.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    Toast.makeText(getContext(), "Se ha cargado la nota con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("el error: " + response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String idesthasdeber = String.valueOf(iddeber);
+                String notadeber = String.valueOf(nota);
+                //String idejercicio = "";
+
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("idEstudiantehasDeber", idesthasdeber);
+                parametros.put("calificacionestudiante", notadeber);
+                System.out.println("Los parametros: " + parametros.toString());
+
+                return parametros;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+
+
     }
+
+    // ----------------------------------------------------------------------------------------------
+
+
+
+
+
 
     private void verificarEjercicio() {
 
@@ -350,6 +424,8 @@ public class Tipo1FonicoFragment extends Fragment
             System.out.println(" Ejercicio aprobado. cant letras igual a letra: " + letraIgual + " = " + letraIgual_correcto);
             System.out.println(" letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Muy Bien!!!!");
+            nota=5;
+            cargarWebService_1();
             letraIgual_correcto = 0;
             letraIgual = 0;
             letraNoIgual = 0;
@@ -374,6 +450,7 @@ public class Tipo1FonicoFragment extends Fragment
         } else {
             System.out.println("Error letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Intentalo de nuevo");
+            nota=1;
             letraIgual_correcto = 0;
             letraIgual = 0;
             letraNoIgual = 0;

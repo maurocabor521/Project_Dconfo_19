@@ -180,6 +180,11 @@ public class Tipo2FonicoFragment extends Fragment
     String urlImagen;
     int f = -1;
 
+    private String letrainicial;
+    private String letrafinal;
+
+    int iddeber;
+
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
 
@@ -221,6 +226,15 @@ public class Tipo2FonicoFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tipo2_fonico2, container, false);
+
+        letrainicial = getArguments().getString("letrainicial");
+        System.out.println("letrainicial: " + letrainicial);
+
+        letrafinal = getArguments().getString("letrafinal");
+        System.out.println("letrafinal: " + letrafinal);
+
+        iddeber = getArguments().getInt("idesthasdeber");
+        System.out.println("iddeber: " + iddeber);
 
         cv_est_ft2_c1f1 = (CircleImageView) view.findViewById(R.id.iv_estudiante_fon2_c1_f1);
         cv_est_ft2_c1f2 = (CircleImageView) view.findViewById(R.id.iv_estudiante_fon2_c1_f2);

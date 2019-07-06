@@ -1,5 +1,6 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -38,8 +41,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,6 +103,7 @@ public class Tipo1EstudianteFragment extends Fragment
 
     int campanada;
     String cantLexemas;
+    ProgressDialog progreso;
 
     private OnFragmentInteractionListener mListener;
 
@@ -247,23 +253,72 @@ public class Tipo1EstudianteFragment extends Fragment
         System.out.println("oración: " + textOracion);
     }
 
+    // ----------------------------------------------------------------------------------------------
+
+    private void cargarWebService_1() {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        String ip = Globals.url;
+        String url = "http://" + ip + "/proyecto_dconfo_v1/28wsJSONAsignarCalificacionDeberEstudiante.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("el error: " + response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //String idejercicio = edt_CodigoEjercicio.getText().toString();
+                //String idejercicio = "";
+
+
+                Map<String, String> parametros = new HashMap<>();
+                // parametros.put("idEjercicio", idejercicio);
+
+
+                return parametros;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+
+
+    }
+
+    // ----------------------------------------------------------------------------------------------
+
 
     public void cargarWebService() {
 
         String url_lh = Globals.url;
-        // String ip = getString(R.string.ip);
 
-        //String url = "http://192.168.0.13/proyecto_dconfo/wsJSONConsultarListaCursos.php";
-        //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarEjercicio.php?idEjercicioG1=" + idEjercicio;
         String url = "http://" + url_lh + "/proyecto_dconfo_v1/9wsJSONConsultarEjercicioEstudiante.php?idEjercicioG2=" + idEjercicio;
-        //String url = ip+"ejemploBDRemota/wsJSONConsultarLista.php";
-        //reemplazar espacios en blanco del nombre por %20
+
         url = url.replace(" ", "%20");
-        //hace el llamado a la url
+
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-        // request.add(jsonObjectRequest);
+
         VolleySingleton.getIntanciaVolley(context).addToRequestQueue(jsonObjectRequest);//p21
-        //Toast.makeText(getContext(), "web service", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

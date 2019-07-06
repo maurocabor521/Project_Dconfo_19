@@ -182,6 +182,9 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
     private String letraInicial;
     private String letraFinal;
 
+    private String letrainicial;
+    private String letrafinal;
+
 
     ArrayList<String> listaLetras;
     ArrayList<Integer> listafilLetras;
@@ -190,6 +193,7 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
     private Imagen imagen;
     String urlImagen;
     int f = -1;
+    int iddeber;
 
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
@@ -280,6 +284,15 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
         listaIdImagenes = new ArrayList<>();
 
         usuario = getArguments().getString("usuario");
+
+        iddeber = getArguments().getInt("idesthasdeber");
+        System.out.println("iddeber: " + iddeber);
+
+        letrainicial = getArguments().getString("letrainicial");
+        System.out.println("letrainicial: " + letrainicial);
+
+        letrafinal = getArguments().getString("letrafinal");
+        System.out.println("letrafinal: " + letrafinal);
 
         idImagen1 = getArguments().getInt("idejercicio1");
         listaIdImagenes.add(idImagen1);
