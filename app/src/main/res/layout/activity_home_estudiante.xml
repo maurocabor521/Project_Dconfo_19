@@ -4,32 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     android:orientation="vertical"
     tools:context=".presentation.view.activity.estudiante.HomeEstudianteActivity">
 
     <include layout="@layout/actionbar_toolbar" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/container_HomeEstudiante"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbtn_estudiante_home_deberes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/flecha_atras" />
 
-            <FrameLayout
-                android:id="@+id/container_HomeEstudiante"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="70dp">
+    </FrameLayout>
 
 
-            </FrameLayout>
-        </LinearLayout>
-
-        <include layout="@layout/bottombar_estudiante" />
-    </RelativeLayout>
 </LinearLayout>
+

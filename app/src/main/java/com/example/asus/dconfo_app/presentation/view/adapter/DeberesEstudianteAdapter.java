@@ -63,6 +63,7 @@ public class DeberesEstudianteAdapter extends RecyclerView.Adapter<DeberesEstudi
         // holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
         Log.i("size adapter", "lista_: " + listaDeberes.size());
         holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
+
         if (listaIdActividad.get(position) == 1) {
             holder.txtActividad.setText("Fónico");
             holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());

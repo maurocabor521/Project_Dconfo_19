@@ -3,6 +3,7 @@ package com.example.asus.dconfo_app.presentation.view.activity.estudiante;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.example.asus.dconfo_app.MainActivity;
 import com.example.asus.dconfo_app.R;
@@ -44,19 +47,49 @@ public class HomeEstudianteActivity extends AppCompatActivity implements
     Tipo2EstudianteFragment tipo2EstudianteFragment;
     String nameestudiante;
     int idestudiante;
+    FloatingActionButton fbtn_volver;
+    FrameLayout fl_ejercicios;
+    boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_estudiante);
-        bottomBar = findViewById(R.id.bottombar_estudiante);
+
         Intent intent = this.getIntent();
         Bundle extra = intent.getExtras();
+
+        //fl_homeRecycler = (FrameLayout) findViewById(R.id.container_HomeEstudiante_1);
+        fl_ejercicios = (FrameLayout) findViewById(R.id.container_HomeEstudiante);
+        fbtn_volver = (FloatingActionButton) findViewById(R.id.fbtn_estudiante_home_deberes);
+        fbtn_volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearTranstition();
+            }
+        });
+
 
         nameestudiante = extra.getString("nameestudiante");
         idestudiante = extra.getInt("idestudiante");
         showToolbar("Est: " + nameestudiante + " ,id: " + idestudiante, true);
-        cargarBottombar();
+
+
+        crearTranstition();
+
+    }
+
+    public void crearTranstition() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEstudiante", idestudiante);
+        bundle.putString("nameEstudiante", nameestudiante);
+
+        homeEstudianteFragment = new CasaHomeEstudianteFragment();
+        homeEstudianteFragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, homeEstudianteFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null).commit();
     }
 
     //método que permite volver al padre conservando las variables
@@ -92,7 +125,7 @@ public class HomeEstudianteActivity extends AppCompatActivity implements
             return true;
         } else if (id == R.id.actionSalir) {
             finish();
-            Intent intent=new Intent(HomeEstudianteActivity.this, MainActivity.class);
+            Intent intent = new Intent(HomeEstudianteActivity.this, MainActivity.class);
             startActivity(intent);
             return true;
         }
@@ -100,58 +133,6 @@ public class HomeEstudianteActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void cargarBottombar() {
-
-        bottomBar.setDefaultTab(R.id.bot_deber_home_deberes);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(int tabId) {
-                switch (tabId) {
-                    case R.id.bot_deber_home_deberes:
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("idEstudiante", idestudiante);
-                        bundle.putString("nameEstudiante", nameestudiante);
-
-                        homeEstudianteFragment = new CasaHomeEstudianteFragment();
-                        homeEstudianteFragment.setArguments(bundle);
-
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, homeEstudianteFragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-                        //Toast.makeText(getApplicationContext(), "Ejercicios Home", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.bot_deber_t1:
-
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putInt("idEstudiante", idestudiante);
-                        bundle1.putString("nameEstudiante", nameestudiante);
-
-                        tipo1EstudianteFragment = new Tipo1EstudianteFragment();
-                        tipo1EstudianteFragment.setArguments(bundle1);
-
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-
-                        break;
-                    case R.id.bot_deber_t2:
-
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putInt("idEstudiante", idestudiante);
-                        bundle2.putString("nameEstudiante", nameestudiante);
-
-                        tipo2EstudianteFragment = new Tipo2EstudianteFragment();
-                        tipo2EstudianteFragment.setArguments(bundle2);
-
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo2EstudianteFragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-
-                        break;
-                }
-            }
-        });
-    }
 
     public void showToolbar(String tittle, boolean upButton) {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_ejercicio);

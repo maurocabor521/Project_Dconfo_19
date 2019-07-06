@@ -80,7 +80,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     JsonObjectRequest jsonObjectRequest;
     ArrayList<DeberEstudiante> listaDeberes;
     ArrayList<EjercicioG1> listaEjerciciosG1;
-    ArrayList<EjercicioG2> listaEjerciciosG2;
+    ArrayList<EjercicioG2> listaEjerciciosG2;//*****************
     ArrayList<Integer> listaEjercicios_g1;
     ArrayList<Integer> listaEjercicios_g2;
     ArrayList<Integer> listaEjercicios_total;
@@ -99,6 +99,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     int flag2 = 0;
     boolean puedeg1 = false;
     boolean puedeg2 = false;
+    boolean flag_cws = false;
 
     JSONArray jsonArray1;
 
@@ -163,7 +164,11 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         nameestudiante = getArguments().getString("nameEstudiante");
         idestudiante = getArguments().getInt("idEstudiante");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Estudiante Home: " + nameestudiante + "id: " + idestudiante);
-        cargarWebService();
+
+        if (flag_cws == false) {
+
+            cargarWebService();
+        }
         // cargarWebService1();
 
 
@@ -173,6 +178,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     private void cargarWebService() {
         progreso.setMessage("Cargando...");
         progreso.show();
+        flag_cws = true;
 
         if (buscar.equals("deber")) {
             String url_lh = Globals.url;
@@ -332,7 +338,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
             json = response.optJSONArray("ejerciciog2");
             // System.out.println("json G2: " + response.toString());
-
+            //listaEjerciciosG2 = new ArrayList<>();
 
             try {
                 for (int i = 0; i < json.length(); i++) {
@@ -433,7 +439,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 System.out.println("bundle3: " + bundle.get("idejercicio3"));
                 System.out.println("bundle4: " + bundle.get("idejercicio4"));*/
 
-                String usuario="estudiante";
+                String usuario = "estudiante";
 
                 bundle_t2.putInt("idejercicio", idEjercicio);
                 bundle_t2.putString("letrainicial", letraInicial);
@@ -598,7 +604,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 Bundle bundle3 = new Bundle();
                 Bundle bundle4 = new Bundle();
 
-                String usuario="estudiante";
+                String usuario = "estudiante";
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("idejercicio", ejerpos2);
@@ -658,31 +664,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                             .addToBackStack(null).commit();*/
                 }
 
-             /*   if (actividad== 2) {
-                    // bundle.putInt("idejercicio", ejerpos1);
-                    bundle.putInt("idejercicio", ejerpos2);
-                    bundle.putString("grupo", g2);
-                    Log.i("ejercicio g2 :", tipo2);
-                    System.out.println("ejercicio g2 :" + tipo2);
-                }                if (ejerpos2 != 0) {
-                    // bundle.putInt("idejercicio", ejerpos1);
-                    bundle.putInt("idejercicio", ejerpos2);
-                    bundle.putString("grupo", g2);
-                    Log.i("ejercicio g2 :", tipo2);
-                    System.out.println("ejercicio g2 :" + tipo2);
-                }*/
 
-
-                // if (ejertipo == "tipo1") {
-                // tipo1EstudianteFragment.setArguments(bundle);
-                //inicioEjercicioFragment.setArguments(bundle);
-                // getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
-                //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, inicioEjercicioFragment)
-                // .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                // .addToBackStack(null).commit();
-                   /* } else {
-                        Toast.makeText(getContext(), "no es tipo1"+ejertipo, Toast.LENGTH_LONG).show();
-                    }*/
             }
         });
 

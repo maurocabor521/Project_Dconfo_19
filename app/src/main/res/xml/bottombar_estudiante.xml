@@ -4,13 +4,10 @@
         title="deberes"
         barColorWhenSelected="@color/colorPrimary"
         icon="@drawable/home"/>
-    <tab id="@+id/bot_deber_t1"
+    <tab id="@+id/bot_deber_volver"
         title="tipo 1"
         barColorWhenSelected="@color/colorPrimary"
         icon="@drawable/ic_square_30dp"/>
-    <tab id="@+id/bot_deber_t2"
-        title="tipo 2"
-        barColorWhenSelected="@color/colorPrimary"
-        icon="@drawable/ic_square_30dp"/>
+
 
 </tabs>
