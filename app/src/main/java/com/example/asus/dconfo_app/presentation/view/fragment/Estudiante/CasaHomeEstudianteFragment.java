@@ -168,6 +168,10 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
         nameestudiante = getArguments().getString("nameEstudiante");
         idestudiante = getArguments().getInt("idEstudiante");
+
+        bundle_t2.putString("nameEstudiante",nameestudiante);
+        bundle_t2.putInt("idEstudiante",idestudiante);
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Estudiante Home: " + nameestudiante + "id: " + idestudiante);
 
         if (flag_cws == false) {

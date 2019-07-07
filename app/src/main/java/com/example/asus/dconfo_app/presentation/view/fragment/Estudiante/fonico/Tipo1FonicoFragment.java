@@ -1,19 +1,25 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -28,6 +34,8 @@ import com.example.asus.dconfo_app.domain.model.EjercicioG1;
 import com.example.asus.dconfo_app.domain.model.Imagen;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
+import com.example.asus.dconfo_app.presentation.view.activity.estudiante.HomeEstudianteActivity;
+import com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.CasaHomeEstudianteFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -125,6 +133,13 @@ public class Tipo1FonicoFragment extends Fragment
     int iddeber;
     ProgressDialog progreso;
     int nota;
+    int intento = 3;
+    TextView txt_intento;
+    LinearLayout ll_intento;
+    String nameestudiante;
+    int idestudiante;
+    VideoView vv_video;
+    Uri path;
 
     private OnFragmentInteractionListener mListener;
 
@@ -168,12 +183,25 @@ public class Tipo1FonicoFragment extends Fragment
         txt_letra = view.findViewById(R.id.txt_estudiante_fonico1_letra);
 
         txt_resultado = view.findViewById(R.id.txt_fonico_resultado_t1);
+        txt_intento = view.findViewById(R.id.txt_est_fon1_intento);
+        ll_intento = view.findViewById(R.id.ll_est_fon1_intent);
+
+        vv_video = view.findViewById(R.id.vv_est_fon1);
+        vv_video.setVisibility(View.VISIBLE);
+         path = Uri.parse(“android.resource://com.example.reproducirvideo/”
+        + R.raw.video fonico 1);
+
+        videoView.setVideoURI(path);
+        videoView.start();
 
         letra = getArguments().getString("letrainicial");
         usuario = getArguments().getString("usuario");
 
         iddeber = getArguments().getInt("idesthasdeber");
         System.out.println("iddeber: " + iddeber);
+
+        nameestudiante = getArguments().getString("nameEstudiante");
+        idestudiante = getArguments().getInt("idEstudiante");
 
         btn_verificar_tipo1 = (Button) view.findViewById(R.id.btn_estudiante_fonico_enviar_tipo1);
         btn_verificar_tipo1.setOnClickListener(new View.OnClickListener() {
@@ -366,10 +394,6 @@ public class Tipo1FonicoFragment extends Fragment
     // ----------------------------------------------------------------------------------------------
 
 
-
-
-
-
     private void verificarEjercicio() {
 
         if (letraf1_c1.equals(letra)) {
@@ -424,7 +448,7 @@ public class Tipo1FonicoFragment extends Fragment
             System.out.println(" Ejercicio aprobado. cant letras igual a letra: " + letraIgual + " = " + letraIgual_correcto);
             System.out.println(" letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Muy Bien!!!!");
-            nota=5;
+            nota = 5;
             cargarWebService_1();
             letraIgual_correcto = 0;
             letraIgual = 0;
@@ -450,7 +474,14 @@ public class Tipo1FonicoFragment extends Fragment
         } else {
             System.out.println("Error letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Intentalo de nuevo");
-            nota=1;
+
+            intento--;
+            txt_intento.setText(String.valueOf(intento));
+            if (intento == 0) {
+                nota = 1;
+                cargarWebService_1();
+                mostrarInforme();
+            }
             letraIgual_correcto = 0;
             letraIgual = 0;
             letraNoIgual = 0;
@@ -475,6 +506,38 @@ public class Tipo1FonicoFragment extends Fragment
             btn_selected_c4.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    private void mostrarInforme() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Informe");
+        alertDialog.setMessage("Fallaste!!! ");
+        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.llorando_96);
+        alertDialog.setIcon(drawable);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        crearTranstition();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void crearTranstition() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEstudiante", idestudiante);
+        bundle.putString("nameEstudiante", nameestudiante);
+
+        System.out.println("idEstudiante: " + idestudiante);
+        System.out.println("nameEstudiante: " + nameestudiante);
+
+        CasaHomeEstudianteFragment homeEstudianteFragment = new CasaHomeEstudianteFragment();
+        homeEstudianteFragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, homeEstudianteFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null).commit();
     }
 
     public void llamarWebService() {

@@ -12,11 +12,52 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Ejercicio Fónico 1 Estudiante" />
+            android:orientation="horizontal"
+            android:id="@+id/ll_est_fon1_intent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Ejercicio Fónico"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="Intento:" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/orange"
+                    android:gravity="center_horizontal"
+                    android:text="3"
+                    android:textSize="25dp"
+                    android:id="@+id/txt_est_fon1_intento"/>
+            </LinearLayout>
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vv_est_fon1"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
