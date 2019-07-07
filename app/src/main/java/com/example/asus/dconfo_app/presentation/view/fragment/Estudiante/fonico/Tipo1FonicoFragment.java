@@ -139,7 +139,9 @@ public class Tipo1FonicoFragment extends Fragment
     String nameestudiante;
     int idestudiante;
     VideoView vv_video;
-    Uri path;
+    String path;
+    Button btn_ocultar;
+    LinearLayout ll_ocultar_video;
 
     private OnFragmentInteractionListener mListener;
 
@@ -185,14 +187,21 @@ public class Tipo1FonicoFragment extends Fragment
         txt_resultado = view.findViewById(R.id.txt_fonico_resultado_t1);
         txt_intento = view.findViewById(R.id.txt_est_fon1_intento);
         ll_intento = view.findViewById(R.id.ll_est_fon1_intent);
+        ll_ocultar_video = view.findViewById(R.id.ll_est_fon1_video);
+
+        btn_ocultar = view.findViewById(R.id.btn_est_fon1_ocultar);
+        btn_ocultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ll_ocultar_video.setVisibility(View.GONE);
+            }
+        });
 
         vv_video = view.findViewById(R.id.vv_est_fon1);
         vv_video.setVisibility(View.VISIBLE);
-         path = Uri.parse(“android.resource://com.example.reproducirvideo/”
-        + R.raw.video fonico 1);
-
-        videoView.setVideoURI(path);
-        videoView.start();
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.vid_fon_1);
+        vv_video.setVideoURI(uri);
+        vv_video.start();
 
         letra = getArguments().getString("letrainicial");
         usuario = getArguments().getString("usuario");

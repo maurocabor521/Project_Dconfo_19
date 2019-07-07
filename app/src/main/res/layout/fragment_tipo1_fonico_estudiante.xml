@@ -15,46 +15,71 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/ll_est_fon1_intent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Ejercicio Fónico"
-                android:layout_gravity="center"/>
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/ll_est_fon1_video">
+
+                <VideoView
+                    android:id="@+id/vv_est_fon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ocultar video"
+                    android:id="@+id/btn_est_fon1_ocultar"
+                    android:theme="@style/RaisedButtonDark"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_est_fon1_intent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="Intento:" />
+                    android:text="Ejercicio Fónico" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/orange"
-                    android:gravity="center_horizontal"
-                    android:text="3"
-                    android:textSize="25dp"
-                    android:id="@+id/txt_est_fon1_intento"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Intento:" />
+
+                    <TextView
+                        android:id="@+id/txt_est_fon1_intento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/orange"
+                        android:gravity="center_horizontal"
+                        android:text="3"
+                        android:textSize="25dp" />
+                </LinearLayout>
+
             </LinearLayout>
-            <VideoView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/vv_est_fon1"
-                android:visibility="gone"/>
 
 
         </LinearLayout>
