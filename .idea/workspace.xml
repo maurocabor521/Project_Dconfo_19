@@ -21,9 +21,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo1_fonico_estudiante.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo1_fonico_estudiante.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/video__fonico_1.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/video_fonico_1.wmv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +76,7 @@
         <counts>
           <entry key="dummy" value="7" />
           <entry key="gradle" value="1" />
-          <entry key="java" value="10836" />
+          <entry key="java" value="10845" />
           <entry key="txt" value="12" />
           <entry key="xml" value="4236" />
         </counts>
@@ -87,7 +84,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="10836" />
+          <entry key="JAVA" value="10845" />
           <entry key="PLAIN_TEXT" value="19" />
           <entry key="XML" value="4236" />
         </counts>
@@ -130,8 +127,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="372" column="55" selection-start-line="372" selection-start-column="55" selection-end-line="372" selection-end-column="55" />
+            <state relative-caret-position="285">
+              <caret line="199" column="17" selection-start-line="199" selection-start-column="17" selection-end-line="199" selection-end-column="17" />
               <folding>
                 <element signature="e#6405#6580#0" expanded="true" />
                 <element signature="e#6579#6580#0" expanded="true" />
@@ -540,13 +537,6 @@
       <option name="presentableId" value="Default" />
       <updated>1560433111516</updated>
     </task>
-    <task id="LOCAL-00020" summary="nuevo commit">
-      <created>1561481883616</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1561481883616</updated>
-    </task>
     <task id="LOCAL-00021" summary="nuevo commit">
       <created>1561482048417</created>
       <option name="number" value="00021" />
@@ -883,7 +873,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562512338755</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="nuevo commit">
+      <created>1562517501393</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1562517501393</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1330,8 +1327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="372" column="55" selection-start-line="372" selection-start-column="55" selection-end-line="372" selection-end-column="55" />
+        <state relative-caret-position="285">
+          <caret line="199" column="17" selection-start-line="199" selection-start-column="17" selection-end-line="199" selection-end-column="17" />
           <folding>
             <element signature="e#6405#6580#0" expanded="true" />
             <element signature="e#6579#6580#0" expanded="true" />

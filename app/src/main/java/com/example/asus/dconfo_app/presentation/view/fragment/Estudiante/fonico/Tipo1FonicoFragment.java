@@ -202,6 +202,8 @@ public class Tipo1FonicoFragment extends Fragment
             @Override
             public void onClick(View v) {
                 ll_ocultar_video.setVisibility(View.GONE);
+                ll_ejercicio.setVisibility(View.VISIBLE);
+                vv_video.stopPlayback();
             }
         });
 
