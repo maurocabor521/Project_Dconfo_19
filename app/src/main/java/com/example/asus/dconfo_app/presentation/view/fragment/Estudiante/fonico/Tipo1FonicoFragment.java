@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -44,6 +45,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -142,6 +145,8 @@ public class Tipo1FonicoFragment extends Fragment
     String path;
     Button btn_ocultar;
     LinearLayout ll_ocultar_video;
+    LinearLayout ll_ejercicio;
+    int cont = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -189,6 +194,9 @@ public class Tipo1FonicoFragment extends Fragment
         ll_intento = view.findViewById(R.id.ll_est_fon1_intent);
         ll_ocultar_video = view.findViewById(R.id.ll_est_fon1_video);
 
+        ll_ejercicio = view.findViewById(R.id.ll_est_fon1_ejercicio);
+        ll_ejercicio.setVisibility(View.GONE);
+
         btn_ocultar = view.findViewById(R.id.btn_est_fon1_ocultar);
         btn_ocultar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,10 +206,8 @@ public class Tipo1FonicoFragment extends Fragment
         });
 
         vv_video = view.findViewById(R.id.vv_est_fon1);
-        vv_video.setVisibility(View.VISIBLE);
-        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.vid_fon_1);
-        vv_video.setVideoURI(uri);
-        vv_video.start();
+
+        verVideo();
 
         letra = getArguments().getString("letrainicial");
         usuario = getArguments().getString("usuario");
@@ -346,6 +352,43 @@ public class Tipo1FonicoFragment extends Fragment
 
         return view;
     }//create
+
+    private void verVideo() {
+
+        vv_video.setVisibility(View.VISIBLE);
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.vid_fon_1);
+        vv_video.setVideoURI(uri);
+        vv_video.start();
+
+        CountDownTimer cTimer = null;
+        cTimer = new CountDownTimer(29000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                cont++;
+                System.out.println("el cont: " + cont);
+            }
+
+            @Override
+            public void onFinish() {
+                ll_ocultar_video.setVisibility(View.GONE);
+                ll_ejercicio.setVisibility(View.VISIBLE);
+            }
+        }.start();
+
+        /*if (cont == 2) {
+            ll_ocultar_video.setVisibility(View.GONE);
+            cont = 0;
+        }*/
+
+
+        //System.out.println("vv_video.getDrawingTime()" + vv_video.getDrawingTime());
+        //System.out.println("startTime"+startTime);
+       /* if (vv_video.isPlaying()) {
+            ll_ocultar_video.setVisibility(View.VISIBLE);
+        }else {
+            ll_ocultar_video.setVisibility(View.GONE);
+            vv_video.getDuration();
+        }*/
+    }
 
     // ----------------------------------------------------------------------------------------------
 
