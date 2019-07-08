@@ -51,4 +51,5 @@
     <string name="Escuchar_Texto">Escuchar Texto</string>
     <string name="idGrupoCant">Cant. Estudiantes</string>
     <string name="action_my_groups">Mis Grupos</string>
+    <string name="enviar_mail">enviar_mail</string>
 </resources>

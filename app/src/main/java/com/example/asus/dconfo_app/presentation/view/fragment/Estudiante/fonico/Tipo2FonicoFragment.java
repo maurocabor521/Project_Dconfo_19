@@ -1,12 +1,17 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,12 +34,16 @@ import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.Imagen;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.HomeDocenteActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.estudiante.HomeEstudianteActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -184,6 +195,8 @@ public class Tipo2FonicoFragment extends Fragment
     private String letrafinal;
 
     int iddeber;
+    int nota = 0;
+    ProgressDialog progreso;
 
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
@@ -972,41 +985,200 @@ public class Tipo2FonicoFragment extends Fragment
 
             if (resPareja1 == true && resPareja2 == true && resPareja3 == true && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡ BIEN HECHO 100% !!!");
+                nota = 5;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == true && resPareja3 == true && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡ 1 CASI 75% !!!");
+                nota = 4;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == true && resPareja3 == false && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡ 2 CASI 75% !!!");
+                nota = 4;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == false && resPareja3 == true && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡ 3 CASI 75% !!!");
+                nota = 4;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == true && resPareja3 == true && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡ 4 CASI 75% !!!");
+                nota = 4;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == false && resPareja3 == true && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == true && resPareja3 == false && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == true && resPareja3 == true && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == true && resPareja3 == false && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == false && resPareja3 == false && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == true && resPareja3 == false && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡  50% !!!");
-
+                nota = 3;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == false && resPareja3 == false && resPareja4 == true) {
                 txt_resultado.setText(" ¡¡¡  25% !!!");
+                nota = 2;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == false && resPareja3 == true && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  25% !!!");
+                nota = 2;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == true && resPareja3 == false && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  25% !!!");
+                nota = 2;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == true && resPareja2 == false && resPareja3 == false && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  25% !!!");
+                nota = 2;
+                ws_cargarNota();
+                enviarNota();
             } else if (resPareja1 == false && resPareja2 == false && resPareja3 == false && resPareja4 == false) {
                 txt_resultado.setText(" ¡¡¡  NO ACERTASTE NINGUNA !!!");
+                nota = 1;
+                ws_cargarNota();
+                enviarNota();
             }
 
         }
     }
+
+    private void enviarNota() {
+      /*  Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","amacor521@gmail.com", null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Android APP - nota:"+nota);
+        startActivity(Intent.createChooser(emailIntent,  getActivity().getString(R.string.enviar_mail)));*/
+
+        /*Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/html");
+        intent.putExtra(Intent.EXTRA_EMAIL, "amacor521@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+
+        startActivity(Intent.createChooser(intent, "Send Email"));*/
+
+        /*Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto","amacor521@gmail.com", null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Calificación de :"+nota);
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));*///sirve pero hay que dar enviar en correo celular
+
+     /*   Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"amacor521@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+        i.putExtra(Intent.EXTRA_TEXT, "nota: " + nota);
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }*/
+        String dconfo = "dconfo";
+        String dconfo_mensaje = "Tiene un nuevo mensaje";
+      /*  NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext())
+                .setSmallIcon(R.drawable.dconfo)
+                .setContentTitle(dconfo)
+                .setContentText(dconfo_mensaje)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);*/
+
+        // Create an explicit intent for an Activity in your app
+        NotificationCompat.Builder mBuilder;
+        NotificationManager mNotifyMgr =(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int icono = R.drawable.home;
+        Intent i=new Intent(getActivity(), HomeEstudianteActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, i, 0);
+
+        mBuilder =new NotificationCompat.Builder(getContext())
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(icono)
+                .setContentTitle("Ejercicio Realizado")
+                .setContentText("Tu nota es:"+nota)
+                .setVibrate(new long[] {100, 250, 100, 500})
+                .setAutoCancel(true);
+
+
+
+        mNotifyMgr.notify(1, mBuilder.build());
+    }
+    // ----------------------------------------------------------------------------------------------
+
+    private void ws_cargarNota() {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        String ip = Globals.url;
+        String url = "http://" + ip + "/proyecto_dconfo_v1/28wsJSONAsignarCalificacionDeberEstudiante.php";//p12.buena
+
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {//recibe respuesta del webservice,cuando esta correcto
+                progreso.hide();
+                if (response.trim().equalsIgnoreCase("registra")) {
+
+                    Toast.makeText(getContext(), "Se ha cargado la nota con éxito", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    System.out.println("el error: " + response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_LONG).show();
+                String ERROR = "error";
+                Log.d(ERROR, error.toString());
+                System.out.println("error" + error.toString());
+                progreso.hide();
+            }
+        }) {//enviar para metros a webservice, mediante post
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String idesthasdeber = String.valueOf(iddeber);
+                String notadeber = String.valueOf(nota);
+                //String idejercicio = "";
+
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("idEstudiantehasDeber", idesthasdeber);
+                parametros.put("calificacionestudiante", notadeber);
+                System.out.println("Los parametros: " + parametros.toString());
+
+                return parametros;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);//p21
+
+
+    }
+
+    // ----------------------------------------------------------------------------------------------
 
     //**********************************************************************************************
 
