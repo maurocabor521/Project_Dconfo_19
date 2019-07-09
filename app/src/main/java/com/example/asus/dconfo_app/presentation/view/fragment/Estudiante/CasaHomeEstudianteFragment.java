@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -82,6 +83,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
     JsonObjectRequest jsonObjectRequest;
     ArrayList<DeberEstudiante> listaDeberes;
+    ArrayList<DeberEstudiante> listaDeberes_full;
     ArrayList<EjercicioG1> listaEjerciciosG1;
     ArrayList<EjercicioG2> listaEjerciciosG2;//*****************
     ArrayList<Integer> listaEjercicios_g1;
@@ -95,7 +97,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     ArrayList<String> listaTipoDeber2;
 
     private int idEjercicio;
-    private Bundle bundle_t2 = new Bundle();;
+    private Bundle bundle_t2 = new Bundle();
+    ;
 
     private String buscar = "deber";
     int flag = 0;
@@ -105,6 +108,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     boolean flag_cws = false;
 
     int idDeber;
+    TextView txt_name;
+    TextView txt_listPendientes;
+    TextView txt_listHechas;
 
     JSONArray jsonArray1;
 
@@ -152,6 +158,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         progreso = new ProgressDialog(getActivity());
 
         listaDeberes = new ArrayList<>();
+        listaDeberes_full = new ArrayList<>();
         listaIdActividadEjercicios = new ArrayList<>();
         listaEjerciciosG1 = new ArrayList<>();
         listaEjerciciosG2 = new ArrayList<>();
@@ -162,15 +169,21 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         listaTipoDeber2 = new ArrayList<>();
         listaIdEjercicioG2 = new ArrayList<>();
 
+        txt_listPendientes = (TextView) view.findViewById(R.id.txt_estudiante_home_lista_tareas);
+        txt_name = (TextView) view.findViewById(R.id.txt_estudiante_home_est_name);
+        txt_listHechas = (TextView) view.findViewById(R.id.txt_estudiante_home_lista_tareas_hechas);
+
+
         rv_misDeberes = (RecyclerView) view.findViewById(R.id.rcv_EstudianteListaDeberes_CHE);
         rv_misDeberes.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_misDeberes.setHasFixedSize(true);
 
         nameestudiante = getArguments().getString("nameEstudiante");
+        txt_name.setText(nameestudiante);
         idestudiante = getArguments().getInt("idEstudiante");
 
-        bundle_t2.putString("nameEstudiante",nameestudiante);
-        bundle_t2.putInt("idEstudiante",idestudiante);
+        bundle_t2.putString("nameEstudiante", nameestudiante);
+        bundle_t2.putInt("idEstudiante", idestudiante);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Estudiante Home: " + nameestudiante + "id: " + idestudiante);
 
@@ -247,12 +260,15 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         if (buscar.equals("deber")) {//deber
 
             DeberEstudiante deberEstudiante = null;
+            DeberEstudiante deberEstudiante1 = null;
             EjercicioG1 ejercicioG1 = null;
             EjercicioG2 ejercicioG2 = null;
 
             JSONArray json = response.optJSONArray("deber");
 
-            jsonArray1 = response.optJSONArray("ejerciciog1");
+            JSONArray json1 = response.optJSONArray("deber1");
+
+            //jsonArray1 = response.optJSONArray("ejerciciog1");
 
 
             try {
@@ -270,22 +286,39 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     listaDeberes.add(deberEstudiante);
                     listaEjercicios_g2.add(deberEstudiante.getIdEjercicio2());
 
-                  /*  if (deberEstudiante.getIdEjercicio() != 0) {
-                        listaDeberes.add(deberEstudiante);
-                        listaEjercicios_g1.add(deberEstudiante.getIdEjercicio());
-                        listaTipoDeber.add(deberEstudiante.getTipoDeber());
-
-                    } else if (deberEstudiante.getIdEjercicio2() != 0) {
-                        listaDeberes.add(deberEstudiante);
-                        listaEjercicios_g2.add(deberEstudiante.getIdEjercicio2());
-                        listaTipoDeber2.add(deberEstudiante.getTipoDeber());
-                    }*/
-
-
                 }
                 //buscar="eje2";
                 puedeg2 = true;
                 crearListaIdActividadEjercicio();
+                txt_listPendientes.setText(String.valueOf(listaDeberes.size()));
+                // System.out.println("************listaDeberes: " + listaDeberes.size());
+                //System.out.println("************listaIdEjercicio: " + listaEjercicios_g2.toString());
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }//catch
+
+            try {
+                for (int i = 0; i < json1.length(); i++) {
+
+
+                    deberEstudiante1 = new DeberEstudiante();
+                    JSONObject jsonObject1 = null;
+                    jsonObject1 = json1.getJSONObject(i);
+                    // jsonObject = new JSONObject(response);
+                    deberEstudiante1.setIdEjercicio2(jsonObject1.optInt("EjercicioG2_idEjercicioG2"));
+                    deberEstudiante1.setFechaDeber(jsonObject1.optString("fechaestudiante_has_Deber"));
+                    deberEstudiante1.setTipoDeber(jsonObject1.optString("tipoDeber"));
+                    deberEstudiante1.setIdDocente(jsonObject1.optInt("docente_iddocente"));
+                    deberEstudiante1.setIdCalificacion(jsonObject1.optInt("calificacionestudiante_has_Deber"));
+                    deberEstudiante1.setIdEstHasDeber(jsonObject1.optInt("id_estudiante_has_Debercol"));
+                    listaDeberes_full.add(deberEstudiante1);
+
+
+                }
+
+                txt_listHechas.setText(String.valueOf(listaDeberes_full.size()-listaDeberes.size()));
                 // System.out.println("************listaDeberes: " + listaDeberes.size());
                 //System.out.println("************listaIdEjercicio: " + listaEjercicios_g2.toString());
 
@@ -431,7 +464,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
                 // ArrayList<Integer> listaIDimagenes = new ArrayList<>();
                 //Bundle bundle = new Bundle();
-               // bundle_t2 = new Bundle();
+                // bundle_t2 = new Bundle();
 
 
                 int[] listaidImagenes = new int[listaDEjerciciosg2HI.size()];
@@ -623,7 +656,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     System.out.println("letraInicial *******: " + letrainicial);
                 }
                 if (!letrafinal.equals(null)) {
-                   bundle_t2.putString("letrafinal", letrafinal);
+                    bundle_t2.putString("letrafinal", letrafinal);
                     System.out.println("letraFinal *******: " + letrafinal);
                 }
 
