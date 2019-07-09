@@ -1,12 +1,21 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante;
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +45,7 @@ import com.example.asus.dconfo_app.domain.model.EjercicioG2;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.AsignarEstudianteDeberActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.estudiante.HomeEstudianteActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,6 +116,17 @@ public class Tipo1EstudianteFragment extends Fragment
     String cantLexemas;
     ProgressDialog progreso;
 
+    int nota;
+    int intento = 3;
+    String nameestudiante;
+    int idestudiante;
+    TextView txt_intento;
+    LinearLayout ll_intento;
+    int iddeber;
+    pl.droidsonroids.gif.GifImageButton gifImageButton;
+    MediaPlayer mediaPlayer;
+
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo1EstudianteFragment() {
@@ -148,9 +170,22 @@ public class Tipo1EstudianteFragment extends Fragment
         idEjercicio = getArguments().getInt("idejercicio");
 
         usuario = getArguments().getString("usuario");
+        nameestudiante = getArguments().getString("nameEstudiante");
+        idestudiante = getArguments().getInt("idEstudiante");
+        iddeber = getArguments().getInt("idesthasdeber");
+
+        ll_intento = view.findViewById(R.id.ll_est_lex1_intent);
+        ll_intento.setVisibility(View.VISIBLE);
+        txt_intento = view.findViewById(R.id.txt_est_lex1_intento);
+
+        gifImageButton = view.findViewById(R.id.pl_gif_lex1);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.ping4);
+
 
         System.out.println("************************idEjercicio: " + idEjercicio);
+        System.out.println("************************idEstudiante: " + idestudiante);
         System.out.println("************************usuario: " + usuario);
+        System.out.println("************************iddeber: " + iddeber);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("id Ejercicio: " + idEjercicio);
 
@@ -194,6 +229,7 @@ public class Tipo1EstudianteFragment extends Fragment
             @Override
             public void onClick(View v) {
                 campanada++;
+                mediaPlayer.start();
                 if (campanada == 1) {
                     System.out.println("campanada :" + campanada);
                     btn_b1.setBackground(getResources().getDrawable(R.drawable.selec));
@@ -224,10 +260,22 @@ public class Tipo1EstudianteFragment extends Fragment
         btn_responder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (campanada== Integer.parseInt(cantLexemas)) {
+                if (campanada == Integer.parseInt(cantLexemas)) {
                     txt_miRespuesta.setText("CORRECTO");
+                    nota = 5;
+                    cargarWebService_1();
+                    enviarNota();
                 } else {
                     txt_miRespuesta.setText("INCORRECTO");
+                    mostrarError();
+                    intento--;
+                    txt_intento.setText(String.valueOf(intento));
+                    if (intento == 0) {
+                        nota = 1;
+                        mostrarInforme();
+                        cargarWebService_1();
+                        enviarNota();
+                    }
                 }
             }
         });
@@ -235,22 +283,6 @@ public class Tipo1EstudianteFragment extends Fragment
         cargarWebService();
 
         return view;
-    }
-
-
-    private void speak() {
-        // String text = edt_OrtacionEjercicio.getText().toString();
-        //String text = edt_OrtacionEjercicio.getText().toString();
-        float pitch = (float) mSeekBarPitch.getProgress() / 50;
-        if (pitch < 0.1) pitch = 0.1f;
-        float speed = (float) mSeekBarSpeed.getProgress() / 50;
-        if (speed < 0.1) speed = 0.1f;
-
-        mTTS.setPitch(pitch);
-        mTTS.setSpeechRate(speed);
-
-        mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
-        System.out.println("oración: " + textOracion);
     }
 
     // ----------------------------------------------------------------------------------------------
@@ -268,7 +300,7 @@ public class Tipo1EstudianteFragment extends Fragment
                 progreso.hide();
                 if (response.trim().equalsIgnoreCase("registra")) {
 
-                    Toast.makeText(getContext(), "Se ha cargado con éxito", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Se ha cargado la nota con éxito", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "No se ha cargado con éxito", Toast.LENGTH_LONG).show();
                     System.out.println("el error: " + response.toString());
@@ -286,13 +318,15 @@ public class Tipo1EstudianteFragment extends Fragment
         }) {//enviar para metros a webservice, mediante post
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                //String idejercicio = edt_CodigoEjercicio.getText().toString();
+                String idesthasdeber = String.valueOf(iddeber);
+                String notadeber = String.valueOf(nota);
                 //String idejercicio = "";
 
 
                 Map<String, String> parametros = new HashMap<>();
-                // parametros.put("idEjercicio", idejercicio);
-
+                parametros.put("idEstudiantehasDeber", idesthasdeber);
+                parametros.put("calificacionestudiante", notadeber);
+                System.out.println("Los parametros: " + parametros.toString());
 
                 return parametros;
             }
@@ -305,6 +339,96 @@ public class Tipo1EstudianteFragment extends Fragment
     }
 
     // ----------------------------------------------------------------------------------------------
+
+    private void mostrarInforme() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Informe");
+        alertDialog.setMessage("Fallaste!!! ");
+        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.llorando_96);
+        alertDialog.setIcon(drawable);
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        crearTranstition();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void mostrarError() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Fallaste!!!");
+        alertDialog.setMessage("Intentalo de nuevo ");
+        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.rana_gif);
+
+        alertDialog.setIcon(drawable);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        //crearTranstition();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void crearTranstition() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEstudiante", idestudiante);
+        bundle.putString("nameEstudiante", nameestudiante);
+
+        System.out.println("idEstudiante: " + idestudiante);
+        System.out.println("nameEstudiante: " + nameestudiante);
+
+        CasaHomeEstudianteFragment homeEstudianteFragment = new CasaHomeEstudianteFragment();
+        homeEstudianteFragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, homeEstudianteFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null).commit();
+    }
+
+    private void enviarNota() {
+
+        String dconfo = "dconfo";
+        String dconfo_mensaje = "Tiene un nuevo mensaje";
+
+        NotificationCompat.Builder mBuilder;
+        NotificationManager mNotifyMgr = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int icono = R.drawable.home;
+        Intent i = new Intent(getActivity(), HomeEstudianteActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, i, 0);
+
+        mBuilder = new NotificationCompat.Builder(getContext())
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(icono)
+                .setContentTitle("Ejercicio Realizado")
+                .setContentText("Tu nota es:" + nota)
+                .setVibrate(new long[]{100, 250, 100, 500})
+                .setAutoCancel(true);
+
+
+        mNotifyMgr.notify(1, mBuilder.build());
+    }
+    // ----------------------------------------------------------------------------------------------
+
+
+    private void speak() {
+        // String text = edt_OrtacionEjercicio.getText().toString();
+        //String text = edt_OrtacionEjercicio.getText().toString();
+        float pitch = (float) mSeekBarPitch.getProgress() / 50;
+        if (pitch < 0.1) pitch = 0.1f;
+        float speed = (float) mSeekBarSpeed.getProgress() / 50;
+        if (speed < 0.1) speed = 0.1f;
+
+        mTTS.setPitch(pitch);
+        mTTS.setSpeechRate(speed);
+
+        mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
+        System.out.println("oración: " + textOracion);
+    }
 
 
     public void cargarWebService() {

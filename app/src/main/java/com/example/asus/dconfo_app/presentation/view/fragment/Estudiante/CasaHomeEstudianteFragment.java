@@ -184,8 +184,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
         bundle_t2.putString("nameEstudiante", nameestudiante);
         bundle_t2.putInt("idEstudiante", idestudiante);
+        System.out.println("id del estudiante****************"+idestudiante);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Estudiante Home: " + nameestudiante + "id: " + idestudiante);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Hola!!! " + nameestudiante + " - id: " + idestudiante);
 
         if (flag_cws == false) {
 
@@ -504,6 +505,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     cargarWebService();
                 }
                 if (tipo == 6) {
+                    System.out.println("BUNDLE_T2: "+bundle_t2.toString());
+                    Toast.makeText(getContext(),"idejercicio: "+bundle_t2.toString(),Toast.LENGTH_SHORT).show();
                     tipo2silabicoEstudianteFragment.setArguments(bundle_t2);
                     // inicioEjercicioFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo2silabicoEstudianteFragment)
@@ -671,11 +674,12 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("idejercicio", ejerpos2);
+                bundle.putInt("idEstudiante", idestudiante);
                 bundle.putString("cantLexemas", cantLex);
                 bundle.putString("oracion", oracion);
 
                 bundle.putString("usuario", usuario);//**************Nuevo 250619///////////////////////
-
+                bundle.putInt("idesthasdeber", idDeber);
 
                 if (tipo == 1) {
                    /* tipo1FonicoFragment.setArguments(bundle);
@@ -696,7 +700,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     buscar = "eje3";
                     cargarWebService();
                 } else if (tipo == 3) {//************listo
+                    System.out.println("BUNDLE_T2: "+bundle.toString());
                     tipo1EstudianteFragment.setArguments(bundle);
+                   // tipo1EstudianteFragment.setArguments(bundle_t2);
                     // inicioEjercicioFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
                             //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, inicioEjercicioFragment)
@@ -705,6 +711,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 } else if (tipo == 4) {//************listo
                     //tipo1EstudianteFragment.setArguments(bundle);
                     tipo2EstudianteFragment.setArguments(bundle);
+                    //tipo2EstudianteFragment.setArguments(bundle_t2);
                     //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo2EstudianteFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -712,6 +719,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                 } else if (tipo == 5) {//************listo
                     //tipo1EstudianteFragment.setArguments(bundle);
                     tipo1silabicoEstudianteFragment.setArguments(bundle);
+                    //tipo1silabicoEstudianteFragment.setArguments(bundle_t2);
                     //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1silabicoEstudianteFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

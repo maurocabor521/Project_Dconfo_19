@@ -1,9 +1,12 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante.fonico;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -444,6 +448,31 @@ public class Tipo1FonicoFragment extends Fragment
 
 
     }
+    private void enviarNota() {
+
+        String dconfo = "dconfo";
+        String dconfo_mensaje = "Tiene un nuevo mensaje";
+
+        NotificationCompat.Builder mBuilder;
+        NotificationManager mNotifyMgr =(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int icono = R.drawable.home;
+        Intent i=new Intent(getActivity(), HomeEstudianteActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, i, 0);
+
+        mBuilder =new NotificationCompat.Builder(getContext())
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(icono)
+                .setContentTitle("Ejercicio Realizado")
+                .setContentText("Tu nota es:"+nota)
+                .setVibrate(new long[] {100, 250, 100, 500})
+                .setAutoCancel(true);
+
+
+
+        mNotifyMgr.notify(1, mBuilder.build());
+    }
+    // ----------------------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------------------
 
@@ -504,6 +533,7 @@ public class Tipo1FonicoFragment extends Fragment
             txt_resultado.setText("Muy Bien!!!!");
             nota = 5;
             cargarWebService_1();
+            enviarNota();
             letraIgual_correcto = 0;
             letraIgual = 0;
             letraNoIgual = 0;
@@ -535,6 +565,7 @@ public class Tipo1FonicoFragment extends Fragment
                 nota = 1;
                 cargarWebService_1();
                 mostrarInforme();
+                enviarNota();
             }
             letraIgual_correcto = 0;
             letraIgual = 0;
