@@ -23,4 +23,6 @@
     <dimen name="tsize_documento">17sp</dimen>
     <dimen name="elevation_ciecleimageprofile">10dp</dimen>
     <dimen name="tsize_documento_1">30dp</dimen>
+    <dimen name="tsize_25dp">25dp</dimen>
+    <dimen name="tsize_35dp">35dp</dimen>
 </resources>

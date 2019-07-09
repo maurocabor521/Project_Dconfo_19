@@ -60,36 +60,36 @@ public class DeberesEstudianteAdapter extends RecyclerView.Adapter<DeberesEstudi
 
     @Override
     public void onBindViewHolder(EjerciciosHolder holder, int position) {
-        // holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
+        //holder.txtidGrupo.setText(listaGrupos.get(position).getIdGrupo().toString());
         Log.i("size adapter", "lista_: " + listaDeberes.size());
         holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
 
         if (listaIdActividad.get(position) == 1) {
             holder.txtActividad.setText("Fónico");
-            holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
-            holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
+           // holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
+           // holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
             int c = holder.ll_ejercicio.getResources().getColor(R.color.colorPrimary);
             holder.ll_ejercicio.setBackgroundColor(c);
-            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.crear_fonica);
+            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.letra_f);
             holder.imageView.setBackground(drawable);
         } else if (listaIdActividad.get(position) == 2) {
           /*  if (listaDeberes.get(position).equals("NULL")){
                 holder.txtAsignacion.setText(listaDeberes.get(position).get);
             }*/
             holder.txtActividad.setText("Léxico");
-            holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
-            holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
+           // holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
+           // holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
             int c = holder.ll_ejercicio.getResources().getColor(R.color.colorAccent);
             holder.ll_ejercicio.setBackgroundColor(c);
-            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.ic_conciencia_lexica);
+            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.letra_l);
             holder.imageView.setBackground(drawable);
         } else if (listaIdActividad.get(position) == 3) {
             holder.txtActividad.setText("Silábico");
-            holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
-            holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
+           // holder.txtidEjercicio.setText(listaDeberes.get(position).getIdEjercicio2().toString());
+//            holder.txtnameDeber.setText(listaDeberes.get(position).getTipoDeber().toString());
             int c = holder.ll_ejercicio.getResources().getColor(R.color.design_default_color_primary);
             holder.ll_ejercicio.setBackgroundColor(c);
-            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.ic_conciencia_silabica);
+            Drawable drawable = holder.ll_ejercicio.getResources().getDrawable(R.drawable.letra_s);
             holder.imageView.setBackground(drawable);
         }
         //holder.txtidEjercicio.setText(listaDeberes.get(position).get);
@@ -162,9 +162,9 @@ public class DeberesEstudianteAdapter extends RecyclerView.Adapter<DeberesEstudi
         public EjerciciosHolder(View itemView) {
             super(itemView);
             txtidEjercicio = (TextView) itemView.findViewById(R.id.txt_deber_idejercicio);
-            txtnameDeber = (TextView) itemView.findViewById(R.id.txt_deber_tipodeber);
+            //txtnameDeber = (TextView) itemView.findViewById(R.id.txt_deber_tipodeber);
             txtActividad = (TextView) itemView.findViewById(R.id.txt_actividad_tipodeber);
-            txtAsignacion = (TextView) itemView.findViewById(R.id.txt_asignacion);
+            //txtAsignacion = (TextView) itemView.findViewById(R.id.txt_asignacion);
             ll_ejercicio = (LinearLayout) itemView.findViewById(R.id.ll_item_ejercicio);
             imageView = (ImageView) itemView.findViewById(R.id.iv_item_deber_est);
 
