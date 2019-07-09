@@ -123,8 +123,11 @@ public class Tipo1EstudianteFragment extends Fragment
     TextView txt_intento;
     LinearLayout ll_intento;
     int iddeber;
-    pl.droidsonroids.gif.GifImageButton gifImageButton;
     MediaPlayer mediaPlayer;
+    MediaPlayer mp1;
+    MediaPlayer mp2;
+
+    pl.droidsonroids.gif.GifImageButton gifImageButton;
 
 
     private OnFragmentInteractionListener mListener;
@@ -180,6 +183,8 @@ public class Tipo1EstudianteFragment extends Fragment
 
         gifImageButton = view.findViewById(R.id.pl_gif_lex1);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.ping4);
+        mp1 = MediaPlayer.create(getContext(), R.raw.exito);
+        mp2 = MediaPlayer.create(getContext(), R.raw.error);
 
 
         System.out.println("************************idEjercicio: " + idEjercicio);
@@ -262,17 +267,20 @@ public class Tipo1EstudianteFragment extends Fragment
             public void onClick(View v) {
                 if (campanada == Integer.parseInt(cantLexemas)) {
                     txt_miRespuesta.setText("CORRECTO");
+                    mp1.start();
                     nota = 5;
                     cargarWebService_1();
                     enviarNota();
+                    mostrarInforme();
                 } else {
                     txt_miRespuesta.setText("INCORRECTO");
+                    mp2.start();
                     mostrarError();
                     intento--;
                     txt_intento.setText(String.valueOf(intento));
                     if (intento == 0) {
                         nota = 1;
-                        mostrarInforme();
+
                         cargarWebService_1();
                         enviarNota();
                     }
@@ -342,11 +350,11 @@ public class Tipo1EstudianteFragment extends Fragment
 
     private void mostrarInforme() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-        alertDialog.setTitle("Informe");
-        alertDialog.setMessage("Fallaste!!! ");
-        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.llorando_96);
+        alertDialog.setTitle("Muy Bien !!!");
+        alertDialog.setMessage("Acertaste!!! ");
+        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.premio);
         alertDialog.setIcon(drawable);
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -359,7 +367,12 @@ public class Tipo1EstudianteFragment extends Fragment
     private void mostrarError() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Fallaste!!!");
-        alertDialog.setMessage("Intentalo de nuevo ");
+        if (intento != 0) {
+            alertDialog.setMessage("Intentalo de nuevo ");
+        }else {
+            alertDialog.setMessage("Lo siento !!! ");
+        }
+
         Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.rana_gif);
 
         alertDialog.setIcon(drawable);
@@ -367,7 +380,9 @@ public class Tipo1EstudianteFragment extends Fragment
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        //crearTranstition();
+                        if (intento == 0) {
+                            crearTranstition();
+                        }
                     }
                 });
         alertDialog.show();
