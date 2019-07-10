@@ -33,6 +33,8 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
         Response.ErrorListener {
 
     public int iddocente = 0;
+    public String id_estudiante;
+    String flag;
     Integer idgrupo;
     RecyclerView rv_docente_notas;
     ProgressDialog progreso;
@@ -40,6 +42,7 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     ArrayList<DeberEstudiante> listaDeberes_full;
+    ArrayList<Integer> lista_idEstudiante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,12 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
         rv_docente_notas.setHasFixedSize(true);
 
         listaDeberes_full = new ArrayList<>();
+        lista_idEstudiante = new ArrayList<>();
 
         progreso = new ProgressDialog(this);
-
+        flag = "1";
         cargarWebService();
+
 
         showToolbar("Notas Estudiantes" + " - " + iddocente, true);
 
@@ -74,21 +79,43 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
         String iddoc = "20181";
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5wsJSONConsultarListaDeberesEst_nota.php?estudiante_idestudiante=";
+        if (flag.equals("1")) {
 
-        url = url.replace(" ", "%20");
-        //hace el llamado a la url
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5wsJSONConsultarListaDeberesEst_nota.php?estudiante_idestudiante=";
 
-        final int MY_DEFAULT_TIMEOUT = 15000;
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_DEFAULT_TIMEOUT,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            url = url.replace(" ", "%20");
+            //hace el llamado a la url
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-        // request.add(jsonObjectRequest);
-        VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
-        //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();
+            final int MY_DEFAULT_TIMEOUT = 15000;
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_DEFAULT_TIMEOUT,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
+            //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
+        } else if (flag.equals("2")) {
+
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5wsJSONConsultarListaDeberesEst_nota.php?estudiante_idestudiante=" + id_estudiante;
+
+            url = url.replace(" ", "%20");
+            //hace el llamado a la url
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+
+            final int MY_DEFAULT_TIMEOUT = 15000;
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_DEFAULT_TIMEOUT,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
+            //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
+        }//flag="2"
+
+
     }
 
     @Override
@@ -104,49 +131,54 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
     @Override
     public void onResponse(JSONObject response) {
         progreso.hide();
-        //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
-        DeberEstudiante deberEstudiante = null;
-        JSONArray json = response.optJSONArray("deber_nota");
+        if (flag.equals("1")) {
+            //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
+            DeberEstudiante deberEstudiante = null;
+            JSONArray json = response.optJSONArray("deber_nota");
 
 
-        try {
-            for (int i = 0; i < json.length(); i++) {
-                deberEstudiante = new DeberEstudiante();
-                JSONObject jsonObject = null;
-                jsonObject = json.getJSONObject(i);
-                // jsonObject = new JSONObject(response);
-                deberEstudiante.setIdEjercicio2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
-                deberEstudiante.setIdEstudiante(jsonObject.optInt("estudiante_idestudiante"));
-                deberEstudiante.setFechaDeber(jsonObject.optString("fechaestudiante_has_Deber"));
-                deberEstudiante.setTipoDeber(jsonObject.optString("tipoDeber"));
-                deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
-                deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
-                deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
-                listaDeberes_full.add(deberEstudiante);
-
-
-            }
-            //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
-            // Log.i("size", "lista: " + listaGrupos.size());
-            NotasDeberesEstudianteAdapter notasDeberesEstudianteAdapter = new NotasDeberesEstudianteAdapter(listaDeberes_full);
-
-            notasDeberesEstudianteAdapter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
+            try {
+                for (int i = 0; i < json.length(); i++) {
+                    deberEstudiante = new DeberEstudiante();
+                    JSONObject jsonObject = null;
+                    jsonObject = json.getJSONObject(i);
+                    // jsonObject = new JSONObject(response);
+                    deberEstudiante.setIdEjercicio2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
+                    deberEstudiante.setIdEstudiante(jsonObject.optInt("estudiante_idestudiante"));
+                    deberEstudiante.setFechaDeber(jsonObject.optString("fechaestudiante_has_Deber"));
+                    deberEstudiante.setTipoDeber(jsonObject.optString("tipoDeber"));
+                    deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
+                    deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
+                    deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
+                    listaDeberes_full.add(deberEstudiante);
+                    lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
 
                 }
-            });
-            rv_docente_notas.setAdapter(notasDeberesEstudianteAdapter);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.d("error", response.toString());
+                //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
+                // Log.i("size", "lista: " + listaGrupos.size());
+                NotasDeberesEstudianteAdapter notasDeberesEstudianteAdapter = new NotasDeberesEstudianteAdapter(listaDeberes_full);
 
-            Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+                notasDeberesEstudianteAdapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-            progreso.hide();
-        }
-    }
+
+                    }
+                });
+                rv_docente_notas.setAdapter(notasDeberesEstudianteAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.d("error", response.toString());
+
+                Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+                progreso.hide();
+            }
+            System.out.println("Lista id estudiante: " + lista_idEstudiante.toString());
+        }//flag="1"
+
+
+    }//********************************************
 
     public void showToolbar(String tittle, boolean upButton) {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_ejercicio);
