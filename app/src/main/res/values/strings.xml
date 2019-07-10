@@ -52,4 +52,9 @@
     <string name="idGrupoCant">Cant. Estudiantes</string>
     <string name="action_my_groups">Mis Grupos</string>
     <string name="enviar_mail">enviar_mail</string>
+    <string name="idDeber">ID Deber</string>
+    <string name="ID_Estudiante">ID Estudiante</string>
+    <string name="IDEjercicio">ID Ejercicio</string>
+    <string name="nota">Nota</string>
+    <string name="fecha">Fecha</string>
 </resources>

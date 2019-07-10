@@ -28,6 +28,7 @@ import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.Asi
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.grupos.GrupoDocenteActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.notas.NotasActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.adapter.ConcienciaTipoAdapterRecyclerView;
@@ -44,6 +45,7 @@ public class HomeDocenteActivity extends AppCompatActivity
     Intent intentActividades;
     Intent intentGrupos;
     Intent intentEjercicios;
+    Intent intentConsultarNotas;
     String namegrupo;
     String namedocente;
     int iddocente;
@@ -226,7 +228,13 @@ public class HomeDocenteActivity extends AppCompatActivity
             intentAsignarDeber.putExtras(args);
             startActivity(intentAsignarDeber);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_consultar_notas) {
+            Bundle args = new Bundle();
+            args.putInt("iddocente", iddocente);
+            args.putInt("idgrupo", idgrupo);
+            intentConsultarNotas = new Intent(HomeDocenteActivity.this, NotasActivity.class);
+            intentConsultarNotas.putExtras(args);
+            startActivity(intentConsultarNotas);
 
         } else if (id == R.id.nav_con_lexica) {
             // Handle the camera action

@@ -7,6 +7,8 @@ public class DeberEstudiante {
     String TipoDeber;
     String fechaDeber;
     Integer idCalificacion;
+    Integer idEstudiante;
+    Integer notaDeber;
 
 
    /* public Integer getIdEjercicio() {
@@ -16,6 +18,22 @@ public class DeberEstudiante {
     public void setIdEjercicio(Integer idEjercicio) {
         this.idEjercicio = idEjercicio;
     }*/
+
+    public Integer getNotaDeber() {
+        return notaDeber;
+    }
+
+    public void setNotaDeber(Integer notaDeber) {
+        this.notaDeber = notaDeber;
+    }
+
+    public Integer getIdEstudiante() {
+        return idEstudiante;
+    }
+
+    public void setIdEstudiante(Integer idEstudiante) {
+        this.idEstudiante = idEstudiante;
+    }
 
     public Integer getIdEstHasDeber() {
         return idEstHasDeber;

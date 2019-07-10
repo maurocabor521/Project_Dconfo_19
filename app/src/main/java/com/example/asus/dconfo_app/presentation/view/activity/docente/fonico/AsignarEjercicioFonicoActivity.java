@@ -58,7 +58,7 @@ public class AsignarEjercicioFonicoActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     EditText edt_TipoDeber;
 
-    Integer idgrupo;
+
 
     //******** CONEXIÓN CON WEBSERVICE
     //RequestQueue request;
@@ -67,6 +67,7 @@ public class AsignarEjercicioFonicoActivity extends AppCompatActivity {
     StringRequest stringRequest;
 
     public int iddocente = 0;
+    Integer idgrupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
