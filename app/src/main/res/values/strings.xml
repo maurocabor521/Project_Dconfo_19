@@ -57,4 +57,5 @@
     <string name="IDEjercicio">ID Ejercicio</string>
     <string name="nota">Nota</string>
     <string name="fecha">Fecha</string>
+    <string name="notaXEstudiante">Notas por Estudiante</string>
 </resources>

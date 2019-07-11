@@ -1,7 +1,9 @@
 package com.example.asus.dconfo_app.presentation.view.activity.docente.notas;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,11 @@ import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.Grupos_Estudiante_DocenteAdapter;
 import com.example.asus.dconfo_app.presentation.view.adapter.NotasDeberesEstudianteAdapter;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.FindNotasXEstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.HomeTiposFragment;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +37,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class NotasActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
-        Response.ErrorListener {
+        Response.ErrorListener,
+FindNotasXEstudianteFragment.OnFragmentInteractionListener{
 
     public int iddocente = 0;
     public String id_estudiante;
@@ -43,6 +51,8 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
     JsonObjectRequest jsonObjectRequest;
     ArrayList<DeberEstudiante> listaDeberes_full;
     ArrayList<Integer> lista_idEstudiante;
+    private BottomBar bottomBar;
+    FindNotasXEstudianteFragment fnXest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +75,47 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
         flag = "1";
         cargarWebService();
 
-
         showToolbar("Notas Estudiantes" + " - " + iddocente, true);
+        bottomBar = findViewById(R.id.bottombar_notas);
+        cargarBottombar();
 
+    }
+
+    private void cargarBottombar() {
+
+        bottomBar.setDefaultTab(R.id.btn_home_notas);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                switch (tabId) {
+                    case R.id.btn_home_notas:
+
+
+                        rv_docente_notas.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), "Notas Home", Toast.LENGTH_LONG).show();
+                        break;
+
+                    case R.id.btn_estudiante:
+                        Toast.makeText(getApplicationContext(), "Notas X Estudiante", Toast.LENGTH_LONG).show();
+                        rv_docente_notas.setVisibility(View.GONE);
+
+                        Bundle args1 = new Bundle();
+
+                        args1.putInt("iddocente", iddocente);
+                        args1.putInt("idgrupo", idgrupo);
+
+                        fnXest = new FindNotasXEstudianteFragment();
+                        fnXest.setArguments(args1);
+
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_contenedor_notas, fnXest)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+
+                        break;
+                }
+
+            }
+        });
     }
 
     private void cargarWebService() {
@@ -197,4 +245,8 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
