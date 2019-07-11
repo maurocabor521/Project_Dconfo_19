@@ -58,4 +58,5 @@
     <string name="nota">Nota</string>
     <string name="fecha">Fecha</string>
     <string name="notaXEstudiante">Notas por Estudiante</string>
+    <string name="SeleccioneXEstudiante">Seleccione Estudiante</string>
 </resources>
