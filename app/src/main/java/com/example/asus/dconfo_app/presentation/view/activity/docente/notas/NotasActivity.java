@@ -25,6 +25,7 @@ import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.adapter.Grupos_Estudiante_DocenteAdapter;
 import com.example.asus.dconfo_app.presentation.view.adapter.NotasDeberesEstudianteAdapter;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.FindNotasXEstudianteFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.FindNotasXGrupoEstFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.HomeTiposFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
@@ -38,7 +39,8 @@ import java.util.ArrayList;
 
 public class NotasActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener,
-FindNotasXEstudianteFragment.OnFragmentInteractionListener{
+        FindNotasXEstudianteFragment.OnFragmentInteractionListener,
+        FindNotasXGrupoEstFragment.OnFragmentInteractionListener {
 
     public int iddocente = 0;
     public String id_estudiante;
@@ -53,6 +55,7 @@ FindNotasXEstudianteFragment.OnFragmentInteractionListener{
     ArrayList<Integer> lista_idEstudiante;
     private BottomBar bottomBar;
     FindNotasXEstudianteFragment fnXest;
+    FindNotasXGrupoEstFragment fnXgrupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +111,23 @@ FindNotasXEstudianteFragment.OnFragmentInteractionListener{
                         fnXest.setArguments(args1);
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_contenedor_notas, fnXest)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+
+                        break;
+                    case R.id.btn_grupos:
+                        Toast.makeText(getApplicationContext(), "Notas X Estudiante", Toast.LENGTH_LONG).show();
+                        rv_docente_notas.setVisibility(View.GONE);
+
+                        Bundle args2 = new Bundle();
+
+                        args2.putInt("iddocente", iddocente);
+                        args2.putInt("idgrupo", idgrupo);
+
+                        fnXgrupo = new FindNotasXGrupoEstFragment();
+                        fnXgrupo.setArguments(args2);
+
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_contenedor_notas, fnXgrupo)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
 

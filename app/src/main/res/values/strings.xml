@@ -59,4 +59,5 @@
     <string name="fecha">Fecha</string>
     <string name="notaXEstudiante">Notas por Estudiante</string>
     <string name="SeleccioneXEstudiante">Seleccione Estudiante</string>
+    <string name="X_Grupo">Notas por Grupos de Estudiantes</string>
 </resources>
