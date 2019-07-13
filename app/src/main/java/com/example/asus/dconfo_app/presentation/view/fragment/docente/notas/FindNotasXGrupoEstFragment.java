@@ -65,6 +65,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
     int idgrupo;
     int idgrupo_GrupoEst;
+    int id_GrupoEst_rv;
     int iddocente;
     ProgressDialog progreso;
 
@@ -80,7 +81,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
     ArrayList<Estudiante> listaEstudiantes;
     ArrayList<Integer> listaIdEstudiantes;
     List<String> listaStringGrupoEstudiantes = new ArrayList<>();
-    List<String> listaStringGrupoEstHasDeber ;
+    List<String> listaStringGrupoEstHasDeber;
     ArrayList<Grupo_Estudiantes> listaGrupoEstudiantes;
     ArrayList<Integer> lista_idEstudiante;
     ArrayList<DeberEstudiante> listaDeberes_full;
@@ -148,6 +149,8 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
             @Override
             public void onClick(View v) {
                 flag = "1";
+                listaGrupoEstHasDeber = new ArrayList<>();
+                idgrupo_GrupoEst = Integer.parseInt(edt_idGrupoEstudiante.getText().toString());
                 cargarWebService();
             }
         });
@@ -168,7 +171,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
         if (flag.equals("1")) {
 
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5_1wsJSONConsultarListaDeberesGrupoEst_nota.php?id_grupo_estudiante=" + 22;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5_1wsJSONConsultarListaDeberesGrupoEst_nota.php?id_grupo_estudiante=" + idgrupo_GrupoEst;
 
             url = url.replace(" ", "%20");
             //hace el llamado a la url
@@ -191,9 +194,9 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.hide();
-        Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
-        System.out.println();
-        Log.d("ERROR", error.toString());
+        Toast.makeText(getContext(), "No hay actividades para el grupo de estudiantes: " + idgrupo_GrupoEst, Toast.LENGTH_LONG).show();
+        System.out.println("el error: " + error.toString());
+        // Log.d("ERROR", error.toString());
         progreso.hide();
     }
 
@@ -203,8 +206,9 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
         progreso.hide();
         if (flag.equals("1")) {
             //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
-            DeberEstudiante deberEstudiante = null;
-            GrupoEstudiantesHasDeber grupoEstudiantesHasDeber=null;
+            //DeberEstudiante deberEstudiante = null;
+
+            GrupoEstudiantesHasDeber grupoEstudiantesHasDeber = null;
             JSONArray json = response.optJSONArray("deber_nota");
 
 
@@ -215,10 +219,11 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
                     jsonObject = json.getJSONObject(i);
                     // jsonObject = new JSONObject(response);
                     grupoEstudiantesHasDeber.setGrupo_estudiante_idgrupo_estudiante(jsonObject.optInt("grupo_estudiante_idgrupo_estudiante"));
+                    grupoEstudiantesHasDeber.setId_GE_H_D(jsonObject.optInt("id_GE_H_D"));
                     grupoEstudiantesHasDeber.setFecha_gehd(jsonObject.optString("fecha_gehd"));
 
                     listaGrupoEstHasDeber.add(grupoEstudiantesHasDeber);
-                   // lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
+                    // lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
 
                 }
              /*   listaStringGrupoEstHasDeber = new ArrayList<>();
@@ -230,11 +235,14 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
                 grupos_estudiante_has_deberAdapter.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-
+                    public void onClick(View v) {
+                        id_GrupoEst_rv = listaGrupoEstHasDeber.get(rv_datosGrupoEstudiante.
+                                getChildAdapterPosition(v)).getGrupo_estudiante_idgrupo_estudiante();
+                        Toast.makeText(getContext(), "id grupo estudiante: " + id_GrupoEst_rv, Toast.LENGTH_LONG).show();
 
                     }
                 });
+
                 rv_datosGrupoEstudiante.setAdapter(grupos_estudiante_has_deberAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -314,7 +322,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
                                         //listaIdEstudiantes.add(listaEstudiantes.get(position - 1).getIdestudiante());
                                         // listaIdEstudiantes.add(listaEstudiantes.get(position).getIdestudiante());
                                         edt_idGrupoEstudiante.setText(listaGrupoEstudiantes.get(position).getIdGrupoEstudiantes().toString());
-                                        idgrupo_GrupoEst=listaGrupoEstudiantes.get(position).getIdGrupoEstudiantes();
+
                                         // idestudiante = Integer.parseInt(edt_idGrupoEstudiante.getText().toString());
                                         //System.out.println("lista id est: " + listaIdEstudiantes.toString());
 //                                        Toast.makeText(getApplicationContext(), "id est: " + listaIdEstudiantes.get(position), Toast.LENGTH_LONG).show();

@@ -53,6 +53,7 @@ public class Grupos_Estudiante_Has_DeberAdapter extends RecyclerView.Adapter<Gru
 
         }*/
         holder.txtidGrupoEst.setText(listaGruposEstHasDeber.get(position).getGrupo_estudiante_idgrupo_estudiante().toString());
+        holder.txtIdGrupoHasDeber.setText(listaGruposEstHasDeber.get(position).getId_GE_H_D().toString());
         holder.txtFechaAsignacion.setText(listaGruposEstHasDeber.get(position).getFecha_gehd());
        // holder.txtCantEstudiantes.setText(listaGruposEstudiantes.get(position).getIdGrupoEstudiantes().toString());
 
@@ -77,12 +78,12 @@ public class Grupos_Estudiante_Has_DeberAdapter extends RecyclerView.Adapter<Gru
     }
 
     public class GruposHolder extends RecyclerView.ViewHolder {
-        TextView txtidGrupoEst, txtFechaAsignacion;
+        TextView txtidGrupoEst, txtFechaAsignacion, txtIdGrupoHasDeber;
 
         public GruposHolder(View itemView) {
             super(itemView);
             txtidGrupoEst = (TextView) itemView.findViewById(R.id.txt_GrupoEstHasDeber_IdGrupoEst);
-
+            txtIdGrupoHasDeber = (TextView) itemView.findViewById(R.id.txt_GrupoEstHasDeber_IdGEhD);
             txtFechaAsignacion = (TextView) itemView.findViewById(R.id.txt_GrupoEstHasDeber_fechaAsig);
         }
     }

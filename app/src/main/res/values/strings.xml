@@ -62,4 +62,5 @@
     <string name="X_Grupo">Notas por Grupos de Estudiantes</string>
     <string name="idGrupoEstudiante">IdGrupoEst</string>
     <string name="FechaGEHD">Fecha Asignación</string>
+    <string name="idGrupoEstHasDeber">idGEhD</string>
 </resources>
