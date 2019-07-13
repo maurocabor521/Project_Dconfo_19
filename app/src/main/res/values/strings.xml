@@ -63,4 +63,5 @@
     <string name="idGrupoEstudiante">IdGrupoEst</string>
     <string name="FechaGEHD">Fecha Asignación</string>
     <string name="idGrupoEstHasDeber">idGEhD</string>
+    <string name="Notas_GrupoEstudiante">Notas Grupo Estudiante</string>
 </resources>

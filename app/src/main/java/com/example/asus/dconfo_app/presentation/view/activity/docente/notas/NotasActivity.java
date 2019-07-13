@@ -26,6 +26,7 @@ import com.example.asus.dconfo_app.presentation.view.adapter.Grupos_Estudiante_D
 import com.example.asus.dconfo_app.presentation.view.adapter.NotasDeberesEstudianteAdapter;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.FindNotasXEstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.FindNotasXGrupoEstFragment;
+import com.example.asus.dconfo_app.presentation.view.fragment.docente.notas.ShowNotasGrupoEstudianteFragment;
 import com.example.asus.dconfo_app.presentation.view.fragment.docente.tipoFragments.HomeTiposFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
@@ -40,7 +41,8 @@ import java.util.ArrayList;
 public class NotasActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener,
         FindNotasXEstudianteFragment.OnFragmentInteractionListener,
-        FindNotasXGrupoEstFragment.OnFragmentInteractionListener {
+        FindNotasXGrupoEstFragment.OnFragmentInteractionListener,
+        ShowNotasGrupoEstudianteFragment.OnFragmentInteractionListener {
 
     public int iddocente = 0;
     public String id_estudiante;

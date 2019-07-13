@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -66,6 +67,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
     int idgrupo;
     int idgrupo_GrupoEst;
     int id_GrupoEst_rv;
+    int id_GrupoEst_has_deber;
     int iddocente;
     ProgressDialog progreso;
 
@@ -86,6 +88,8 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
     ArrayList<Integer> lista_idEstudiante;
     ArrayList<DeberEstudiante> listaDeberes_full;
     ArrayList<GrupoEstudiantesHasDeber> listaGrupoEstHasDeber;
+
+    ShowNotasGrupoEstudianteFragment showNotasGrupoEstudianteFragment;
 
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -236,8 +240,25 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
                 grupos_estudiante_has_deberAdapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         id_GrupoEst_rv = listaGrupoEstHasDeber.get(rv_datosGrupoEstudiante.
                                 getChildAdapterPosition(v)).getGrupo_estudiante_idgrupo_estudiante();
+                        Bundle args1 = new Bundle();
+
+                        id_GrupoEst_has_deber = listaGrupoEstHasDeber.get(rv_datosGrupoEstudiante.
+                                getChildAdapterPosition(v)).getId_GE_H_D();
+
+
+                        args1.putInt("iddocente", iddocente);
+                        args1.putInt("idgrupo", idgrupo);
+                        args1.putInt("idgrupoesthasdeber", id_GrupoEst_has_deber);
+
+                        showNotasGrupoEstudianteFragment = new ShowNotasGrupoEstudianteFragment();
+                        showNotasGrupoEstudianteFragment.setArguments(args1);
+
+                        getFragmentManager().beginTransaction().replace(R.id.fl_contenedor_notas, showNotasGrupoEstudianteFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
                         Toast.makeText(getContext(), "id grupo estudiante: " + id_GrupoEst_rv, Toast.LENGTH_LONG).show();
 
                     }
