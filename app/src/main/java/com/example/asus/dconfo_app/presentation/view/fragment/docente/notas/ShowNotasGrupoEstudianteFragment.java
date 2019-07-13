@@ -223,6 +223,8 @@ public class ShowNotasGrupoEstudianteFragment extends Fragment implements Respon
                     deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
                     deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
                     deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
+                    deberEstudiante.setIdAsignacion(jsonObject.optInt("Asignacion_idGrupoAsignacion"));
+                    deberEstudiante.setIdGrupoHdeber(jsonObject.optInt("grupo_estudiante_has_deber_id_GE_H_D"));
                     listaDeberes_full.add(deberEstudiante);
                     //lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
 

@@ -9,6 +9,8 @@ public class DeberEstudiante {
     Integer idCalificacion;
     Integer idEstudiante;
     Integer notaDeber;
+    Integer idAsignacion;
+    Integer idGrupoHdeber;
 
 
    /* public Integer getIdEjercicio() {
@@ -18,6 +20,22 @@ public class DeberEstudiante {
     public void setIdEjercicio(Integer idEjercicio) {
         this.idEjercicio = idEjercicio;
     }*/
+
+    public Integer getIdAsignacion() {
+        return idAsignacion;
+    }
+
+    public void setIdAsignacion(Integer idAsignacion) {
+        this.idAsignacion = idAsignacion;
+    }
+
+    public Integer getIdGrupoHdeber() {
+        return idGrupoHdeber;
+    }
+
+    public void setIdGrupoHdeber(Integer idGrupoHdeber) {
+        this.idGrupoHdeber = idGrupoHdeber;
+    }
 
     public Integer getNotaDeber() {
         return notaDeber;

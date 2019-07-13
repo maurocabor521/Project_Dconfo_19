@@ -220,6 +220,8 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
                     deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
                     deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
                     deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
+                    deberEstudiante.setIdAsignacion(jsonObject.optInt("Asignacion_idGrupoAsignacion"));
+                    deberEstudiante.setIdGrupoHdeber(jsonObject.optInt("grupo_estudiante_has_deber_id_GE_H_D"));
                     listaDeberes_full.add(deberEstudiante);
                     lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
 
@@ -244,7 +246,11 @@ public class NotasActivity extends AppCompatActivity implements Response.Listene
 
                 progreso.hide();
             }
-            System.out.println("Lista id estudiante: " + lista_idEstudiante.toString());
+           // System.out.println("Lista id estudiante: " + lista_idEstudiante.toString());
+            for (int i = 0; i < listaDeberes_full.size(); i++) {
+                System.out.println("Lista listaDeberes_full show: i=" + (i + 1) + " - asignación - " + listaDeberes_full.get(i).getIdAsignacion());
+                System.out.println("Lista listaDeberes_full show: i=" + (i + 1) + " - GrupoHdeber - " + listaDeberes_full.get(i).getIdGrupoHdeber());
+            }
         }//flag="1"
 
 

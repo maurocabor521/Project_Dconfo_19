@@ -62,10 +62,37 @@ public class NotasDeberesEstudianteAdapter extends RecyclerView.Adapter<NotasDeb
         holder.txt_IDdeber_notaDeber.setText(listaDeberes.get(position).getIdEstHasDeber().toString());
         holder.txt_IdEstudiante_notaDeber.setText(listaDeberes.get(position).getIdEstudiante().toString());
         holder.txt_id_Ejercicio_notaDeber.setText(listaDeberes.get(position).getIdEjercicio2().toString());
+
         if (listaDeberes.get(position).getIdCalificacion().equals(0)) {
             holder.txt_nota_notaDeber.setText("No se ha desarrollado el ejercicio");
-        }else {
+
+        } else {
             holder.txt_nota_notaDeber.setText(listaDeberes.get(position).getIdCalificacion().toString());
+
+        }
+
+        if (listaDeberes.get(position).getIdGrupoHdeber().equals(0)) {
+            int c = holder.ll_show.getResources().getColor(R.color.colorAccent);
+            holder.ll_show.setBackgroundColor(c);
+        } else {
+            int c = holder.ll_show.getResources().getColor(R.color.colorPrimaryDark);
+            holder.ll_show.setBackgroundColor(c);
+            Drawable drawable = holder.ll_show.getResources().getDrawable(R.drawable.letra_g);
+            holder.imageView.setBackground(drawable);
+
+        }
+
+        if (!(listaDeberes.get(position).getIdAsignacion().equals(0))) {
+            int c = holder.ll_show.getResources().getColor(R.color.orange);
+            holder.ll_show.setBackgroundColor(c);
+            Drawable drawable = holder.ll_show.getResources().getDrawable(R.drawable.letra_a);
+            holder.imageView.setBackground(drawable);
+        }
+        if (listaDeberes.get(position).getIdAsignacion().equals(0) && listaDeberes.get(position).getIdGrupoHdeber().equals(0) ) {
+            int c = holder.ll_show.getResources().getColor(R.color.green);
+            holder.ll_show.setBackgroundColor(c);
+            Drawable drawable = holder.ll_show.getResources().getDrawable(R.drawable.letra_l);
+            holder.imageView.setBackground(drawable);
         }
         holder.txt_fecha_notaDeber.setText(listaDeberes.get(position).getFechaDeber());
     }
@@ -92,7 +119,7 @@ public class NotasDeberesEstudianteAdapter extends RecyclerView.Adapter<NotasDeb
 
     public class EjerciciosHolder extends RecyclerView.ViewHolder {
         TextView txt_IDdeber_notaDeber, txt_IdEstudiante_notaDeber, txt_id_Ejercicio_notaDeber, txt_nota_notaDeber, txt_fecha_notaDeber;
-        LinearLayout ll_ejercicio;
+        LinearLayout ll_show;
         ImageView imageView;
 
         public EjerciciosHolder(View itemView) {
@@ -102,7 +129,8 @@ public class NotasDeberesEstudianteAdapter extends RecyclerView.Adapter<NotasDeb
             txt_id_Ejercicio_notaDeber = (TextView) itemView.findViewById(R.id.txt_id_Ejercicio_notaDeber);
             txt_nota_notaDeber = (TextView) itemView.findViewById(R.id.txt_nota_notaDeber);
             txt_fecha_notaDeber = (TextView) itemView.findViewById(R.id.txt_fecha_notaDeber);
-
+            ll_show = (LinearLayout) itemView.findViewById(R.id.ll_showNotas);
+            imageView = (ImageView) itemView.findViewById(R.id.imv_show_image);
 
         }
     }
