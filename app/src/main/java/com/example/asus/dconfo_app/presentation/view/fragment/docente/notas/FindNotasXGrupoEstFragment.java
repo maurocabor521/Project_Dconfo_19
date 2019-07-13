@@ -16,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,7 +30,10 @@ import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.Curso;
 import com.example.asus.dconfo_app.domain.model.DeberEstudiante;
 import com.example.asus.dconfo_app.domain.model.Estudiante;
+import com.example.asus.dconfo_app.domain.model.Grupo_Estudiantes;
+import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
+import com.example.asus.dconfo_app.presentation.view.adapter.NotasDeberesEstudianteAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +50,8 @@ import java.util.List;
  * Use the {@link FindNotasXGrupoEstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FindNotasXGrupoEstFragment extends Fragment {
+public class FindNotasXGrupoEstFragment extends Fragment implements Response.Listener<JSONObject>,
+        Response.ErrorListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -56,6 +62,7 @@ public class FindNotasXGrupoEstFragment extends Fragment {
     private String mParam2;
 
     int idgrupo;
+    int idgrupo_GrupoEst;
     int iddocente;
     ProgressDialog progreso;
 
@@ -70,9 +77,10 @@ public class FindNotasXGrupoEstFragment extends Fragment {
     ArrayList<String> listaStringIdGrupoEstudiantes;
     ArrayList<Estudiante> listaEstudiantes;
     ArrayList<Integer> listaIdEstudiantes;
-    List<String> listaStringEstudiantes = new ArrayList<>();
-    ArrayList<DeberEstudiante> listaDeberes_full;
+    List<String> listaStringGrupoEstudiantes = new ArrayList<>();
+    ArrayList<Grupo_Estudiantes> listaGrupoEstudiantes;
     ArrayList<Integer> lista_idEstudiante;
+    ArrayList<DeberEstudiante> listaDeberes_full;
 
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -115,7 +123,8 @@ public class FindNotasXGrupoEstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_find_notas_xgrupo_est, container, false);;
+        View view = inflater.inflate(R.layout.fragment_find_notas_xgrupo_est, container, false);
+        ;
         progreso = new ProgressDialog(getActivity());
         iddocente = getArguments().getInt("iddocente");
         idgrupo = getArguments().getInt("idgrupo");
@@ -127,11 +136,14 @@ public class FindNotasXGrupoEstFragment extends Fragment {
         rv_datosGrupoEstudiante.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_datosGrupoEstudiante.setHasFixedSize(true);
 
-        btn_BuscarGrupoEstudiante=(Button)view.findViewById(R.id.btn_docente_buscar_X_grupo_nota);
+        listaDeberes_full = new ArrayList<>();
+
+        btn_BuscarGrupoEstudiante = (Button) view.findViewById(R.id.btn_docente_buscar_X_grupo_nota);
         btn_BuscarGrupoEstudiante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                flag = "1";
+                cargarWebService();
             }
         });
 
@@ -140,12 +152,123 @@ public class FindNotasXGrupoEstFragment extends Fragment {
         return view;
     }
 
+    private void cargarWebService() {
+
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        // String ip = getString(R.string.ip);
+        //int iddoc=20181;
+        String iddoc = "20181";
+        String url_lh = Globals.url;
+
+        if (flag.equals("1")) {
+
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5_1wsJSONConsultarListaDeberesGrupoEst_nota.php?id_grupo_estudiante=" + 22;
+
+            url = url.replace(" ", "%20");
+            //hace el llamado a la url
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+
+            final int MY_DEFAULT_TIMEOUT = 15000;
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_DEFAULT_TIMEOUT,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
+            //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
+        } else if (flag.equals("2")) {
+
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5wsJSONConsultarListaDeberesEst_nota.php?estudiante_idestudiante=";
+
+            url = url.replace(" ", "%20");
+            //hace el llamado a la url
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+
+            final int MY_DEFAULT_TIMEOUT = 15000;
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_DEFAULT_TIMEOUT,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
+            //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
+        }//flag="2"
+
+
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        progreso.hide();
+        Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
+        System.out.println();
+        Log.d("ERROR", error.toString());
+        progreso.hide();
+    }
+
+    // si esta bien el llamado a la url entonces entra a este metodo
+    @Override
+    public void onResponse(JSONObject response) {
+        progreso.hide();
+        if (flag.equals("1")) {
+            //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
+            DeberEstudiante deberEstudiante = null;
+            JSONArray json = response.optJSONArray("deber_nota_grupo");
+
+
+            try {
+                for (int i = 0; i < json.length(); i++) {
+                    deberEstudiante = new DeberEstudiante();
+                    JSONObject jsonObject = null;
+                    jsonObject = json.getJSONObject(i);
+                    // jsonObject = new JSONObject(response);
+                    deberEstudiante.setIdEjercicio2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
+                    deberEstudiante.setIdEstudiante(jsonObject.optInt("estudiante_idestudiante"));
+                    deberEstudiante.setFechaDeber(jsonObject.optString("fechaestudiante_has_Deber"));
+                    deberEstudiante.setTipoDeber(jsonObject.optString("tipoDeber"));
+                    deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
+                    deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
+                    deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
+                    listaDeberes_full.add(deberEstudiante);
+                   // lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
+
+                }
+                //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
+                // Log.i("size", "lista: " + listaGrupos.size());
+                NotasDeberesEstudianteAdapter notasDeberesEstudianteAdapter = new NotasDeberesEstudianteAdapter(listaDeberes_full);
+
+                notasDeberesEstudianteAdapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                    }
+                });
+                rv_datosGrupoEstudiante.setAdapter(notasDeberesEstudianteAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.d("error", response.toString());
+
+                Toast.makeText(getContext(), "No se ha podido establecer conexión: " + response.toString(), Toast.LENGTH_LONG).show();
+
+                progreso.hide();
+            }
+            System.out.println("Lista listaDeberes_full: " + listaDeberes_full.toString());
+        }//flag="1"
+
+
+    }//********************************************
+
+
     //***********************************
     public void listarGrupoEstudiantes() {
 
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/12wsJSONConsultar_Lista_Grupo_Est.php?idgrupo=" + idgrupo+"&iddocente="+iddocente;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/12wsJSONConsultar_Lista_Grupo_Est.php?idgrupo=" + idgrupo + "&iddocente=" + iddocente;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
@@ -159,20 +282,14 @@ public class FindNotasXGrupoEstFragment extends Fragment {
                         // Do something with response
                         //mTextView.setText(response.toString());
 
-                        Curso curso = null;
-                        Estudiante estudiante = null;
-
-
-                        ArrayList<Curso> listaDCursos = new ArrayList<>();
-                        //listaCursos1 = new ArrayList<>();
-
-                        listaEstudiantes = new ArrayList<>();
+                        listaGrupoEstudiantes = new ArrayList<>();
+                        Grupo_Estudiantes grupo_estudiantes;
 
                         // Process the JSON
                         try {
                             // Get the JSON array
                             //JSONArray array = response.getJSONArray("students");
-                            JSONArray array = response.optJSONArray("grupo_h_e");
+                            JSONArray array = response.optJSONArray("grupo_estudiante");
 
                             // Loop through the array elements
                             for (int i = 0; i < array.length(); i++) {
@@ -182,24 +299,24 @@ public class FindNotasXGrupoEstFragment extends Fragment {
 
                                 // Get current json object
                                 JSONObject student = array.getJSONObject(i);
-                                estudiante = new Estudiante();
+                                grupo_estudiantes = new Grupo_Estudiantes();
                                 JSONObject jsonObject = null;
                                 jsonObject = array.getJSONObject(i);
-                                estudiante.setIdestudiante(jsonObject.optInt("estudiante_idestudiante"));
-                                estudiante.setNameestudiante(jsonObject.optString("nameEstudiante"));
+                                grupo_estudiantes.setIdGrupoEstudiantes(jsonObject.optInt("idgrupo_estudiante"));
+                                grupo_estudiantes.setNameGrupoEstudiantes(jsonObject.optString("name_grupo_estudiante"));
 
-                                listaEstudiantes.add(estudiante);
+                                listaGrupoEstudiantes.add(grupo_estudiantes);
                             }
 
-                            listaStringEstudiantes = new ArrayList<>();
+                            listaStringGrupoEstudiantes = new ArrayList<>();
                             // listaStringEstudiantes.add("Seleccione Id Estudiante");
-                            for (int i = 0; i < listaEstudiantes.size(); i++) {
-                                listaStringEstudiantes.add(listaEstudiantes.get(i).getIdestudiante().toString() + " - " + listaEstudiantes.get(i).getNameestudiante());
+                            for (int i = 0; i < listaGrupoEstudiantes.size(); i++) {
+                                listaStringGrupoEstudiantes.add(listaGrupoEstudiantes.get(i).getIdGrupoEstudiantes().toString() + " - " + listaGrupoEstudiantes.get(i).getNameGrupoEstudiantes());
                             }
 
-                            listaIdEstudiantes.add(0000);
+                            // listaIdEstudiantes.add(0000);
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listaStringEstudiantes);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listaStringGrupoEstudiantes);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             sp_Grupo_Estudiantes.setAdapter(adapter);
                             sp_Grupo_Estudiantes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,9 +324,10 @@ public class FindNotasXGrupoEstFragment extends Fragment {
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     if (position != -1) {
                                         //listaIdEstudiantes.add(listaEstudiantes.get(position - 1).getIdestudiante());
-                                        listaIdEstudiantes.add(listaEstudiantes.get(position).getIdestudiante());
-                                        edt_idGrupoEstudiante.setText(listaEstudiantes.get(position).getIdestudiante().toString());
-                                        idestudiante = Integer.parseInt(edt_idGrupoEstudiante.getText().toString());
+                                        // listaIdEstudiantes.add(listaEstudiantes.get(position).getIdestudiante());
+                                        edt_idGrupoEstudiante.setText(listaGrupoEstudiantes.get(position).getIdGrupoEstudiantes().toString());
+                                        idgrupo_GrupoEst=listaGrupoEstudiantes.get(position).getIdGrupoEstudiantes();
+                                        // idestudiante = Integer.parseInt(edt_idGrupoEstudiante.getText().toString());
                                         //System.out.println("lista id est: " + listaIdEstudiantes.toString());
 //                                        Toast.makeText(getApplicationContext(), "id est: " + listaIdEstudiantes.get(position), Toast.LENGTH_LONG).show();
                                         //showListView();
@@ -225,8 +343,8 @@ public class FindNotasXGrupoEstFragment extends Fragment {
                             });
 
                             //Toast.makeText(getApplicationContext(), "lista estudiantes" + listaStringEstudiantes, Toast.LENGTH_LONG).show();
-                            System.out.println("estudiantes size: " + listaEstudiantes.size());
-                            System.out.println("estudiantes: " + listaEstudiantes.get(0).getIdestudiante());
+                            System.out.println("listaGrupoEstudiantes size: " + listaGrupoEstudiantes.size());
+                            System.out.println("listaGrupoEstudiantes: " + listaGrupoEstudiantes.get(0).getIdGrupoEstudiantes());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -249,7 +367,6 @@ public class FindNotasXGrupoEstFragment extends Fragment {
     }
 
     //***********************************
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
