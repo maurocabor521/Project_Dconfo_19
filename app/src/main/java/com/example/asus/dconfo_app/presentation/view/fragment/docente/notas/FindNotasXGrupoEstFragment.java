@@ -30,9 +30,11 @@ import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.Curso;
 import com.example.asus.dconfo_app.domain.model.DeberEstudiante;
 import com.example.asus.dconfo_app.domain.model.Estudiante;
+import com.example.asus.dconfo_app.domain.model.GrupoEstudiantesHasDeber;
 import com.example.asus.dconfo_app.domain.model.Grupo_Estudiantes;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
+import com.example.asus.dconfo_app.presentation.view.adapter.Grupos_Estudiante_Has_DeberAdapter;
 import com.example.asus.dconfo_app.presentation.view.adapter.NotasDeberesEstudianteAdapter;
 
 import org.json.JSONArray;
@@ -78,9 +80,11 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
     ArrayList<Estudiante> listaEstudiantes;
     ArrayList<Integer> listaIdEstudiantes;
     List<String> listaStringGrupoEstudiantes = new ArrayList<>();
+    List<String> listaStringGrupoEstHasDeber ;
     ArrayList<Grupo_Estudiantes> listaGrupoEstudiantes;
     ArrayList<Integer> lista_idEstudiante;
     ArrayList<DeberEstudiante> listaDeberes_full;
+    ArrayList<GrupoEstudiantesHasDeber> listaGrupoEstHasDeber;
 
     //RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -137,6 +141,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
         rv_datosGrupoEstudiante.setHasFixedSize(true);
 
         listaDeberes_full = new ArrayList<>();
+        listaGrupoEstHasDeber = new ArrayList<>();
 
         btn_BuscarGrupoEstudiante = (Button) view.findViewById(R.id.btn_docente_buscar_X_grupo_nota);
         btn_BuscarGrupoEstudiante.setOnClickListener(new View.OnClickListener() {
@@ -178,24 +183,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
             // request.add(jsonObjectRequest);
             VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
             //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
-        } else if (flag.equals("2")) {
-
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8_5wsJSONConsultarListaDeberesEst_nota.php?estudiante_idestudiante=";
-
-            url = url.replace(" ", "%20");
-            //hace el llamado a la url
-            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-
-            final int MY_DEFAULT_TIMEOUT = 15000;
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    MY_DEFAULT_TIMEOUT,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-            // request.add(jsonObjectRequest);
-            VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
-            //Toast.makeText(getApplicationContext(), "web service 1111", Toast.LENGTH_LONG).show();}
-        }//flag="2"
+        }
 
 
     }
@@ -216,38 +204,38 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
         if (flag.equals("1")) {
             //Toast.makeText(getApplicationContext(), "Mensaje: " + response.toString(), Toast.LENGTH_SHORT).show();
             DeberEstudiante deberEstudiante = null;
-            JSONArray json = response.optJSONArray("deber_nota_grupo");
+            GrupoEstudiantesHasDeber grupoEstudiantesHasDeber=null;
+            JSONArray json = response.optJSONArray("deber_nota");
 
 
             try {
                 for (int i = 0; i < json.length(); i++) {
-                    deberEstudiante = new DeberEstudiante();
+                    grupoEstudiantesHasDeber = new GrupoEstudiantesHasDeber();
                     JSONObject jsonObject = null;
                     jsonObject = json.getJSONObject(i);
                     // jsonObject = new JSONObject(response);
-                    deberEstudiante.setIdEjercicio2(jsonObject.optInt("EjercicioG2_idEjercicioG2"));
-                    deberEstudiante.setIdEstudiante(jsonObject.optInt("estudiante_idestudiante"));
-                    deberEstudiante.setFechaDeber(jsonObject.optString("fechaestudiante_has_Deber"));
-                    deberEstudiante.setTipoDeber(jsonObject.optString("tipoDeber"));
-                    deberEstudiante.setIdDocente(jsonObject.optInt("docente_iddocente"));
-                    deberEstudiante.setIdCalificacion(jsonObject.optInt("calificacionestudiante_has_Deber"));
-                    deberEstudiante.setIdEstHasDeber(jsonObject.optInt("id_estudiante_has_Debercol"));
-                    listaDeberes_full.add(deberEstudiante);
+                    grupoEstudiantesHasDeber.setGrupo_estudiante_idgrupo_estudiante(jsonObject.optInt("grupo_estudiante_idgrupo_estudiante"));
+                    grupoEstudiantesHasDeber.setFecha_gehd(jsonObject.optString("fecha_gehd"));
+
+                    listaGrupoEstHasDeber.add(grupoEstudiantesHasDeber);
                    // lista_idEstudiante.add(deberEstudiante.getIdEstudiante());
 
                 }
-                //Toast.makeText(getApplicationContext(), "listagrupos: " + listaGrupos.size(), Toast.LENGTH_LONG).show();
-                // Log.i("size", "lista: " + listaGrupos.size());
-                NotasDeberesEstudianteAdapter notasDeberesEstudianteAdapter = new NotasDeberesEstudianteAdapter(listaDeberes_full);
+             /*   listaStringGrupoEstHasDeber = new ArrayList<>();
+                // listaStringEstudiantes.add("Seleccione Id Estudiante");
+                for (int i = 0; i < listaGrupoEstudiantes.size(); i++) {
+                    listaStringGrupoEstHasDeber.add(listaGrupoEstudiantes.get(i).getIdGrupoEstudiantes().toString() + " - " + listaGrupoEstudiantes.get(i).getNameGrupoEstudiantes());
+                }*/
+                Grupos_Estudiante_Has_DeberAdapter grupos_estudiante_has_deberAdapter = new Grupos_Estudiante_Has_DeberAdapter(listaGrupoEstHasDeber);
 
-                notasDeberesEstudianteAdapter.setOnClickListener(new View.OnClickListener() {
+                grupos_estudiante_has_deberAdapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
 
                     }
                 });
-                rv_datosGrupoEstudiante.setAdapter(notasDeberesEstudianteAdapter);
+                rv_datosGrupoEstudiante.setAdapter(grupos_estudiante_has_deberAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.d("error", response.toString());
