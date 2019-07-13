@@ -10,13 +10,29 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Notas_GrupoEstudiante"
+        android:background="@color/orange"
         android:gravity="center_horizontal"
-        android:background="@color/orange"/>
+        android:text="@string/Notas_GrupoEstudiante" />
 
-    <android.support.v7.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_notasGrupoEstHasDeber"></android.support.v7.widget.RecyclerView>
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabtn_show_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/flecha_atras" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_notasGrupoEstHasDeber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+    </FrameLayout>
+
 
 </LinearLayout>

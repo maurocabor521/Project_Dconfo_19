@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -68,6 +70,8 @@ public class ShowNotasGrupoEstudianteFragment extends Fragment implements Respon
     ArrayList<Integer> lista_idEstudiante;
     private String flag;
     RecyclerView rv_datosEstudiante;
+    FloatingActionButton fl_back;
+    FindNotasXGrupoEstFragment findNotasXGrupoEstFragment;
 
     private OnFragmentInteractionListener mListener;
 
@@ -113,6 +117,23 @@ public class ShowNotasGrupoEstudianteFragment extends Fragment implements Respon
         id_GrupoEst_rv = getArguments().getInt("idgrupoesthasdeber");
         System.out.println("id grupoesthasdeber: " + id_GrupoEst_rv);
         listaDeberes_full = new ArrayList<>();
+        fl_back = (FloatingActionButton) view.findViewById(R.id.fabtn_show_back);
+        fl_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle args1 = new Bundle();
+                args1.putInt("iddocente", iddocente);
+                args1.putInt("idgrupo", idgrupo);
+
+
+                findNotasXGrupoEstFragment = new FindNotasXGrupoEstFragment();
+                findNotasXGrupoEstFragment.setArguments(args1);
+                getFragmentManager().beginTransaction().replace(R.id.fl_contenedor_notas, findNotasXGrupoEstFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null).commit();
+            }
+        });
         rv_datosEstudiante = (RecyclerView) view.findViewById(R.id.rv_notasGrupoEstHasDeber);
         rv_datosEstudiante.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_datosEstudiante.setHasFixedSize(true);
@@ -226,7 +247,9 @@ public class ShowNotasGrupoEstudianteFragment extends Fragment implements Respon
 
                 progreso.hide();
             }
-            // System.out.println("Lista id estudiante: " + lista_idEstudiante.toString());
+            for (int i = 0; i < listaDeberes_full.size(); i++) {
+                System.out.println("Lista listaDeberes_full show: i=" + (i + 1) + " - Find - " + listaDeberes_full.get(i).getIdCalificacion());
+            }
         }//flag="1"
 
 

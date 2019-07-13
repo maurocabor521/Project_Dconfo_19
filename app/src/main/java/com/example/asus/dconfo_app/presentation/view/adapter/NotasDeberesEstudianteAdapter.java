@@ -62,7 +62,11 @@ public class NotasDeberesEstudianteAdapter extends RecyclerView.Adapter<NotasDeb
         holder.txt_IDdeber_notaDeber.setText(listaDeberes.get(position).getIdEstHasDeber().toString());
         holder.txt_IdEstudiante_notaDeber.setText(listaDeberes.get(position).getIdEstudiante().toString());
         holder.txt_id_Ejercicio_notaDeber.setText(listaDeberes.get(position).getIdEjercicio2().toString());
-        holder.txt_nota_notaDeber.setText(listaDeberes.get(position).getIdCalificacion().toString());
+        if (listaDeberes.get(position).getIdCalificacion().equals(0)) {
+            holder.txt_nota_notaDeber.setText("No se ha desarrollado el ejercicio");
+        }else {
+            holder.txt_nota_notaDeber.setText(listaDeberes.get(position).getIdCalificacion().toString());
+        }
         holder.txt_fecha_notaDeber.setText(listaDeberes.get(position).getFechaDeber());
     }
 

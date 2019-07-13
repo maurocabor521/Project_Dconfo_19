@@ -144,6 +144,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
         rv_datosGrupoEstudiante = (RecyclerView) view.findViewById(R.id.rv_docente_X_Grupo_Est_notas);
         rv_datosGrupoEstudiante.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_datosGrupoEstudiante.setHasFixedSize(true);
+        rv_datosGrupoEstudiante.setVisibility(View.GONE);
 
         listaDeberes_full = new ArrayList<>();
         listaGrupoEstHasDeber = new ArrayList<>();
@@ -243,12 +244,12 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
                         id_GrupoEst_rv = listaGrupoEstHasDeber.get(rv_datosGrupoEstudiante.
                                 getChildAdapterPosition(v)).getGrupo_estudiante_idgrupo_estudiante();
-                        Bundle args1 = new Bundle();
+
 
                         id_GrupoEst_has_deber = listaGrupoEstHasDeber.get(rv_datosGrupoEstudiante.
                                 getChildAdapterPosition(v)).getId_GE_H_D();
 
-
+                        Bundle args1 = new Bundle();
                         args1.putInt("iddocente", iddocente);
                         args1.putInt("idgrupo", idgrupo);
                         args1.putInt("idgrupoesthasdeber", id_GrupoEst_has_deber);
@@ -263,7 +264,7 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
                     }
                 });
-
+                rv_datosGrupoEstudiante.setVisibility(View.VISIBLE);
                 rv_datosGrupoEstudiante.setAdapter(grupos_estudiante_has_deberAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -273,7 +274,8 @@ public class FindNotasXGrupoEstFragment extends Fragment implements Response.Lis
 
                 progreso.hide();
             }
-            System.out.println("Lista listaDeberes_full: " + listaDeberes_full.toString());
+            //System.out.println("Lista listaDeberes_full: " + listaDeberes_full.toString());
+
         }//flag="1"
 
 
