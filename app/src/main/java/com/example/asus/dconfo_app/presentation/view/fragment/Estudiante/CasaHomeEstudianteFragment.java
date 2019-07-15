@@ -247,7 +247,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.hide();
-        // Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "ERROR-CASAHOME" + error.toString(), Toast.LENGTH_LONG).show();
         System.out.println("////////////////eeeerrrrrr////////////");
         if (buscar.equals("deber")) {
             Log.d("-ERROR-CASAHOME-deber: ", error.toString());

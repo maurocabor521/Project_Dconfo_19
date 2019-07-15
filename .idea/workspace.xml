@@ -15,14 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/CasaHomeEstudianteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/CasaHomeEstudianteFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +59,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="5" />
-          <entry key="java" value="469" />
+          <entry key="java" value="471" />
           <entry key="jpg" value="1" />
           <entry key="png" value="3" />
           <entry key="xml" value="284" />
@@ -72,7 +69,7 @@
         <counts>
           <entry key="Groovy" value="5" />
           <entry key="Image" value="4" />
-          <entry key="JAVA" value="469" />
+          <entry key="JAVA" value="471" />
           <entry key="XML" value="284" />
         </counts>
       </usages-collector>
@@ -80,7 +77,7 @@
         <counts>
           <entry key="dummy" value="7" />
           <entry key="gradle" value="3" />
-          <entry key="java" value="14193" />
+          <entry key="java" value="14195" />
           <entry key="txt" value="12" />
           <entry key="xml" value="5694" />
         </counts>
@@ -88,7 +85,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="3" />
-          <entry key="JAVA" value="14193" />
+          <entry key="JAVA" value="14195" />
           <entry key="PLAIN_TEXT" value="19" />
           <entry key="XML" value="5694" />
         </counts>
@@ -97,15 +94,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/tipoFragments/Tipo1Fragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2772">
-              <caret line="73" column="13" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/Tipo1EstudianteFragment.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -118,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="297" column="20" selection-start-line="297" selection-start-column="20" selection-end-line="297" selection-end-column="40" />
+            <state relative-caret-position="399">
+              <caret line="667" lean-forward="true" selection-start-line="613" selection-start-column="1" selection-end-line="667" />
               <folding>
                 <element signature="e#7864#8019#0" expanded="true" />
                 <element signature="e#8018#8019#0" expanded="true" />
@@ -128,11 +116,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="256" selection-start-line="256" selection-end-line="256" />
+            <state relative-caret-position="85">
+              <caret line="355" column="16" lean-forward="true" selection-start-line="355" selection-start-column="16" selection-end-line="355" selection-end-column="16" />
+              <folding>
+                <element signature="e#11129#11283#0" expanded="true" />
+                <element signature="e#11282#11283#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,17 +150,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/ejercicios/MisEjerciciosActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7890">
-              <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+            <state relative-caret-position="236">
+              <caret line="557" column="57" lean-forward="true" selection-start-line="557" selection-start-column="57" selection-end-line="557" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/CasaHomeEstudianteFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="250" column="66" selection-start-line="250" selection-start-column="66" selection-end-line="250" selection-end-column="66" />
+            <state relative-caret-position="184">
+              <caret line="245" selection-start-line="245" selection-end-line="245" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/fonicos/Tipo2FonicoUpdateFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-528">
+              <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/DeberesEstudianteAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1938">
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -178,16 +188,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
               <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo1_fonico_estudiante.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="124" column="31" selection-start-line="124" selection-start-column="31" selection-end-line="124" selection-end-column="31" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -292,8 +292,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/notas/FindNotasXEstudianteFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/notas/ShowNotasGrupoEstudianteFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/CasaHomeEstudianteFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java" />
       </list>
     </option>
   </component>
@@ -414,6 +414,27 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="fragment" type="462c0819:PsiDirectoryNode" />
               <item name="docente" type="462c0819:PsiDirectoryNode" />
+              <item name="modificarEjercicio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dconfo_app" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment" type="462c0819:PsiDirectoryNode" />
+              <item name="docente" type="462c0819:PsiDirectoryNode" />
+              <item name="modificarEjercicio" type="462c0819:PsiDirectoryNode" />
+              <item name="fonicos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dconfo_app" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment" type="462c0819:PsiDirectoryNode" />
+              <item name="docente" type="462c0819:PsiDirectoryNode" />
               <item name="notas" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -444,6 +465,16 @@
               <item name="fragment" type="462c0819:PsiDirectoryNode" />
               <item name="Estudiante" type="462c0819:PsiDirectoryNode" />
               <item name="fonico" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dconfo_app" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="fragment" type="462c0819:PsiDirectoryNode" />
+              <item name="Estudiante" type="462c0819:PsiDirectoryNode" />
+              <item name="silabico" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Dconfo_1" type="1abcf292:AndroidViewProjectNode" />
@@ -575,13 +606,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560433111516</updated>
-    </task>
-    <task id="LOCAL-00038" summary="nuevo commit">
-      <created>1561930693563</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1561930693563</updated>
     </task>
     <task id="LOCAL-00039" summary="nuevo commit">
       <created>1561935947669</created>
@@ -919,7 +943,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563057072616</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="nuevo commit">
+      <created>1563156261837</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1563156261837</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TodoView">
@@ -995,13 +1026,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="nuevo commit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/grupos/GrupoDocenteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/bottombar_createejerciciodocente.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
@@ -1256,13 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/DeberesEstudianteAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="72" selection-start-line="72" selection-end-line="73" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/Grupos_Estudiante_Has_DeberAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -1306,17 +1323,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="297" column="20" selection-start-line="297" selection-start-column="20" selection-end-line="297" selection-end-column="40" />
-          <folding>
-            <element signature="e#7864#8019#0" expanded="true" />
-            <element signature="e#8018#8019#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tipo2_fonico2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -1324,13 +1330,6 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="256" selection-start-line="256" selection-end-line="256" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/InicioEjercicioFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1346,17 +1345,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/ejercicios/MisEjerciciosActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/adapter/DeberesEstudianteAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7890">
-          <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+        <state relative-caret-position="-1938">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/CasaHomeEstudianteFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="250" column="66" selection-start-line="250" selection-start-column="66" selection-end-line="250" selection-end-column="66" />
+        <state relative-caret-position="184">
+          <caret line="245" selection-start-line="245" selection-end-line="245" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/docente/modificarEjercicio/fonicos/Tipo2FonicoUpdateFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-528">
+          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/activity/docente/ejercicios/MisEjerciciosActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="557" column="57" lean-forward="true" selection-start-line="557" selection-start-column="57" selection-end-line="557" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo1FonicoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="667" lean-forward="true" selection-start-line="613" selection-start-column="1" selection-end-line="667" />
+          <folding>
+            <element signature="e#7864#8019#0" expanded="true" />
+            <element signature="e#8018#8019#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asus/dconfo_app/presentation/view/fragment/Estudiante/fonico/Tipo2FonicoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="355" column="16" lean-forward="true" selection-start-line="355" selection-start-column="16" selection-end-line="355" selection-end-column="16" />
+          <folding>
+            <element signature="e#11129#11283#0" expanded="true" />
+            <element signature="e#11282#11283#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
