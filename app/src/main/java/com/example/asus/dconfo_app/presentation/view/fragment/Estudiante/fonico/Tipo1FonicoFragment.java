@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -151,6 +152,9 @@ public class Tipo1FonicoFragment extends Fragment
     LinearLayout ll_ocultar_video;
     LinearLayout ll_ejercicio;
     int cont = 0;
+    MediaPlayer mediaPlayer;
+    MediaPlayer mp1;
+    MediaPlayer mp2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -190,6 +194,10 @@ public class Tipo1FonicoFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tipo1_fonico_estudiante, container, false);
+
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.ping4);
+        mp1 = MediaPlayer.create(getContext(), R.raw.exito);
+        mp2 = MediaPlayer.create(getContext(), R.raw.error);
 
         txt_letra = view.findViewById(R.id.txt_estudiante_fonico1_letra);
 
@@ -287,12 +295,14 @@ public class Tipo1FonicoFragment extends Fragment
             @Override
             public void onClick(View v) {
                 if (flagc1 == 0) {
+                    mediaPlayer.start();
                     flagf1_c1 = true;
                     flagc1++;
                     btn_selected_c1.setVisibility(View.VISIBLE);
                     System.out.println(" flagf1_c1 : " + flagf1_c1);
                     Toast.makeText(getContext(), "iv_f1_c1", Toast.LENGTH_LONG).show();
                 } else {
+                    mediaPlayer.start();
                     flagf1_c1 = false;
                     flagc1--;
                     btn_selected_c1.setVisibility(View.INVISIBLE);
@@ -304,12 +314,14 @@ public class Tipo1FonicoFragment extends Fragment
         iv_f1_c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 if (flagc2 == 0) {
                     flagf1_c2 = true;
                     flagc2++;
                     btn_selected_c2.setVisibility(View.VISIBLE);
                     System.out.println(" flagf1_c2 : " + flagf1_c2);
                 } else {
+                    mediaPlayer.start();
                     flagf1_c2 = false;
                     flagc2--;
                     btn_selected_c2.setVisibility(View.INVISIBLE);
@@ -321,11 +333,13 @@ public class Tipo1FonicoFragment extends Fragment
             @Override
             public void onClick(View v) {
                 if (flagc3 == 0) {
+                    mediaPlayer.start();
                     flagf1_c3 = true;
                     flagc3++;
                     btn_selected_c3.setVisibility(View.VISIBLE);
                     System.out.println(" flagf1_c3 : " + flagf1_c3);
                 } else {
+                    mediaPlayer.start();
                     flagf1_c3 = false;
                     flagc3--;
                     btn_selected_c3.setVisibility(View.INVISIBLE);
@@ -337,11 +351,13 @@ public class Tipo1FonicoFragment extends Fragment
             @Override
             public void onClick(View v) {
                 if (flagc4 == 0) {
+                    mediaPlayer.start();
                     flagf1_c4 = true;
                     flagc4++;
                     btn_selected_c4.setVisibility(View.VISIBLE);
                     System.out.println(" flagf1_c4 : " + flagf1_c4);
                 } else {
+                    mediaPlayer.start();
                     flagf1_c4 = false;
                     flagc4--;
                     btn_selected_c4.setVisibility(View.INVISIBLE);
@@ -531,6 +547,7 @@ public class Tipo1FonicoFragment extends Fragment
             System.out.println(" Ejercicio aprobado. cant letras igual a letra: " + letraIgual + " = " + letraIgual_correcto);
             System.out.println(" letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Muy Bien!!!!");
+            mp1.start();
             nota = 5;
             cargarWebService_1();
             enviarNota();
@@ -558,7 +575,8 @@ public class Tipo1FonicoFragment extends Fragment
         } else {
             System.out.println("Error letra igual - letra no igual: " + letraIgual + " = " + letraNoIgual);
             txt_resultado.setText("Intentalo de nuevo");
-
+            mp2.start();
+            mostrarError();
             intento--;
             txt_intento.setText(String.valueOf(intento));
             if (intento == 0) {
@@ -604,6 +622,29 @@ public class Tipo1FonicoFragment extends Fragment
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         crearTranstition();
+                    }
+                });
+        alertDialog.show();
+    }
+    private void mostrarError() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Fallaste!!!");
+        if (intento != 0) {
+            alertDialog.setMessage("Intentalo de nuevo ");
+        }else {
+            alertDialog.setMessage("Lo siento !!! ");
+        }
+
+        Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.rana_gif);
+
+        alertDialog.setIcon(drawable);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        if (intento == 0) {
+                            crearTranstition();
+                        }
                     }
                 });
         alertDialog.show();

@@ -184,7 +184,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
         bundle_t2.putString("nameEstudiante", nameestudiante);
         bundle_t2.putInt("idEstudiante", idestudiante);
-        System.out.println("id del estudiante****************"+idestudiante);
+        System.out.println("id del estudiante****************" + idestudiante);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Hola!!! " + nameestudiante + " - id: " + idestudiante);
 
@@ -248,8 +248,19 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
     public void onErrorResponse(VolleyError error) {
         progreso.hide();
         // Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
-        System.out.println();
-        Log.d("-ERROR-CASAHOME: ", error.toString());
+        System.out.println("////////////////eeeerrrrrr////////////");
+        if (buscar.equals("deber")) {
+            Log.d("-ERROR-CASAHOME-deber: ", error.toString());
+        } else if (buscar.equals("eje1")) {
+            Log.d("-ERROR-CASAHOME-eje1: ", error.toString());
+        } else if (buscar.equals("eje2")) {
+            Log.d("-ERROR-CASAHOME-eje2: ", error.toString());
+        } else if (buscar.equals("eje3")) {
+            Log.d("-ERROR-CASAHOME-eje3: ", error.toString());
+        } else if (buscar.equals("eje4")) {
+            Log.d("-ERROR-CASAHOME-eje4: ", error.toString());
+        }
+
         //progreso.hide();
     }
 
@@ -319,7 +330,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
                 }
 
-                txt_listHechas.setText(String.valueOf(listaDeberes_full.size()-listaDeberes.size()));
+                txt_listHechas.setText(String.valueOf(listaDeberes_full.size() - listaDeberes.size()));
                 // System.out.println("************listaDeberes: " + listaDeberes.size());
                 //System.out.println("************listaIdEjercicio: " + listaEjercicios_g2.toString());
 
@@ -505,8 +516,8 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     cargarWebService();
                 }
                 if (tipo == 6) {
-                    System.out.println("BUNDLE_T2: "+bundle_t2.toString());
-                    Toast.makeText(getContext(),"idejercicio: "+bundle_t2.toString(),Toast.LENGTH_SHORT).show();
+                    System.out.println("BUNDLE_T2: " + bundle_t2.toString());
+                    Toast.makeText(getContext(), "idejercicio: " + bundle_t2.toString(), Toast.LENGTH_SHORT).show();
                     tipo2silabicoEstudianteFragment.setArguments(bundle_t2);
                     // inicioEjercicioFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo2silabicoEstudianteFragment)
@@ -700,9 +711,9 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
                     buscar = "eje3";
                     cargarWebService();
                 } else if (tipo == 3) {//************listo
-                    System.out.println("BUNDLE_T2: "+bundle.toString());
+                    System.out.println("BUNDLE_T2: " + bundle.toString());
                     tipo1EstudianteFragment.setArguments(bundle);
-                   // tipo1EstudianteFragment.setArguments(bundle_t2);
+                    // tipo1EstudianteFragment.setArguments(bundle_t2);
                     // inicioEjercicioFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, tipo1EstudianteFragment)
                             //getFragmentManager().beginTransaction().replace(R.id.container_HomeEstudiante, inicioEjercicioFragment)

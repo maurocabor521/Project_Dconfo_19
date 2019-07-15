@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -201,6 +202,10 @@ public class Tipo2FonicoFragment extends Fragment
     StringRequest stringRequest;
     JsonObjectRequest jsonObjectRequest;
 
+    MediaPlayer mediaPlayer;
+    MediaPlayer mp1;
+    MediaPlayer mp2;
+
     private OnFragmentInteractionListener mListener;
 
     public Tipo2FonicoFragment() {
@@ -240,14 +245,18 @@ public class Tipo2FonicoFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tipo2_fonico2, container, false);
 
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.ping4);
+        mp1 = MediaPlayer.create(getContext(), R.raw.exito);
+        mp2 = MediaPlayer.create(getContext(), R.raw.error);
+
         letrainicial = getArguments().getString("letrainicial");
-        System.out.println("letrainicial: " + letrainicial);
+        System.out.println("letrainicial fon2: " + letrainicial);
 
         letrafinal = getArguments().getString("letrafinal");
-        System.out.println("letrafinal: " + letrafinal);
+        System.out.println("letrafinal fon 2: " + letrafinal);
 
         iddeber = getArguments().getInt("idesthasdeber");
-        System.out.println("iddeber: " + iddeber);
+        System.out.println("iddeber fon2: " + iddeber);
 
         cv_est_ft2_c1f1 = (CircleImageView) view.findViewById(R.id.iv_estudiante_fon2_c1_f1);
         cv_est_ft2_c1f2 = (CircleImageView) view.findViewById(R.id.iv_estudiante_fon2_c1_f2);
@@ -1715,7 +1724,7 @@ public class Tipo2FonicoFragment extends Fragment
         switch (v.getId()) {
             case R.id.iv_estudiante_fon2_c1_f1:
                 if (cv_c1f1_isactived == false && cv_c1f1_desactivado == false) {
-
+                    mediaPlayer.start();
                     cv_c1f1_isactived = true;
                     col_imgs = true;
                     contadorColImgs++;
@@ -1733,7 +1742,7 @@ public class Tipo2FonicoFragment extends Fragment
                 Toast.makeText(getContext(), "imagen c1f1 :" + cv_c1f1_isactived, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_estudiante_fon2_c1_f2:
-
+                mediaPlayer.start();
                 if (cv_c1f2_isactived == false && cv_c1f2_desactivado == false) {
                     cv_c1f2_isactived = true;
                     col_imgs = true;
@@ -1755,6 +1764,7 @@ public class Tipo2FonicoFragment extends Fragment
                 System.out.println("imagen 2");
                 break;
             case R.id.iv_estudiante_fon2_c1_f3:
+                mediaPlayer.start();
                 if (cv_c1f3_isactived == false && cv_c1f3_desactivado == false) {
                     cv_c1f3_isactived = true;
                     col_imgs = true;
@@ -1775,7 +1785,7 @@ public class Tipo2FonicoFragment extends Fragment
                 System.out.println("imagen 3");
                 break;
             case R.id.iv_estudiante_fon2_c1_f4:
-
+                mediaPlayer.start();
                 if (cv_c1f4_isactived == false && cv_c1f4_desactivado == false) {
                     cv_c1f4_isactived = true;
                     col_imgs = true;
@@ -1796,6 +1806,7 @@ public class Tipo2FonicoFragment extends Fragment
                 System.out.println("imagen 4");
                 break;
             case R.id.edt_estudiante_fon2_l1:
+                mediaPlayer.start();
                 if (txt_c1f1_isactived == false && txt_c1f1_desactivado == false) {
                     txt_c1f1_isactived = true;
                     col_letras = true;
@@ -1811,6 +1822,7 @@ public class Tipo2FonicoFragment extends Fragment
                 }
                 break;
             case R.id.edt_estudiante_fon2_l2:
+                mediaPlayer.start();
                 if (txt_c1f2_isactived == false && txt_c1f2_desactivado == false) {
                     txt_c1f2_isactived = true;
                     col_letras = true;
@@ -1826,6 +1838,7 @@ public class Tipo2FonicoFragment extends Fragment
                 }
                 break;
             case R.id.edt_estudiante_fon2_l3:
+                mediaPlayer.start();
                 if (txt_c1f3_isactived == false && txt_c1f3_desactivado == false) {
                     txt_c1f3_isactived = true;
                     col_letras = true;
@@ -1841,6 +1854,7 @@ public class Tipo2FonicoFragment extends Fragment
                 }
                 break;
             case R.id.edt_estudiante_fon2_l4:
+                mediaPlayer.start();
                 if (txt_c1f4_isactived == false && txt_c1f4_desactivado == false) {
                     txt_c1f4_isactived = true;
                     col_letras = true;
