@@ -13,8 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="ASIGNAR DEBER SILÁBICO"
-        android:textStyle="bold" />
+        android:text="ASIGNAR"
+        android:textStyle="bold"
+        android:id="@+id/txt_tittle_asig"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -122,6 +123,36 @@
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_asignar_choise_act_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fónico"
+                    android:theme="@style/RaisedButtonDark" />
+
+                <Button
+                    android:id="@+id/btn_asignar_choise_act_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Léxico"
+                    android:theme="@style/RaisedButtonDark" />
+
+                <Button
+                    android:id="@+id/btn_asignar_choise_act_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Silábico"
+                    android:theme="@style/RaisedButtonDark" />
             </LinearLayout>
 
             <LinearLayout

@@ -1,7 +1,10 @@
 package com.example.asus.dconfo_app.presentation.view.fragment.Estudiante;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -249,6 +252,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         System.out.println("////////////////eeeerrrrrr////////////");
         if (buscar.equals("deber")) {
             Log.d("-ERROR-CASAHOME-deber: ", error.toString());
+            notificar();
         } else if (buscar.equals("eje1")) {
             Log.d("-ERROR-CASAHOME-eje1: ", error.toString());
         } else if (buscar.equals("eje2")) {
@@ -327,6 +331,10 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
 
                 }
+
+              //  if (listaDeberes_full.size()==0){
+
+               // }
 
                 txt_listHechas.setText(String.valueOf(listaDeberes_full.size() - listaDeberes.size()));
                 // System.out.println("************listaDeberes: " + listaDeberes.size());
@@ -613,6 +621,26 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
 
 
     }//onResponse
+
+    private void notificar() {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("No tienes Deberes!!!");
+
+
+           /* Drawable drawable = ll_intento.getResources().getDrawable(R.drawable.rana_gif);
+
+            alertDialog.setIcon(drawable);*/
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            alertDialog.show();
+
+    }
 
     private void crearRecyclerview() {
         DeberesEstudianteAdapter deberesEstudianteAdapter =

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -129,6 +130,16 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
     String idEjercicio;
     String idAsignacion;
 
+    Button btn_act_fon;
+    Button btn_act_lex;
+    Button btn_act_sil;
+
+    int id_Actividad;
+    TextView tittle;
+
+    final List<String> listaStringEjercicios = new ArrayList<>();
+    final List<String> listaStringAsignacion = new ArrayList<>();
+
 
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
@@ -148,6 +159,8 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         listaIdEjerG2_Asi_H_E = new ArrayList<>();
         listaString_id_Estudiante_GrupoHE = new ArrayList<>();
+        listaEjercicios = new ArrayList<>();
+        listaAsignaciones = new ArrayList<>();
 
         progreso = new ProgressDialog(getApplicationContext());
         edt_idEstudiante = findViewById(R.id.edt_id_estudiate_deber);
@@ -168,6 +181,52 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         ll_eje = (LinearLayout) findViewById(R.id.ll_docente_X_ejer_sp);
         ll_act = (LinearLayout) findViewById(R.id.ll_docente_X_actividades_sp);
+
+        tittle= (TextView) findViewById(R.id.txt_tittle_asig);
+
+        btn_act_fon = (Button) findViewById(R.id.btn_asignar_choise_act_1);
+        btn_act_fon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id_Actividad=1;
+                listaEjercicios.clear();
+                listaStringEjercicios.clear();
+
+                listaAsignaciones.clear();
+                listaStringAsignacion.clear();
+                listarEjercicios_Docente();
+                listar_Actividades_Docente();
+                tittle.setText("Ejercicio Fónico");
+            }
+        });
+        btn_act_lex = (Button) findViewById(R.id.btn_asignar_choise_act_2);
+        btn_act_lex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id_Actividad=2;
+                listaEjercicios.clear();
+                listaStringEjercicios.clear();
+                listaAsignaciones.clear();
+                listaStringAsignacion.clear();
+                listarEjercicios_Docente();
+                listar_Actividades_Docente();
+                tittle.setText("Ejercicio Léxico");
+            }
+        });
+        btn_act_sil = (Button) findViewById(R.id.btn_asignar_choise_act_3);
+        btn_act_sil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id_Actividad=3;
+                listaEjercicios.clear();
+                listaStringEjercicios.clear();
+                listaAsignaciones.clear();
+                listaStringAsignacion.clear();
+                listarEjercicios_Docente();
+                listar_Actividades_Docente();
+                tittle.setText("Ejercicio Silábico");
+            }
+        });
 
         btn_est = (Button) findViewById(R.id.btn_docente_sp_est);
         btn_est.setOnClickListener(new View.OnClickListener() {
@@ -322,11 +381,29 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("fecha actual: " + simpleDateFormat.format(calendar.getTime()));
-        listarEjercicios_Docente();
+       // listarEjercicios_Docente();
         listarEstudiantes();
         listarGrupo_Estudiantes_Docente();
-        listar_Actividades_Docente();
+        //listar_Actividades_Docente();
         //cargarEjercicios();
+        showToolbar("Mis Asignaciones" + " - " + iddocente, true);
+    }
+
+
+    //método que permite volver al padre conservando las variables
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    public void showToolbar(String tittle, boolean upButton) {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_ejercicio);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(tittle);
+        //getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
     //**********************************************************************************************
 
@@ -637,7 +714,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
         int idactividad = 3;
 
         String url = "http://" + url_lh +
-                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="+idgrupo+"&iddocente="+iddocente+"&idactividad="+idactividad;
+                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="+idgrupo+"&iddocente="+iddocente+"&idactividad="+id_Actividad;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -651,7 +728,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         Asignacion asignacion = null;
-                        listaAsignaciones = new ArrayList<>();
+
 
                         // Process the JSON
                         try {
@@ -673,7 +750,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
                                 listaAsignaciones.add(asignacion);
                             }
 
-                            final List<String> listaStringAsignacion = new ArrayList<>();
+
                             listaStringAsignacion.add("Seleccione Id Actividad");
                             for (int i = 0; i < listaAsignaciones.size(); i++) {
                                 listaStringAsignacion.add(listaAsignaciones.get(i).getIdGrupoAsignacion().toString() + " - " + listaAsignaciones.get(i).getNameGrupoAsignacion());
@@ -885,7 +962,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente="+iddocente+"&idactividad="+2;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente="+iddocente+"&idactividad="+id_Actividad;
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSON1ConsultarListaEjercicios.php";
 
 
@@ -901,7 +978,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // Do something with response
 
-                        listaEjercicios = new ArrayList<>();
+
 
                         EjercicioG2 ejercicioG2 = null;
 
@@ -921,7 +998,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
                                 listaEjercicios.add(ejercicioG2);
                             }
 
-                            final List<String> listaStringEjercicios = new ArrayList<>();
+
                             listaStringEjercicios.add("Seleccione Id Ejercicio");
                             for (int i = 0; i < listaEjercicios.size(); i++) {
                                 listaStringEjercicios.add(listaEjercicios.get(i).getIdEjercicioG2().toString());

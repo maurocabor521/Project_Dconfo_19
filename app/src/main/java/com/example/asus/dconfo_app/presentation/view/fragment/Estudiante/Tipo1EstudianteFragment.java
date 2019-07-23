@@ -42,6 +42,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.asus.dconfo_app.R;
 import com.example.asus.dconfo_app.domain.model.EjercicioG1;
 import com.example.asus.dconfo_app.domain.model.EjercicioG2;
+import com.example.asus.dconfo_app.domain.model.TTSManager;
 import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.AsignarEstudianteDeberActivity;
@@ -67,7 +68,7 @@ import java.util.Map;
  */
 public class Tipo1EstudianteFragment extends Fragment
         implements Response.Listener<JSONObject>,
-        Response.ErrorListener , TextToSpeech.OnInitListener {
+        Response.ErrorListener, TextToSpeech.OnInitListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,8 +88,10 @@ public class Tipo1EstudianteFragment extends Fragment
     private Button btn_b4;
     private Button btn_b5;
     private Button btn_responder;
+
     private TextToSpeech mTTS;
     private TextView txt_miRespuesta;
+
 
     private SeekBar mSeekBarPitch;
     private SeekBar mSeekBarSpeed;
@@ -129,6 +132,8 @@ public class Tipo1EstudianteFragment extends Fragment
 
     pl.droidsonroids.gif.GifImageButton gifImageButton;
 
+    //TTSManager mTTS=null;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -163,17 +168,6 @@ public class Tipo1EstudianteFragment extends Fragment
         }
     }
 
-    // setup TTS
-    public void onInit(int initStatus) {
-
-        // check for successful instantiation
-        if (initStatus == TextToSpeech.SUCCESS) {
-            if (mTTS.isLanguageAvailable(new Locale("spa", "ESP")) == TextToSpeech.LANG_AVAILABLE)
-                mTTS.setLanguage(new Locale("spa", "ESP"));
-        } else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(getContext(),"Sorry! Text To Speech failed...",Toast.LENGTH_SHORT);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -218,7 +212,10 @@ public class Tipo1EstudianteFragment extends Fragment
             }
         });
 
-        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+        //mTTS=new TTSManager();
+        //mTTS.init(getActivity());
+
+      /*  mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
@@ -238,7 +235,8 @@ public class Tipo1EstudianteFragment extends Fragment
                     Log.e("TTS", "Initialization failed");
                 }
             }
-        });
+        });*/
+        mTTS = new TextToSpeech(getActivity(), this);
 
         iv_imagen = (ImageView) view.findViewById(R.id.iv_estudiante_tipo1);
 
@@ -306,6 +304,42 @@ public class Tipo1EstudianteFragment extends Fragment
         cargarWebService();
 
         return view;
+    }
+
+    public boolean textToSpeechIsInitialized = false;  // <--- add this line
+
+    // setup TTS
+    public void onInit(int initStatus) {
+
+        initStatus=0;
+
+        if (initStatus == TextToSpeech.SUCCESS) {
+
+            textToSpeechIsInitialized = true;  // <--- add this line
+
+            int result = mTTS.setLanguage(new Locale("spa", "ESP"));
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                // speakOut("badr","dfd");
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+        System.out.println("initStatus////////////////" + initStatus);
+      /*  if (initStatus == TextToSpeech.SUCCESS) {
+            //Setting speech Language
+            mTTS.setLanguage(new Locale("spa", "ESP"));
+            mTTS.setPitch(1);
+
+        }*/
+
+
+        //mTTS=new TTSManager();
+        //mTTS.init(getActivity());
     }
 
     // ----------------------------------------------------------------------------------------------
@@ -457,6 +491,8 @@ public class Tipo1EstudianteFragment extends Fragment
         mTTS.setSpeechRate(speed);
 
         mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
+
+        // mTTS.initQueue(textOracion);
 
         System.out.println("oración: " + textOracion);
     }
