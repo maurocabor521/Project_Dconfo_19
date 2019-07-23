@@ -186,7 +186,7 @@ public class HomeFonicoFragment extends Fragment implements View.OnClickListener
             String iddoc = "20181";
             String url_lh = Globals.url;
 
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + 1;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente="+iddocente+"&idactividad="+1;
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
             final int MY_DEFAULT_TIMEOUT = 15000;

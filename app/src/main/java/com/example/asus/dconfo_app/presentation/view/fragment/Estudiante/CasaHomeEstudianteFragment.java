@@ -206,8 +206,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         if (buscar.equals("deber")) {
             String url_lh = Globals.url;
             //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaDeberesEst.php?estudiante_idestudiante=" + idestudiante;
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8wsJSONConsultarListaDeberesEst.php?estudiante_idestudiante="
-                    + idestudiante;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/8wsJSONConsultarListaDeberesEst.php?estudiante_idestudiante="+idestudiante;
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
             VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
@@ -220,14 +219,13 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         } else if (buscar.equals("eje2")) {
             String url_lh = Globals.url;
             //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarEjercicioFonico1.php?idEjercicioG2=" + IdEjercicioG2;
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/9wsJSONConsultarEjercicioEstudiante.php?idEjercicioG2="
-                    + IdEjercicioG2;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/9wsJSONConsultarEjercicioEstudiante.php?idEjercicioG2="+IdEjercicioG2;
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
             VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21
         } else if (buscar.equals("eje3")) {//**************AGREGADO
             String url_lh = Globals.url;
             // String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjerG2_DET.php?idejercicioG2=" + idEjercicio;
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/10wsJSONConsultarListaEjerG2_H_Img.php?idejercicioG2=" + ejerpos2;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/10wsJSONConsultarListaEjerG2_H_Img.php?idejercicioG2="+ejerpos2;
             url = url.replace(" ", "%20");
             //Toast.makeText(getContext(), "consultar lista det imagenes: ", Toast.LENGTH_LONG).show();
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
@@ -235,7 +233,7 @@ public class CasaHomeEstudianteFragment extends Fragment implements Response.Lis
         } else if (buscar.equals("eje4")) {
             String url_lh = Globals.url;
             //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSON__ConsultarListaEjerG2_Has_Letra.php?idejercicioG2=" + idEjercicio;
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/11wsJSON__ConsultarListaEjerG2_Has_Letra.php?idejercicioG2=" + ejerpos2;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/11wsJSON__ConsultarListaEjerG2_Has_Letra.php?idejercicioG2="+ejerpos2;
             url = url.replace(" ", "%20");
             //Toast.makeText(getContext(), "consultar lista det letras: ", Toast.LENGTH_LONG).show();
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);

@@ -1736,7 +1736,7 @@ public class Tipo2silabicoEstudianteFragment extends Fragment
         //if ()
 
         String url_lh = Globals.url;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarImagen.php?idImagen_Ejercicio=" + idejercicio;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarImagen.php?idImagen_Ejercicio="+idejercicio;
         url = url.replace(" ", "%20");
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);//p21

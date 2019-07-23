@@ -291,8 +291,7 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
 
 
         String url = "http://" + url_lh +
-                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="
-                + idgrupo + "& iddocente=" + iddocente + "& idactividad=" + idactividad;
+                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="+idgrupo+"&iddocente="+iddocente+"&idactividad="+idactividad;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -373,7 +372,7 @@ public class ActividadDocenteActivity extends AppCompatActivity implements Respo
         String iddoc = "20181";
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente="+iddocente+"&idactividad="+idactividad;
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
         final int MY_DEFAULT_TIMEOUT = 15000;

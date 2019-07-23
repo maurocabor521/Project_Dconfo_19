@@ -207,12 +207,12 @@
                     android:text="Responder"
                     android:theme="@style/RaisedButtonDark" />
 
-                <pl.droidsonroids.gif.GifImageButton
+              <!--  <pl.droidsonroids.gif.GifImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/rana_gif"
-                    android:id="@+id/pl_gif_lex1"/>
+                    android:id="@+id/pl_gif_lex1"/>-->
 
 
             </LinearLayout>

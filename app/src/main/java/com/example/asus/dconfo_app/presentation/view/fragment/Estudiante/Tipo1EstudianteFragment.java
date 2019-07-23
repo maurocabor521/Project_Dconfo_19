@@ -67,7 +67,7 @@ import java.util.Map;
  */
 public class Tipo1EstudianteFragment extends Fragment
         implements Response.Listener<JSONObject>,
-        Response.ErrorListener {
+        Response.ErrorListener , TextToSpeech.OnInitListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -163,6 +163,18 @@ public class Tipo1EstudianteFragment extends Fragment
         }
     }
 
+    // setup TTS
+    public void onInit(int initStatus) {
+
+        // check for successful instantiation
+        if (initStatus == TextToSpeech.SUCCESS) {
+            if (mTTS.isLanguageAvailable(new Locale("spa", "ESP")) == TextToSpeech.LANG_AVAILABLE)
+                mTTS.setLanguage(new Locale("spa", "ESP"));
+        } else if (initStatus == TextToSpeech.ERROR) {
+            Toast.makeText(getContext(),"Sorry! Text To Speech failed...",Toast.LENGTH_SHORT);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -181,7 +193,7 @@ public class Tipo1EstudianteFragment extends Fragment
         ll_intento.setVisibility(View.VISIBLE);
         txt_intento = view.findViewById(R.id.txt_est_lex1_intento);
 
-        gifImageButton = view.findViewById(R.id.pl_gif_lex1);
+        //gifImageButton = view.findViewById(R.id.pl_gif_lex1);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.ping4);
         mp1 = MediaPlayer.create(getContext(), R.raw.exito);
         mp2 = MediaPlayer.create(getContext(), R.raw.error);
@@ -216,6 +228,9 @@ public class Tipo1EstudianteFragment extends Fragment
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supported");
+                        Intent installIntent = new Intent();
+                        installIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                        startActivity(installIntent);
                     } else {
                         // mButtonSpeak.setEnabled(true);
                     }
@@ -369,7 +384,7 @@ public class Tipo1EstudianteFragment extends Fragment
         alertDialog.setTitle("Fallaste!!!");
         if (intento != 0) {
             alertDialog.setMessage("Intentalo de nuevo ");
-        }else {
+        } else {
             alertDialog.setMessage("Lo siento !!! ");
         }
 
@@ -442,6 +457,7 @@ public class Tipo1EstudianteFragment extends Fragment
         mTTS.setSpeechRate(speed);
 
         mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
+
         System.out.println("oración: " + textOracion);
     }
 

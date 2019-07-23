@@ -281,7 +281,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             String iddoc = "20181";
             String url_lh = Globals.url;
 
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" + idactividad;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente="+iddocente+"&idactividad="+idactividad;
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
             final int MY_DEFAULT_TIMEOUT = 15000;
@@ -291,7 +291,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
             // request.add(jsonObjectRequest);
-            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
         } else if (buscar.equals("1")) {//**************AGREGADO
             String url_lh = Globals.url;
 
@@ -299,7 +299,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             url = url.replace(" ", "%20");
 
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
+            VolleySingleton.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);//p21
         } else if (buscar.equals("2")) {
             String url_lh = Globals.url;
 
@@ -307,7 +307,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
             url = url.replace(" ", "%20");
 
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-            VolleySingleton.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);//p21
+            VolleySingleton.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);//p21
         }
 
         // Toast.makeText(getContext(), "LISTA EJERCICIOS DOC.", Toast.LENGTH_LONG).show();
@@ -318,7 +318,7 @@ public class MisEjerciciosActivity extends AppCompatActivity implements Response
         progreso.hide();
         // Toast.makeText(getContext(), "No se puede cone , grupo doc" + error.toString(), Toast.LENGTH_LONG).show();
         System.out.println();
-        Log.d("ERROR", error.toString());
+        Log.d("ERROR CExA: ", error.toString());
         // progreso.hide();
     }
 

@@ -181,7 +181,7 @@ public class HomeTiposFragment extends Fragment
             String iddoc = "20181";
             String url_lh = Globals.url;
 
-            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente=" + iddocente + "& idactividad=" +2;
+            String url = "http://" + url_lh + "/proyecto_dconfo_v1/20wsJSONConsultarListaEjerciciosXactividad.php?iddocente="+iddocente+"&idactividad="+2;
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
             final int MY_DEFAULT_TIMEOUT = 15000;

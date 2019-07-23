@@ -38,15 +38,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.view.activity.docente.Home_ActivitiesActivity" />
-        <activity android:name=".Home_AppActivity" />
+        <activity android:name=".Home_AppActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.administrador.Home_AdminActivity"
             android:label="@string/title_activity_home__admin"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".presentation.view.activity.docente.HomeDocenteActivity"
             android:label="@string/title_activity_home_docente"
-            android:theme="@style/AppTheme.NoActionBar" />
+          />
         <activity android:name=".presentation.view.activity.estudiante.HomeEstudianteActivity" />
         <activity android:name=".presentation.view.activity.estudiante.LoginEstudianteActivity" />
         <activity

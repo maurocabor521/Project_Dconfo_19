@@ -429,7 +429,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/4wsJSONConsultarListaEstudiantesGrupoDocente.php?idgrupo=" + idgrupo;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/4wsJSONConsultarListaEstudiantesGrupoDocente.php?idgrupo="+idgrupo;
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSONConsultarListaCursos.php";
 
         //jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
@@ -539,7 +539,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
         String url_lh = Globals.url;
 
         String url = "http://" + url_lh +
-                "/proyecto_dconfo_v1/12wsJSONConsultar_Lista_Grupo_Est.php?idgrupo=" + idgrupo + "& iddocente=" + iddocente;
+                "/proyecto_dconfo_v1/12wsJSONConsultar_Lista_Grupo_Est.php?idgrupo="+idgrupo+"&iddocente="+iddocente;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -637,8 +637,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
         int idactividad = 3;
 
         String url = "http://" + url_lh +
-                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="
-                + idgrupo + "& iddocente=" + iddocente + "& idactividad=" + idactividad;
+                "/proyecto_dconfo_v1/13wsJSONConsultar_Lista_Asignaciones.php?idgrupo="+idgrupo+"&iddocente="+iddocente+"&idactividad="+idactividad;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -727,7 +726,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
     //***********************************
     public void listar_Ejercicios_de_Asignacion() {
         String url_lh = Globals.url;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/14wsJSONConsultar_Lista_idEjer_Act.php?idactividad=" + idactividad;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/14wsJSONConsultar_Lista_idEjer_Act.php?idactividad="+idactividad;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -803,7 +802,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
     //***********************************
     public void listar_Estudiantes_de_GrupoEst() {
         String url_lh = Globals.url;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/15wsJSONConsultar_Lista_idEst_Grupo.php?idgrupoest=" + grupoestudiante;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/15wsJSONConsultar_Lista_idEst_Grupo.php?idgrupoest="+grupoestudiante;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -886,7 +885,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente=" + iddocente + "& idactividad=" + 2;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente="+iddocente+"&idactividad="+2;
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSON1ConsultarListaEjercicios.php";
 
 
@@ -1099,7 +1098,7 @@ public class AsignarEstudianteDeberActivity extends AppCompatActivity {
 
         String url_lh = Globals.url;
 
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/17wsJSONConsultar_Lista_Grupo_H_Deber.php?iddocente=" + iddocente;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/17wsJSONConsultar_Lista_Grupo_H_Deber.php?iddocente="+iddocente;
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSON1ConsultarListaEjercicios.php";
 
 

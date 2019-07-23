@@ -144,7 +144,7 @@ public class AsignarEjercicioFonicoActivity extends AppCompatActivity {
         String url_lh = Globals.url;
 
         //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEstudiantesGrupoDocente.php?idgrupo=" + idgrupo;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/4wsJSONConsultarListaEstudiantesGrupoDocente.php?idgrupo=" + idgrupo;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/4wsJSONConsultarListaEstudiantesGrupoDocente.php?idgrupo="+idgrupo;
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSONConsultarListaCursos.php";
 
         //jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
@@ -257,7 +257,7 @@ public class AsignarEjercicioFonicoActivity extends AppCompatActivity {
 
         //String url = "http://" + url_lh + "/proyecto_dconfo/wsJSONConsultarListaEjerciciosDocente.php?iddocente=" + iddocente;
         //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarListaEjercicios_Fonico1_Docente.php?iddocente=" + iddocente;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente=" + iddocente+"& idactividad="+1;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/3wsJSONConsultarListaEjerciciosDocente.php?iddocente="+iddocente+"&idactividad="+1;
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());

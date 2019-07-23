@@ -246,7 +246,7 @@ public class Tipo1silabicoEstudianteFragment extends Fragment  implements Respon
 
         //String url = "http://192.168.0.13/proyecto_dconfo/wsJSONConsultarListaCursos.php";
         //String url = "http://" + url_lh + "/proyecto_dconfo_v1/wsJSONConsultarEjercicio.php?idEjercicioG1=" + idEjercicio;
-        String url = "http://" + url_lh + "/proyecto_dconfo_v1/9wsJSONConsultarEjercicioEstudiante.php?idEjercicioG2=" + idEjercicio;
+        String url = "http://" + url_lh + "/proyecto_dconfo_v1/9wsJSONConsultarEjercicioEstudiante.php?idEjercicioG2="+idEjercicio;
         //String url = ip+"ejemploBDRemota/wsJSONConsultarLista.php";
         //reemplazar espacios en blanco del nombre por %20
         url = url.replace(" ", "%20");
