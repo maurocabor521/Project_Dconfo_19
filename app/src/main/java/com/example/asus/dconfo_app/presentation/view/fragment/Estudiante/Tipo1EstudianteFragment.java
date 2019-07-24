@@ -132,6 +132,8 @@ public class Tipo1EstudianteFragment extends Fragment
 
     pl.droidsonroids.gif.GifImageButton gifImageButton;
 
+    private static final int TTS_ENGINE_REQUEST = 101;
+
     //TTSManager mTTS=null;
 
 
@@ -208,14 +210,18 @@ public class Tipo1EstudianteFragment extends Fragment
         mButtonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "boton", Toast.LENGTH_SHORT).show();
+                //speak1(getView());
                 speak();
             }
         });
 
+        //mTTS = new TextToSpeech(getActivity(), this);
+
         //mTTS=new TTSManager();
         //mTTS.init(getActivity());
 
-      /*  mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+       mTTS = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
@@ -235,8 +241,9 @@ public class Tipo1EstudianteFragment extends Fragment
                     Log.e("TTS", "Initialization failed");
                 }
             }
-        });*/
-        mTTS = new TextToSpeech(getActivity(), this);
+        });
+
+
 
         iv_imagen = (ImageView) view.findViewById(R.id.iv_estudiante_tipo1);
 
@@ -308,10 +315,79 @@ public class Tipo1EstudianteFragment extends Fragment
 
     public boolean textToSpeechIsInitialized = false;  // <--- add this line
 
+    private void speak1(View view) {
+        Intent intent = new Intent();
+        intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(intent, TTS_ENGINE_REQUEST);
+    }
+
+    private void speak() {
+        // String text = edt_OrtacionEjercicio.getText().toString();
+        //String text = edt_OrtacionEjercicio.getText().toString();
+        float pitch = (float) mSeekBarPitch.getProgress() / 50;
+        if (pitch < 0.1) pitch = 0.1f;
+        float speed = (float) mSeekBarSpeed.getProgress() / 50;
+        if (speed < 0.1) speed = 0.1f;
+
+        mTTS.setPitch(pitch);
+        mTTS.setSpeechRate(speed);
+
+        int speechStatus = mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
+        if (speechStatus == TextToSpeech.ERROR) {
+            Toast.makeText(getActivity(), "Error mientras habla", Toast.LENGTH_SHORT).show();
+        }
+
+        // mTTS.initQueue(textOracion);
+
+        System.out.println("oración: " + textOracion);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TTS_ENGINE_REQUEST && resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+            mTTS = new TextToSpeech(getActivity(), this);
+        } else {
+            Intent installintent = new Intent();
+            installintent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+            startActivity(installintent);
+        }
+    }
+
     // setup TTS
     public void onInit(int initStatus) {
 
-        initStatus=0;
+        if (initStatus == TextToSpeech.SUCCESS) {
+
+            int result = mTTS.setLanguage(new Locale("spa", "ESP"));
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Toast.makeText(getActivity(), "This Language is not supported", Toast.LENGTH_SHORT).show();
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                Toast.makeText(getActivity(), "is good", Toast.LENGTH_SHORT).show();
+               // speak();
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+            Toast.makeText(getActivity(), "Initilization Failed!", Toast.LENGTH_SHORT).show();
+        }
+        System.out.println("initStatus////////////////" + initStatus);
+      /*  if (initStatus == TextToSpeech.SUCCESS) {
+            //Setting speech Language
+            mTTS.setLanguage(new Locale("spa", "ESP"));
+            mTTS.setPitch(1);
+
+        }*/
+
+
+        //mTTS=new TTSManager();
+        //mTTS.init(getActivity());
+    }
+
+    // setup TTS
+    public void onInit_original(int initStatus) {
 
         if (initStatus == TextToSpeech.SUCCESS) {
 
@@ -329,17 +405,7 @@ public class Tipo1EstudianteFragment extends Fragment
         } else {
             Log.e("TTS", "Initilization Failed!");
         }
-        System.out.println("initStatus////////////////" + initStatus);
-      /*  if (initStatus == TextToSpeech.SUCCESS) {
-            //Setting speech Language
-            mTTS.setLanguage(new Locale("spa", "ESP"));
-            mTTS.setPitch(1);
 
-        }*/
-
-
-        //mTTS=new TTSManager();
-        //mTTS.init(getActivity());
     }
 
     // ----------------------------------------------------------------------------------------------
@@ -477,25 +543,6 @@ public class Tipo1EstudianteFragment extends Fragment
         mNotifyMgr.notify(1, mBuilder.build());
     }
     // ----------------------------------------------------------------------------------------------
-
-
-    private void speak() {
-        // String text = edt_OrtacionEjercicio.getText().toString();
-        //String text = edt_OrtacionEjercicio.getText().toString();
-        float pitch = (float) mSeekBarPitch.getProgress() / 50;
-        if (pitch < 0.1) pitch = 0.1f;
-        float speed = (float) mSeekBarSpeed.getProgress() / 50;
-        if (speed < 0.1) speed = 0.1f;
-
-        mTTS.setPitch(pitch);
-        mTTS.setSpeechRate(speed);
-
-        mTTS.speak(textOracion, TextToSpeech.QUEUE_FLUSH, null);
-
-        // mTTS.initQueue(textOracion);
-
-        System.out.println("oración: " + textOracion);
-    }
 
 
     public void cargarWebService() {
