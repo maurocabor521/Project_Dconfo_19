@@ -112,6 +112,10 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Consultar Notas " />
             <item
+                android:id="@+id/nav_consultar_porcentajes"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Consultar Porcentajes " />
+            <item
                 android:id="@+id/nav_reportes"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Reportes" />

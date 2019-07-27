@@ -29,6 +29,7 @@ import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.New
 import com.example.asus.dconfo_app.presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.grupos.GrupoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.notas.NotasActivity;
+import com.example.asus.dconfo_app.presentation.view.activity.docente.notas.PorcentNotasActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity;
 import com.example.asus.dconfo_app.presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity;
 import com.example.asus.dconfo_app.presentation.view.adapter.ConcienciaTipoAdapterRecyclerView;
@@ -46,6 +47,7 @@ public class HomeDocenteActivity extends AppCompatActivity
     Intent intentGrupos;
     Intent intentEjercicios;
     Intent intentConsultarNotas;
+    Intent intentConsultarPorcentajes;
     String namegrupo;
     String namedocente;
     int iddocente;
@@ -324,6 +326,19 @@ public class HomeDocenteActivity extends AppCompatActivity
             intentAsignarDeberFonico = new Intent(HomeDocenteActivity.this, AsignarEjercicioSilabicoActivity.class);
             intentAsignarDeberFonico.putExtras(parametros1);
             startActivity(intentAsignarDeberFonico);
+            String TAG = "TAG";
+            Log.i(TAG, "iddocente: " + iddocente);
+            Log.i(TAG, "namedocente: " + namedocente);
+
+        }else if (id == R.id.nav_consultar_porcentajes) {
+            Bundle parametros1 = new Bundle();
+            parametros1.putInt("iddocente", iddocente);
+            parametros1.putString("namedocente", namedocente);
+            parametros1.putInt("idgrupo", idgrupo);
+
+            intentConsultarPorcentajes = new Intent(HomeDocenteActivity.this, PorcentNotasActivity.class);
+            intentConsultarPorcentajes.putExtras(parametros1);
+            startActivity(intentConsultarPorcentajes);
             String TAG = "TAG";
             Log.i(TAG, "iddocente: " + iddocente);
             Log.i(TAG, "namedocente: " + namedocente);

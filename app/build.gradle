@@ -42,5 +42,8 @@ dependencies {
     implementation 'me.biubiubiu.justifytext:library:1.1'
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    //picker 2607
     implementation 'com.vincent.filepicker:MultiTypeFilePicker:1.0.8'
+    //picker torta 2707
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.1.4'
 }
