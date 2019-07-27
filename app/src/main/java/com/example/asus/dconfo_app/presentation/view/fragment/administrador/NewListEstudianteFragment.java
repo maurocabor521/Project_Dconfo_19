@@ -39,6 +39,9 @@ import com.example.asus.dconfo_app.domain.model.VolleySingleton;
 import com.example.asus.dconfo_app.helpers.Globals;
 //import com.example.asus.dconfo_app.helpers.POIFSFileSystem;
 import com.opencsv.CSVReader;
+import com.vincent.filepicker.Constant;
+import com.vincent.filepicker.activity.NormalFilePickActivity;
+import com.vincent.filepicker.filter.entity.NormalFile;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -390,11 +393,16 @@ public class NewListEstudianteFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getContext(), "RUTA" + Environment.getExternalStorageDirectory().getPath(), Toast.LENGTH_LONG).show();
                     Log.e("RUTAS", "RUTA" + Environment.getExternalStorageDirectory().getPath());
 
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//sirve
+                    /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//sirve
                     //Intent intent = new Intent(Intent.DownloadManager.ACTION_VIEW_DOWNLOADS);//prueba
                     //intent.setType("file/*");
-                    intent.setType("file/*");
-                    startActivityForResult(intent, 0);
+                    startActivityForResult(intent, 0);*/
+
+                    Intent intent4 = new Intent(getActivity(), NormalFilePickActivity.class);
+                    intent4.putExtra(Constant.MAX_NUMBER, 9);
+                    intent4.putExtra(NormalFilePickActivity.SUFFIX, new String[] {"csv", "xls"});
+                    startActivityForResult(intent4, 0);
+
 
 
             /*       Intent chooser = new Intent(Intent.ACTION_GET_CONTENT);
@@ -445,35 +453,41 @@ public class NewListEstudianteFragment extends Fragment implements View.OnClickL
             case 0: {
                 //what you want to do
                 //file = new File(uri.getPath());
-                Uri uri = data.getData();
-                fileEscogido = new File(uri.getPath());
-                BufferedReader fin1 =
-                        null;
-                try {
-                    fin1 = new BufferedReader(
-                            new InputStreamReader(
-                                    new FileInputStream(fileEscogido)));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                ArrayList<NormalFile> list = data.getParcelableArrayListExtra(Constant.RESULT_PICK_FILE);
 
-                String texto;
-                int cont = 0;
-                try {
-                    if ((texto = fin1.readLine()) != null) {
-                        cont++;
-                        System.out.println("fileEscogido: " + fileEscogido.getAbsolutePath());
-                        System.out.println("fin1.readline: " + texto);
-                        //txt_mensaje.setText(texto);
-                        cuentaSaltos(fileEscogido.toString());
-                        if (texto.equals("\n")) {
-                            cont++;
-                        }
-                        //Toast.makeText(getContext(), "fileEscogido: " + fileEscogido.getAbsolutePath(), Toast.LENGTH_LONG).show();
-                        //Toast.makeText(getContext(), "cont_: " + cont, Toast.LENGTH_LONG).show();
+                if(list.size() == 1) {
+
+                    NormalFile file = list.get(0);
+
+                    fileEscogido = new File(file.getPath());
+                    BufferedReader fin1 =
+                            null;
+                    try {
+                        fin1 = new BufferedReader(
+                                new InputStreamReader(
+                                        new FileInputStream(fileEscogido)));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                    String texto;
+                    int cont = 0;
+                    try {
+                        if ((texto = fin1.readLine()) != null) {
+                            cont++;
+                            System.out.println("fileEscogido: " + fileEscogido.getAbsolutePath());
+                            System.out.println("fin1.readline: " + texto);
+                            //txt_mensaje.setText(texto);
+                            cuentaSaltos(fileEscogido.toString());
+                            if (texto.equals("\n")) {
+                                cont++;
+                            }
+                            //Toast.makeText(getContext(), "fileEscogido: " + fileEscogido.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), "cont_: " + cont, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
               /*  System.out.println("File_Escogido : "+fileEscogido);
                 Log.i("info","uri.data"+uri);
@@ -661,7 +675,7 @@ public class NewListEstudianteFragment extends Fragment implements View.OnClickL
         progreso.show();
         String url_lh=Globals.url;
         String url =
-               // "http://192.168.0.13/proyecto_dconfo/wsJSONCrearEstudiante.php?";
+                // "http://192.168.0.13/proyecto_dconfo/wsJSONCrearEstudiante.php?";
                 "http://"+url_lh+"/proyecto_dconfo_v1/wsJSONCrearEstudiante.php?";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -796,4 +810,5 @@ public class NewListEstudianteFragment extends Fragment implements View.OnClickL
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

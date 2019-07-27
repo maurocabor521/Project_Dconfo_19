@@ -17,56 +17,81 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.view.activity.docente.notas.NotasActivity"></activity>
-        <activity android:name=".presentation.view.activity.docente.ejercicios.MisEjerciciosActivity" />
-        <activity android:name=".presentation.view.activity.docente.grupos.GrupoNuevoActivity" />
-        <activity android:name=".presentation.view.activity.docente.grupos.GrupoDocenteActivity" />
-        <activity android:name=".presentation.view.activity.docente.actividades.ActividadDocenteActivity" />
-        <activity android:name=".presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity" />
-        <activity android:name=".presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity" />
-        <activity android:name=".presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity" />
-        <activity android:name=".presentation.view.activity.docente.fonico.BankImagesActivity" />
-        <activity android:name=".presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity" />
-        <activity android:name=".presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity" />
-        <activity android:name=".presentation.view.activity.docente.AsignarEstudianteDeberActivity" />
-        <activity android:name=".presentation.view.activity.docente.AsignarDeberDocenteActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.view.activity.docente.notas.NotasActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".presentation.view.activity.docente.ejercicios.MisEjerciciosActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.grupos.GrupoNuevoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.grupos.GrupoDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.actividades.ActividadDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.silabico.AsignarEjercicioSilabicoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.silabico.NewEjercicioSilabicoDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.fonico.AsignarEjercicioFonicoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.fonico.BankImagesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.fonico.NewEjercicioFonicoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.fonico.NewEjercicioFonicoDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.AsignarEstudianteDeberActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.AsignarDeberDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.activity.docente.Home_ActivitiesActivity" />
+        <activity android:name=".presentation.view.activity.docente.Home_ActivitiesActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Home_AppActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.administrador.Home_AdminActivity"
             android:label="@string/title_activity_home__admin"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.docente.HomeDocenteActivity"
             android:label="@string/title_activity_home_docente"
+            android:screenOrientation="portrait"
           />
-        <activity android:name=".presentation.view.activity.estudiante.HomeEstudianteActivity" />
-        <activity android:name=".presentation.view.activity.estudiante.LoginEstudianteActivity" />
+        <activity android:name=".presentation.view.activity.estudiante.HomeEstudianteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.estudiante.LoginEstudianteActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.administrador.Home_NewCursoActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".presentation.view.activity.administrador.Home_AdminActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.view.activity.administrador.Home_AdminActivity" />
         </activity>
-        <activity android:name=".presentation.view.activity.docente.LoginDocenteActivity" />
-        <activity android:name=".presentation.view.activity.docente.ManageCursosDocenteActivity" />
+        <activity android:name=".presentation.view.activity.docente.LoginDocenteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.view.activity.docente.ManageCursosDocenteActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.docente.GrupoDocenteActivity"
-            android:parentActivityName=".presentation.view.activity.docente.ManageCursosDocenteActivity">
+            android:parentActivityName=".presentation.view.activity.docente.ManageCursosDocenteActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.view.activity.docente.ManageCursosDocenteActivity" />
         </activity>
-        <activity android:name=".presentation.view.activity.docente.ManageEjercicioDocenteActivity" />
+        <activity android:name=".presentation.view.activity.docente.ManageEjercicioDocenteActivity"
+            android:screenOrientation="portrait"/>
         <!--
         <activity
             android:name=".presentation.view.activity.docente.ManageEjercicioDocenteActivity"
@@ -78,13 +103,15 @@
         -->
         <activity
             android:name=".presentation.view.activity.docente.NewEjercicioDocenteActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".presentation.view.activity.docente.ManageEjercicioDocenteActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.view.activity.docente.ManageEjercicioDocenteActivity" />
         </activity>
-        <activity android:name=".LoginMainActivity" /> <!-- permisos para android 7 -->
-        <provider
+        <activity android:name=".LoginMainActivity"
+            android:screenOrientation="portrait"/> <!-- permisos para android 7 -->
+        <!--provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
@@ -92,7 +119,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>
+        </provider-->
     </application>
 
 </manifest>

@@ -42,4 +42,5 @@ dependencies {
     implementation 'me.biubiubiu.justifytext:library:1.1'
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'com.vincent.filepicker:MultiTypeFilePicker:1.0.8'
 }
